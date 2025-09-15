@@ -1,0 +1,33 @@
+@theme {
+  /* Brand */
+  --color-brand-100: #E1F5F3;
+  --color-brand-200: #B4E5E0;
+  --color-brand-300: #7ED6CB;
+  --color-brand-400: #44C3B4;
+  --color-brand-main: #109C90;
+  --color-brand-600: #0D8A80;
+  --color-brand-700: #0A726A;
+  --color-brand-800: #075C56;
+  --color-brand-900: #044240;
+  --color-brand-hover: #2AE9D9;
+
+  /* Teal2 */
+  --color-teal2-100: #D0FCF8;
+  --color-teal2-200: #A6F8F0;
+  --color-teal2-300: #7BF3E7;
+  --color-teal2-400: #50EFDF;
+  --color-teal2-500: #2AE9D9;
+  --color-teal2-600: #22BBAF;
+  --color-teal2-700: #1A8D85;
+  --color-teal2-800: #12615C;
+  --color-teal2-900: #0B3734;
+
+  /* Test e nero */
+  --color-testcolor: #ff00ff;
+  --color-black-text: #171D1C;
+
+  /* Grigi */
+  --color-gray-border: #E0E0E0;
+  --color-gray-background: #82828221;
+  --color-gray-user: #82828240;
+}
