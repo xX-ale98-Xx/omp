@@ -1,28 +1,65 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation' 
+import { z } from 'zod'
 
 import { createClient } from '@/utils/supabase/server'
 
-export async function login(formData: FormData) {
-  const supabase = await createClient()
+const FormLoginSchema = z.object({
+  email: z.email({ message: 'Inserire una email valida.' }),
+  password: z.string().min(6, { message: 'La password deve essere di almeno 6 caratteri.' }),
+});
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  }
+export type LoginState = {
+  errors?: {
+    email?: string[];
+    password?: string[];
+  };
+  message?: string | null;
+};
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+export async function login(prevState: LoginState, formData: FormData) {
+  const supabase = await createClient();
+
+  // Estraggo valori come stringhe sicure
+  const email = formData.get('email')?.toString() ?? '';
+  const password = formData.get('password')?.toString() ?? '';
+  
+  // Validazione dei campi
+  const validatedFields = FormLoginSchema.safeParse({ email, password });
+
+  if (!validatedFields.success) {
+  const { fieldErrors } = validatedFields.error.flatten();
+
+  return {
+    errors: {
+      email: fieldErrors.email,
+      password: fieldErrors.password,
+    },
+    message: 'Mail o password sbagliati, riprova',
+  };
+}
+
+  // Dati validati
+  const { email: validEmail, password: validPassword } = validatedFields.data;
+
+  // Login con Supabase
+  const { error } = await supabase.auth.signInWithPassword({
+    email: validEmail,
+    password: validPassword,
+  });
 
   if (error) {
-    redirect('/error')
+    // Login fallito: restituisco messaggio
+    return {
+      errors: {},
+      message: "Email o password non corretti.",
+    };
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/home')
+  revalidatePath('/', 'layout');
+  redirect('/home');
 }
 
 export async function signup(formData: FormData) {

@@ -3,7 +3,7 @@
 import { useActionState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import { login, signup, LoginState } from "./actions";
+import { login, signup, LoginState } from "../login/actions";
 
 export default function LoginPage() {
   const initialLoginState: LoginState = { message: null, errors: {} };
@@ -26,10 +26,10 @@ export default function LoginPage() {
 
         {/* Title */}
         <h2 className="text-center text-lg md:text-2xl font-semibold text-black-text">
-          Bentornato!
+          Benvenuto!
         </h2>
         <p className="text-center text-sm md:text-base text-gray-500 mb-6">
-          Fai il login per continuare sul tuo account
+          Registrati per iniziare a usare il tuo account
         </p>
 
         {/* Form */}
@@ -130,12 +130,12 @@ export default function LoginPage() {
 
           {/* Signup */}
           <p className="text-center text-xs md:text-sm text-gray-500">
-            Non hai un account?{" "}
+            Hai già un account?{" "}
             <Link
-              href="/signup"
+              href="/login"
               className="text-brand-main text-xs md:text-sm hover:text-brand-hover font-medium cursor-pointer"
             >
-              Registrati
+              Creane uno
             </Link>
           </p>
         </form>
