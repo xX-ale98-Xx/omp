@@ -33,13 +33,14 @@ export default function SignupPage() {
         </p>
 
         {/* Form */}
-        <form className="space-y-4">
+        <form className="space-y-4" suppressHydrationWarning>
           {/* Name */}
           <div className="space-y-1">
             <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
+                suppressHydrationWarning
                 id="name"
                 name="name"
                 type="text"
@@ -63,6 +64,7 @@ export default function SignupPage() {
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
+                suppressHydrationWarning
                 id="surname"
                 name="surname"
                 type="text"
@@ -86,6 +88,7 @@ export default function SignupPage() {
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
+                suppressHydrationWarning
                 id="email"
                 name="email"
                 type="email"
@@ -112,6 +115,7 @@ export default function SignupPage() {
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
+              suppressHydrationWarning
               id="password"
               name="password"
               type="password"

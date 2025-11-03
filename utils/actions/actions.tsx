@@ -61,8 +61,6 @@ export async function login(prevState: LoginState, formData: FormData) {
   redirect('/home');
 }
 
-
-
 const FormSignupSchema = z.object({
   email: z.email({ message: 'Inserire una email valida.' }),
   password: z.string().min(6, { message: 'La password deve essere di almeno 6 caratteri.' }),
@@ -98,7 +96,15 @@ export async function signup(prevState: SignupState, formData: FormData) {
     }
   };
 
-  const { data, error } = await supabase.auth.signUp({email, password});
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data:{
+        name,
+        surname
+      }
+    }});
 
   if (error) {
     return { message: error.message };
