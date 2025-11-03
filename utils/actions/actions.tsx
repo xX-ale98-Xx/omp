@@ -85,7 +85,7 @@ export async function signup(prevState: SignupState, formData: FormData) {
   const email = formData.get('email')?.toString() ?? '';
   const password = formData.get('password')?.toString() ?? '';
   const name = formData.get('name')?.toString() ?? '';
-  const surname = formData.get('name')?.toString() ?? '';
+  const surname = formData.get('surname')?.toString() ?? '';
   
   // Validazione dei campi
   const validatedFields = FormSignupSchema.safeParse({ email, password, name, surname })
