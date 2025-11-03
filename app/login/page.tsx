@@ -3,7 +3,7 @@
 import { useActionState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import { login, signup, LoginState } from "./actions";
+import { login, LoginState } from "../../utils/actions/actions";
 
 export default function LoginPage() {
   const initialLoginState: LoginState = { message: null, errors: {} };
@@ -35,12 +35,15 @@ export default function LoginPage() {
         {/* Form */}
         <form className="space-y-4">
           <div className="space-y-1">
-            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 
+            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+                          hover:bg-gray-100 hover:border-gray-300 
+                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
+            {/* <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 
             has-[input:focus-within]:outline-2 
             has-[input:focus-within]:-outline-offset-2
             has-[input:focus-within]:outline-brand-main
             has-[input:focus-within]:bg-transparent
-            hover:bg-gray-100 hover:border-gray-300">
+            hover:bg-gray-100 hover:border-gray-300"> */}
               <input
                 id="email"
                 name="email"
@@ -100,7 +103,7 @@ export default function LoginPage() {
           <button
             formAction={loginAction}
             className="w-full rounded-md md:rounded-lg bg-brand-main text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
-                      font-medium text-white hover:bg-brand-700 transition cursor-pointer"
+                      font-medium text-white hover:bg-brand-700 transition focus:outline-brand-700 cursor-pointer"
           >
             Login
           </button>
@@ -117,7 +120,7 @@ export default function LoginPage() {
             type="button"
             className="w-full rounded-md md:rounded-lg border text-gray-500 border-gray-border 
                       text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 flex items-center justify-center gap-2
-                      hover:bg-gray-100 hover:border-gray-300 transition cursor-pointer"
+                      hover:bg-gray-100 hover:border-gray-300 transition focus:outline-brand-main cursor-pointer"
           >
             <Image
               src="https://www.svgrepo.com/show/355037/google.svg"
@@ -133,7 +136,7 @@ export default function LoginPage() {
             Non hai un account?{" "}
             <Link
               href="/signup"
-              className="text-brand-main text-xs md:text-sm hover:text-brand-hover font-medium cursor-pointer"
+              className="text-brand-main text-xs md:text-sm hover:text-brand-hover focus:outline-brand-main font-medium cursor-pointer"
             >
               Registrati
             </Link>

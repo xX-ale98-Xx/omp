@@ -3,11 +3,11 @@
 import { useActionState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import { login, signup, LoginState } from "../login/actions";
+import { signup, SignupState } from "../../utils/actions/actions";
 
-export default function LoginPage() {
-  const initialLoginState: LoginState = { message: null, errors: {} };
-  const [loginState, loginAction] = useActionState(login, initialLoginState);
+export default function SignupPage() {
+  const initialSignupState: SignupState = { message: null, errors: {} };
+  const [signupState, signupAction] = useActionState(signup, initialSignupState);
   
   return (
     <div className="flex min-h-screen items-center justify-center bg-brand-100">
@@ -34,13 +34,57 @@ export default function LoginPage() {
 
         {/* Form */}
         <form className="space-y-4">
+          {/* Name */}
           <div className="space-y-1">
-            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 
-            has-[input:focus-within]:outline-2 
-            has-[input:focus-within]:-outline-offset-2
-            has-[input:focus-within]:outline-brand-main
-            has-[input:focus-within]:bg-transparent
-            hover:bg-gray-100 hover:border-gray-300">
+            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+                          hover:bg-gray-100 hover:border-gray-300 
+                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                placeholder="Nome"
+                aria-describedby="name-error"
+                className="block min-w-0 grow  text-sm/6 py-2 px-3
+                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
+              />
+            </div>
+            <div id="name-error" aria-live="polite" aria-atomic="true">
+              {signupState.errors?.name?.map((error: string) => (
+                <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* Surname */}
+          <div className="space-y-1">
+            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+                          hover:bg-gray-100 hover:border-gray-300 
+                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
+              <input
+                id="surname"
+                name="surname"
+                type="text"
+                required
+                placeholder="Cognome"
+                aria-describedby="surname-error"
+                className="block min-w-0 grow  text-sm/6 py-2 px-3
+                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
+              />
+            </div>
+            <div id="surname-error" aria-live="polite" aria-atomic="true">
+              {signupState.errors?.surname?.map((error: string) => (
+                <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
+              ))}
+            </div>
+          </div>
+
+          {/*Email*/}
+          <div className="space-y-1">
+            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+                          hover:bg-gray-100 hover:border-gray-300 
+                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
                 id="email"
                 name="email"
@@ -53,8 +97,8 @@ export default function LoginPage() {
               />
             </div>
             <div id="email-error" aria-live="polite" aria-atomic="true">
-              {loginState.errors?.email &&
-                loginState.errors.email.map((error: string) => (
+              {signupState.errors?.email &&
+                signupState.errors.email.map((error: string) => (
                   <p className="mt-1 text-xs text-red-500" key={error}>
                     {error}
                   </p>
@@ -62,6 +106,7 @@ export default function LoginPage() {
             </div>
           </div>
 
+          {/*Password*/}
           <div className="space-y-1">
             <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
@@ -78,8 +123,8 @@ export default function LoginPage() {
               />
             </div>
             <div id="password-error" aria-live="polite" aria-atomic="true">
-              {loginState.errors?.password &&
-                loginState.errors.password.map((error: string) => (
+              {signupState.errors?.password &&
+                signupState.errors.password.map((error: string) => (
                   <p className="mt-1 text-xs text-red-500" key={error}>
                     {error}
                   </p>
@@ -88,21 +133,21 @@ export default function LoginPage() {
           </div>
           
           <div id="login-error" aria-live="polite" aria-atomic="true">
-            {loginState?.message && !loginState?.errors?.email?.length && !loginState?.errors?.password?.length &&
+            {signupState?.message && !signupState?.errors?.email?.length && !signupState?.errors?.password?.length &&
             (
-              <p className="mt-2 text-xs text-red-500" key={loginState?.message}>
-                {loginState?.message}
+              <p className="mt-2 text-xs text-red-500" key={signupState?.message}>
+                {signupState?.message}
               </p>
             )}
           </div>
 
-          {/* Login button */}
+          {/* Signup button */}
           <button
-            formAction={loginAction}
+            formAction={signupAction}
             className="w-full rounded-md md:rounded-lg bg-brand-main text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
-                      font-medium text-white hover:bg-brand-700 transition cursor-pointer"
+                      font-medium text-white hover:bg-brand-700 focus:outline-brand-700 transition cursor-pointer"
           >
-            Login
+            Registrati
           </button>
 
           {/* Separator */}
@@ -117,7 +162,7 @@ export default function LoginPage() {
             type="button"
             className="w-full rounded-md md:rounded-lg border text-gray-500 border-gray-border 
                       text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 flex items-center justify-center gap-2
-                      hover:bg-gray-100 hover:border-gray-300 transition cursor-pointer"
+                      hover:bg-gray-100 hover:border-gray-300 focus:outline-brand-main transition cursor-pointer"
           >
             <Image
               src="https://www.svgrepo.com/show/355037/google.svg"
@@ -133,9 +178,9 @@ export default function LoginPage() {
             Hai già un account?{" "}
             <Link
               href="/login"
-              className="text-brand-main text-xs md:text-sm hover:text-brand-hover font-medium cursor-pointer"
+              className="text-brand-main text-xs md:text-sm hover:text-brand-hover focus:outline-brand-main font-medium cursor-pointer"
             >
-              Creane uno
+              Login
             </Link>
           </p>
         </form>
