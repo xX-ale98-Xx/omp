@@ -115,14 +115,14 @@ export default function SignupPage() {
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
-              suppressHydrationWarning
-              id="password"
-              name="password"
-              type="password"
-              required
-              placeholder="Password"
-              aria-describedby="password-error"
-              className="block min-w-0 grow py-2 px-3 text-sm/6 md:text-base/6 md:py-3 md:px-4 text-gray-900 placeholder:text-gray-400 
+                suppressHydrationWarning
+                id="password"
+                name="password"
+                type="password"
+                required
+                placeholder="Password"
+                aria-describedby="password-error"
+                className="block min-w-0 grow py-2 px-3 text-sm/6 md:text-base/6 md:py-3 md:px-4 text-gray-900 placeholder:text-gray-400 
                         focus:outline-none"
               />
             </div>

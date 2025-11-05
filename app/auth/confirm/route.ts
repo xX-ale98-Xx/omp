@@ -1,28 +1,48 @@
 import { type EmailOtpType } from '@supabase/supabase-js'
-import { type NextRequest } from 'next/server'
-
-import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
+import { NextRequest, NextResponse } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
-  const next = searchParams.get('next') ?? '/'
 
-  if (token_hash && type) {
-    const supabase = await createClient()
+  const response = NextResponse.redirect(new URL('/account', request.url))
 
-    const { error } = await supabase.auth.verifyOtp({
+  if (token_hash && type){
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll()
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              response.cookies.set(name, value, options)
+            })
+          },
+        },
+      }
+    )
+
+    // ✅ Verifica OTP
+    const { data, error } = await supabase.auth.verifyOtp({
       type,
       token_hash,
     })
-    if (!error) {
-      // redirect user to specified redirect URL or root of app
-      redirect(next)
+
+    if (!error && data.session) {
+      // ✅ Se la sessione è valida, i cookie vengono automaticamente impostati
+      // dal client SSR che hai appena creato
+      return response
+    } else {
+      console.error('Errore verifica OTP:', error)
+      return NextResponse.redirect(new URL('/error', request.url))
     }
   }
 
-  // redirect the user to an error page with some instructions
-  redirect('/error')
+  // fallback (sessione mancante)
+  return NextResponse.redirect(new URL('/login', request.url))
 }

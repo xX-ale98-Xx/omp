@@ -81,6 +81,8 @@ export type SignupState = {
 export async function signup(prevState: SignupState, formData: FormData) {
   const supabase = await createClient()
 
+  await supabase.auth.signOut();
+
   // Estraggo valori come stringhe sicure
   const email = formData.get('email')?.toString() ?? '';
   const password = formData.get('password')?.toString() ?? '';
@@ -103,8 +105,9 @@ export async function signup(prevState: SignupState, formData: FormData) {
       data:{
         name,
         surname
-      }
-    }});
+      },
+    }
+  });
 
   if (error) {
     return { message: error.message };
