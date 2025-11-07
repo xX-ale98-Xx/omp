@@ -76,6 +76,7 @@ export type SignupState = {
     surname?: string[];
   };
   message?: string | null;
+  success?: boolean | null;
 };
 
 export async function signup(prevState: SignupState, formData: FormData) {
@@ -129,7 +130,9 @@ export async function signup(prevState: SignupState, formData: FormData) {
     return { message: 'Errore aggiornamento profilo: ' + profileError.message };
   }
 
-  // Redirect e revalidazione
-  revalidatePath('/', 'layout');
-  redirect('/home');
+  return {
+    success: true,
+    message: 'Ti abbiamo inviato una mail di conferma.\nSegui il link per accedere al tuo nuovo profilo!',
+    user: data.user,
+  }
 }

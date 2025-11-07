@@ -1,17 +1,24 @@
 "use client";
 
-import { useActionState } from 'react';
+import { useActionState, useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import { signup, SignupState } from "../../utils/actions/actions";
+import { signup, SignupState } from "@/utils/actions/actions";
+import SignupPopup from './components/SignupPopup'
 
 export default function SignupPage() {
-  const initialSignupState: SignupState = { message: null, errors: {} };
-  const [signupState, signupAction] = useActionState(signup, initialSignupState);
+  const initialSignupState: SignupState = { success: null, message: null, errors: {} };
+  const [signupState, signupAction, isPendingSignup] = useActionState(signup, initialSignupState);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (signupState.message) setShowPopup(true)
+  }, [signupState.message]);
   
   return (
     <div className="flex min-h-screen items-center justify-center bg-brand-100">
-      <div className="w-full max-w-sm md:max-w-md rounded-2xl bg-white p-8 shadow-lg">
+      {showPopup && <SignupPopup />}
+      <div className="w-full max-w-xm md:max-w-md rounded-2xl bg-white p-8 shadow-lg">
         {/* Logo placeholder */}
         <div className="flex justify-center">
           <div className="relative w-full h-8 md:h-10 mb-8 mt-4">
@@ -151,7 +158,7 @@ export default function SignupPage() {
             className="w-full rounded-md md:rounded-lg bg-brand-main text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
                       font-medium text-white hover:bg-brand-700 focus:outline-brand-700 transition cursor-pointer"
           >
-            Registrati
+            {isPendingSignup ? 'Registrazione in corso...⏳' : 'Registrati'}
           </button>
 
           {/* Separator */}
