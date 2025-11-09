@@ -10,14 +10,31 @@ export default function SignupPage() {
   const initialSignupState: SignupState = { success: null, message: null, errors: {} };
   const [signupState, signupAction, isPendingSignup] = useActionState(signup, initialSignupState);
   const [showPopup, setShowPopup] = useState(false);
+  const [popupType, setPopupType] = useState<"success" | "error" | null>(null);
+
 
   useEffect(() => {
-    if (signupState.message) setShowPopup(true)
-  }, [signupState.message]);
+  if (signupState.success === true) {
+    setPopupType("success");
+    setShowPopup(true);
+  } else if (signupState.success === false && signupState.message && !signupState.errors?.email && !signupState.errors?.password) {
+    // errori di processo (non validazione)
+    setPopupType("error");
+    setShowPopup(true);
+  }
+}, [signupState]);
   
   return (
     <div className="flex min-h-screen items-center justify-center bg-brand-100">
-      {showPopup && <SignupPopup />}
+
+      {/* Popup for comunicating to user the state of the signup action*/}
+      {showPopup && (
+        <SignupPopup
+          type={popupType}
+          message={signupState.message}
+          setShowPopup={setShowPopup}
+        />
+      )}
       <div className="w-full max-w-xm md:max-w-md rounded-2xl bg-white p-8 shadow-lg">
         {/* Logo placeholder */}
         <div className="flex justify-center">
@@ -58,10 +75,12 @@ export default function SignupPage() {
                           text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
               />
             </div>
+
             <div id="name-error" aria-live="polite" aria-atomic="true">
               {signupState.errors?.name?.map((error: string) => (
-                <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
-              ))}
+                  <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
+                ))
+              }
             </div>
           </div>
 
@@ -84,8 +103,9 @@ export default function SignupPage() {
             </div>
             <div id="surname-error" aria-live="polite" aria-atomic="true">
               {signupState.errors?.surname?.map((error: string) => (
-                <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
-              ))}
+                  <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
+                ))
+              }
             </div>
           </div>
 
@@ -143,14 +163,15 @@ export default function SignupPage() {
             </div>
           </div>
           
-          <div id="login-error" aria-live="polite" aria-atomic="true">
+          {/* Show message section */}
+          {/* <div id="login-error" aria-live="polite" aria-atomic="true">
             {signupState?.message && !signupState?.errors?.email?.length && !signupState?.errors?.password?.length &&
             (
               <p className="mt-2 text-xs text-red-500" key={signupState?.message}>
                 {signupState?.message}
               </p>
             )}
-          </div>
+          </div> */}
 
           {/* Signup button */}
           <button
@@ -184,7 +205,7 @@ export default function SignupPage() {
             Continua con Google
           </button>
 
-          {/* Signup */}
+          {/* Login link */}
           <p className="text-center text-xs md:text-sm text-gray-500">
             Hai già un account?{" "}
             <Link

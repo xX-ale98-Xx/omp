@@ -4,6 +4,8 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { createClient } from '@/utils/supabase/server'
+import type { User } from '@supabase/supabase-js';
+
 
 const FormLoginSchema = z.object({
   email: z.email({ message: 'Inserire una email valida.' }),
@@ -77,6 +79,7 @@ export type SignupState = {
   };
   message?: string | null;
   success?: boolean | null;
+  user?: User | null;
 };
 
 export async function signup(prevState: SignupState, formData: FormData) {
@@ -94,8 +97,10 @@ export async function signup(prevState: SignupState, formData: FormData) {
   const validatedFields = FormSignupSchema.safeParse({ email, password, name, surname })
   if (!validatedFields.success) {
     return {
+      success: false,
       errors: validatedFields.error.flatten().fieldErrors,
       message: "Errore di validazione",
+      user: null
     }
   };
 
@@ -111,13 +116,19 @@ export async function signup(prevState: SignupState, formData: FormData) {
   });
 
   if (error) {
-    return { message: error.message };
+    return { 
+      success: false, 
+      message: error.message,
+      user: null };
   };
 
   // prendo l'id dell'utente creato
   const user = data.user;
   if (!user) {
-    return { message: "Errore: utente non creato" }
+    return { 
+      success: false, 
+      message: "Errore: utente non creato",
+      user: null }
   };
 
   // Aggiorna i dati del profilo creato dal trigger su auth.users
@@ -127,7 +138,10 @@ export async function signup(prevState: SignupState, formData: FormData) {
     .eq('user_id', user.id);
 
   if (profileError) {
-    return { message: 'Errore aggiornamento profilo: ' + profileError.message };
+    return { 
+      success: false, 
+      message: 'Errore aggiornamento profilo: ' + profileError.message,
+      user: null};
   }
 
   return {
