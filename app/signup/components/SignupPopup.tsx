@@ -23,7 +23,7 @@ export default function SignupPopup({ type, message, setShowPopup }: SignupPopup
     <AnimatePresence>
       <motion.div
         key="overlay"
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-white/20 backdrop-blur-sm"
         onClick={() => setShowPopup(false)}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -37,45 +37,13 @@ export default function SignupPopup({ type, message, setShowPopup }: SignupPopup
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className={`relative w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl 
-            ${isSuccess ? "border border-green-400" : "border border-red-400"}
-          `}
+          className={`flex flex-col gap-8 relative w-full max-w-sm rounded-2xl bg-white px-8 py-10 shadow-xl border border-solid border-gray-200`}
         >
-          {/* Icona circolare sopra il box */}
-          <div
-            className={`absolute -top-8 left-1/2 -translate-x-1/2 flex h-14 w-14 items-center justify-center rounded-full shadow-md
-              ${isSuccess ? "bg-green-500" : "bg-red-500"}
-            `}
-          >
-            {isSuccess ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            )}
-          </div>
 
-          <div className="pt-8 text-center">
+          <div className="flex flex-col gap-5 text-center">
             <h2
-              className={`text-xl font-semibold mb-2 ${
-                isSuccess ? "text-green-600" : "text-red-600"
+              className={`text-xl font-semibold ${
+                isSuccess ? "text-brand-main" : "text-myRed-500"
               }`}
             >
               {title}
@@ -85,13 +53,13 @@ export default function SignupPopup({ type, message, setShowPopup }: SignupPopup
             </p>
           </div>
 
-          <div className="mt-6 flex justify-center">
+          <div className="flex justify-center">
             <button
               onClick={() => setShowPopup(false)}
-              className={`rounded-lg px-5 py-2 font-medium text-white shadow-md transition 
+              className={`rounded-lg px-5 py-2 font-medium text-white transition-all duration-300 ease-in-out 
                 ${isSuccess
-                  ? "bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-300"
-                  : "bg-red-500 hover:bg-red-600 focus:ring-2 focus:ring-red-300"}
+                  ? "bg-brand-main hover:bg-brand-600 focus:ring-2 focus:ring-brand-300"
+                  : "bg-myRed-500 hover:bg-myRed-700 focus:ring-2 focus:ring-myRed-300"}
               `}
             >
               Chiudi

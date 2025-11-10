@@ -11,6 +11,17 @@
   --color-brand-900: #044240;
   --color-brand-hover: #2AE9D9;
 
+  /* Complementary warning */
+  --color-myRed-100: #FDE2E2;
+  --color-myRed-200: #F9BDBD;
+  --color-myRed-300: #F38B8B;
+  --color-myRed-400: #EE5F5F;
+  --color-myRed-500: #D94F4F; /* colore principale */
+  --color-myRed-600: #C04343;
+  --color-myRed-700: #A33737;
+  --color-myRed-800: #852A2A;
+  --color-myRed-900: #6A1F1F;
+
   /* Teal2 */
   --color-teal2-100: #D0FCF8;
   --color-teal2-200: #A6F8F0;

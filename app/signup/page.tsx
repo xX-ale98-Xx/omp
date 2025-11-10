@@ -25,7 +25,7 @@ export default function SignupPage() {
 }, [signupState]);
   
   return (
-    <div className="flex min-h-screen items-center justify-center bg-brand-100">
+    <div className="flex min-h-screen items-center justify-center bg-brand-100 px-12">
 
       {/* Popup for comunicating to user the state of the signup action*/}
       {showPopup && (
@@ -35,7 +35,8 @@ export default function SignupPage() {
           setShowPopup={setShowPopup}
         />
       )}
-      <div className="w-full max-w-xm md:max-w-md rounded-2xl bg-white p-8 shadow-lg">
+
+      <div className="w-full max-w-sm md:max-w-md rounded-2xl bg-white p-6 md:p-8 shadow-lg">
         {/* Logo placeholder */}
         <div className="flex justify-center">
           <div className="relative w-full h-8 md:h-10 mb-8 mt-4">
@@ -60,7 +61,7 @@ export default function SignupPage() {
         <form className="space-y-4" suppressHydrationWarning>
           {/* Name */}
           <div className="space-y-1">
-            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
@@ -86,7 +87,7 @@ export default function SignupPage() {
 
           {/* Surname */}
           <div className="space-y-1">
-            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
@@ -111,7 +112,7 @@ export default function SignupPage() {
 
           {/*Email*/}
           <div className="space-y-1">
-            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
@@ -138,7 +139,7 @@ export default function SignupPage() {
 
           {/*Password*/}
           <div className="space-y-1">
-            <div className="flex items-center rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
+            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
               <input
@@ -176,8 +177,8 @@ export default function SignupPage() {
           {/* Signup button */}
           <button
             formAction={signupAction}
-            className="w-full rounded-md md:rounded-lg bg-brand-main text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
-                      font-medium text-white hover:bg-brand-700 focus:outline-brand-700 transition cursor-pointer"
+            className="w-full transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-brand-main text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
+                      font-medium text-white hover:bg-brand-700 focus:outline-brand-700 cursor-pointer"
           >
             {isPendingSignup ? 'Registrazione in corso...⏳' : 'Registrati'}
           </button>
@@ -192,9 +193,9 @@ export default function SignupPage() {
           {/* Google login */}
           <button
             type="button"
-            className="w-full rounded-md md:rounded-lg border text-gray-500 border-gray-border 
+            className="w-full transition-all duration-300 ease-in-out rounded-md md:rounded-lg border text-gray-500 border-gray-border 
                       text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 flex items-center justify-center gap-2
-                      hover:bg-gray-100 hover:border-gray-300 focus:outline-brand-main transition cursor-pointer"
+                      hover:bg-gray-100 hover:border-gray-300 focus:outline-brand-main cursor-pointer"
           >
             <Image
               src="https://www.svgrepo.com/show/355037/google.svg"
@@ -210,7 +211,7 @@ export default function SignupPage() {
             Hai già un account?{" "}
             <Link
               href="/login"
-              className="text-brand-main text-xs md:text-sm hover:text-brand-hover focus:outline-brand-main font-medium cursor-pointer"
+              className="transition-all duration-300 ease-in-out text-brand-main text-xs md:text-sm hover:text-brand-hover focus:outline-brand-main font-medium cursor-pointer"
             >
               Login
             </Link>
