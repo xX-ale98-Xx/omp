@@ -25,7 +25,7 @@ export default function SignupPage() {
 }, [signupState]);
   
   return (
-    <div className="flex min-h-screen items-center justify-center bg-brand-100 px-12">
+    <div className="flex min-h-screen items-center justify-center bg-brand-100">
 
       {/* Popup for comunicating to user the state of the signup action*/}
       {showPopup && (
