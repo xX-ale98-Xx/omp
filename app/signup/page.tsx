@@ -36,7 +36,7 @@ export default function SignupPage() {
         />
       )}
 
-      <div className="w-full md:max-w-md rounded-2xl bg-white p-4 md:p-8 shadow-lg">
+      <div className="w-full max-w-md rounded-2xl bg-white p-4 md:p-8 shadow-lg">
         {/* Logo placeholder */}
         <div className="flex justify-center">
           <div className="relative w-full h-8 md:h-10 mb-8 mt-4">
