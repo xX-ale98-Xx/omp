@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from 'next/link';
 import { signup, SignupState } from "@/utils/actions/actions";
 import SignupPopup from './components/SignupPopup'
+import AuthenticationInput from './components/AuthenticationInput'
 
 export default function SignupPage() {
   const initialSignupState: SignupState = { success: null, message: null, errors: {} };
@@ -60,120 +61,41 @@ export default function SignupPage() {
         {/* Form */}
         <form className="space-y-4" suppressHydrationWarning>
           {/* Name */}
-          <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
-                          hover:bg-gray-100 hover:border-gray-300 
-                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
-              <input
-                suppressHydrationWarning
-                id="name"
-                name="name"
-                type="text"
-                required
-                placeholder="Nome"
-                aria-describedby="name-error"
-                className="block min-w-0 grow  text-sm/6 py-2 px-3
-                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
-              />
-            </div>
-
-            <div id="name-error" aria-live="polite" aria-atomic="true">
-              {signupState.errors?.name?.map((error: string) => (
-                  <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
-                ))
-              }
-            </div>
-          </div>
-
+          <AuthenticationInput 
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Nome"
+            errors={signupState.errors?.name}
+          />
+          
           {/* Surname */}
-          <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
-                          hover:bg-gray-100 hover:border-gray-300 
-                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
-              <input
-                suppressHydrationWarning
-                id="surname"
-                name="surname"
-                type="text"
-                required
-                placeholder="Cognome"
-                aria-describedby="surname-error"
-                className="block min-w-0 grow  text-sm/6 py-2 px-3
-                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
-              />
-            </div>
-            <div id="surname-error" aria-live="polite" aria-atomic="true">
-              {signupState.errors?.surname?.map((error: string) => (
-                  <p className="mt-1 text-xs text-red-500" key={error}>{error}</p>
-                ))
-              }
-            </div>
-          </div>
+          <AuthenticationInput 
+            id="surname"
+            name="surname"
+            type="text"
+            placeholder="Cognome"
+            errors={signupState.errors?.surname}
+          />
 
           {/*Email*/}
-          <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
-                          hover:bg-gray-100 hover:border-gray-300 
-                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
-              <input
-                suppressHydrationWarning
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder="Email"
-                aria-describedby="email-error"
-                className="block min-w-0 grow  text-sm/6 py-2 px-3
-                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
-              />
-            </div>
-            <div id="email-error" aria-live="polite" aria-atomic="true">
-              {signupState.errors?.email &&
-                signupState.errors.email.map((error: string) => (
-                  <p className="mt-1 text-xs text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
-          </div>
+          <AuthenticationInput 
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            errors={signupState.errors?.email}
+          />
 
           {/*Password*/}
-          <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
-                          hover:bg-gray-100 hover:border-gray-300 
-                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
-              <input
-                suppressHydrationWarning
-                id="password"
-                name="password"
-                type="password"
-                required
-                placeholder="Password"
-                aria-describedby="password-error"
-                className="block min-w-0 grow py-2 px-3 text-sm/6 md:text-base/6 md:py-3 md:px-4 text-gray-900 placeholder:text-gray-400 
-                        focus:outline-none"
-              />
-            </div>
-            <div id="password-error" aria-live="polite" aria-atomic="true">
-              {signupState.errors?.password &&
-                signupState.errors.password.map((error: string) => (
-                  <p className="mt-1 text-xs text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
-          </div>
+          <AuthenticationInput 
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            errors={signupState.errors?.password}
+          />
           
-          {/* Show message section */}
-          {/* <div id="login-error" aria-live="polite" aria-atomic="true">
-            {signupState?.message && !signupState?.errors?.email?.length && !signupState?.errors?.password?.length &&
-            (
-              <p className="mt-2 text-xs text-red-500" key={signupState?.message}>
-                {signupState?.message}
-              </p>
-            )}
-          </div> */}
-
           {/* Signup button */}
           <button
             formAction={signupAction}
