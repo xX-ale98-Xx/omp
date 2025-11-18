@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
 
-  const response = NextResponse.redirect(new URL('/account', request.url))
+  const response = NextResponse.redirect(new URL('/home', request.url))
 
   if (token_hash && type){
     const supabase = createServerClient(
