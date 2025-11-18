@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import { login, LoginState } from "../../utils/actions/actions";
+import AuthenticationInput from '@/components/authPages/AuthenticationInput'
 
 export default function LoginPage() {
   const initialLoginState: LoginState = { message: null, errors: {} };
@@ -34,7 +35,27 @@ export default function LoginPage() {
 
         {/* Form */}
         <form className="space-y-4" suppressHydrationWarning>
-          <div className="space-y-1">
+
+          {/* Email */}
+          <AuthenticationInput 
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Email"
+              errors={loginState?.errors?.email}
+          />
+
+          {/* Password */}
+          <AuthenticationInput 
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              errors={loginState?.errors?.password}
+          />
+
+
+          {/* <div className="space-y-1">
             <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
@@ -58,9 +79,9 @@ export default function LoginPage() {
                   </p>
                 ))}
             </div>
-          </div>
+          </div> */}
 
-          <div className="space-y-1">
+          {/* <div className="space-y-1">
             <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
                           hover:bg-gray-100 hover:border-gray-300 
                             has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
@@ -93,7 +114,7 @@ export default function LoginPage() {
                 {loginState?.message}
               </p>
             )}
-          </div>
+          </div> */}
 
           {/* Login button */}
           <button

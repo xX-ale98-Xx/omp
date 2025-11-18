@@ -4,8 +4,8 @@ import { useActionState, useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import { signup, SignupState } from "@/utils/actions/actions";
-import SignupPopup from './components/SignupPopup'
-import AuthenticationInput from './components/AuthenticationInput'
+import SignupPopup from '../../components/authPages/SignupPopup'
+import AuthenticationInput from '../../components/authPages/AuthenticationInput'
 
 export default function SignupPage() {
   const initialSignupState: SignupState = { success: null, message: null, errors: {} };
