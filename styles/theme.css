@@ -1,41 +1,42 @@
 @theme {
-  /* Brand */
-  --color-brand-100: #E1F5F3;
-  --color-brand-200: #B4E5E0;
-  --color-brand-300: #7ED6CB;
-  --color-brand-400: #44C3B4;
-  --color-brand-main: #109C90;
-  --color-brand-600: #0D8A80;
-  --color-brand-700: #0A726A;
-  --color-brand-800: #075C56;
-  --color-brand-900: #044240;
-  --color-brand-hover: #2AE9D9;
+  /*
+    theme.css
+    Mappa i "semantic tokens" usati in Tailwind
+    → questi puntano alle variabili definite in personal.css
+    → che cambiano automaticamente in dark / light mode
+  */
 
-  /* Complementary warning */
-  --color-myRed-100: #FDE2E2;
-  --color-myRed-200: #F9BDBD;
-  --color-myRed-300: #F38B8B;
-  --color-myRed-400: #EE5F5F;
-  --color-myRed-500: #D94F4F; /* colore principale */
-  --color-myRed-600: #C04343;
-  --color-myRed-700: #A33737;
-  --color-myRed-800: #852A2A;
-  --color-myRed-900: #6A1F1F;
+  /* Brand (mappati sulla family 'turquoise') */
+  --color-brand-100: var(--turquoise-100);
+  --color-brand-200: var(--turquoise-200);
+  --color-brand-300: var(--turquoise-300);
+  --color-brand-800: var(--turquoise-800);
+  --color-brand-900: var(--turquoise-900);
+  --color-brand-hover: var(--turquoise-500);
 
-  /* Teal2 */
-  --color-teal2-100: #D0FCF8;
-  --color-teal2-200: #A6F8F0;
-  --color-teal2-300: #7BF3E7;
-  --color-teal2-400: #50EFDF;
-  --color-teal2-500: #2AE9D9;
-  --color-teal2-600: #22BBAF;
-  --color-teal2-700: #1A8D85;
-  --color-teal2-800: #12615C;
-  --color-teal2-900: #0B3734;
+  /* Background / Foreground */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
 
-  /* Test e nero */
-  --color-testcolor: #ff00ff;
-  --color-black-text: #171D1C;
+  /* Primary */
+  --color-primary: var(--myPrimary-bg);
+  --color-primary-hover: var(--myPrimary-hover);
+
+  /* Secondary */
+  --color-secondary: var(--mySecondary-bg);
+  --color-secondary-hover: var(--mySecondary-hover);
+
+  /* Success */
+  --color-success: var(--mySuccess-bg);
+  --color-success-hover: var(--mySuccess-hover);
+
+  /* Warning */
+  --color-warning: var(--myWarning-bg);
+  --color-warning-hover: var(--myWarning-hover);
+
+  /* Accent / Info */
+  --color-accent: var(--myAccent-bg);
+  --color-accent-hover: var(--myAccent-hover);
 
   /* Grigi */
   --color-gray-border: #E0E0E0;

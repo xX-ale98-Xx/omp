@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* 1) palette armonizzata (source of truth) - OMP */
+@import "./harmonized-palette.css" layer(theme);
+
+/* File per aggiungere le calssi tailwind personalizzate con i colori della palette */
+@import "./theme.css" layer(theme);
+
+/* Colori base (Tema Chiaro) */
+:root {
+  /* Base app colors */
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Primary color */
+  --myPrimary-bg: var(--turquoise-600); /* APCA ~60 per sfondo chiaro */
+  --myPrimary-hover: var(--turquoise-700);
+
+  /* Secondary color */
+  --mySecondary-bg: var(--turmeric-600);
+  --mySecondary-hover: var(--turmeric-700);
+
+  /* Success color */
+  --mySuccess-bg: var(--green-600);
+  --mySuccess-hover: var(--green-700);
+
+  /* Warning color */
+  --myWarning-bg: var(--coral-600);
+  --myWarning-hover: var(--coral-700);
+
+  /* Accent / Info color */
+  --myAccent-bg: var(--azure-600);
+  --myAccent-hover: var(--azure-700);
+}
+
+/* Dark theme */
+.dark {
+  --background: #171717;
+  --foreground: #ffffff;
+
+  /* Primary color */
+  --myPrimary-bg: var(--turquoise-500); /* APCA ~60 per sfondo chiaro */
+  --myPrimary-hover: var(--turquoise-400);
+
+  /* Secondary color */
+  --mySecondary-bg: var(--turmeric-500);
+  --mySecondary-hover: var(--turmeric-400);
+
+  /* Success color */
+  --mySuccess-bg: var(--green-500);
+  --mySuccess-hover: var(--green-400);
+
+  /* Warning color */
+  --myWarning-bg: var(--coral-500);
+  --myWarning-hover: var(--coral-400);
+
+  /* Accent / Info color */
+  --myAccent-bg: var(--azure-500);
+  --myAccent-hover: var(--azure-400);
+}
+
+
+body {
+  /* Applica le variabili, che cambieranno automaticamente */
+  background: var(--background);
+  color: var(--foreground);
+  /* ... altri stili ... */
+  font-family:  var(--font-inter), Arial, Helvetica, sans-serif;
+}

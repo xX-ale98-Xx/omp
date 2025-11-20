@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter, lusitana } from "@/utils/ui/fonts";
 import "@/styles/globals.css";
+import "@/styles/personal.css";
 
 export const metadata: Metadata = {
   title: "OhMyPhysio - OMP!",
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" >
       <body
         className={`${inter.className} ${inter.variable} ${lusitana.variable} antialiased`}
       >

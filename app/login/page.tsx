@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [loginState, loginAction] = useActionState(login, initialLoginState);
   
   return (
-    <div className="flex min-h-screen items-center justify-center bg-brand-100">
+    <div className="flex min-h-screen items-center justify-center  bg-background">
       <div className="w-full max-w-md rounded-2xl bg-white p-4 md:p-8 shadow-lg">
         {/* Logo placeholder */}
         <div className="flex justify-center">
@@ -54,72 +54,10 @@ export default function LoginPage() {
               errors={loginState?.errors?.password}
           />
 
-
-          {/* <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
-                          hover:bg-gray-100 hover:border-gray-300 
-                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
-              <input
-                suppressHydrationWarning
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder="Email"
-                aria-describedby="email-error"
-                className="block min-w-0 grow  text-sm/6 py-2 px-3
-                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
-              />
-            </div>
-            <div id="email-error" aria-live="polite" aria-atomic="true">
-              {loginState.errors?.email &&
-                loginState.errors.email.map((error: string) => (
-                  <p className="mt-1 text-xs text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
-          </div> */}
-
-          {/* <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent
-                          hover:bg-gray-100 hover:border-gray-300 
-                            has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main">
-              <input
-                suppressHydrationWarning
-                id="password"
-                name="password"
-                type="password"
-                required
-                placeholder="Password"
-                aria-describedby="password-error"
-                className="block min-w-0 grow py-2 px-3 text-sm/6 md:text-base/6 md:py-3 md:px-4 text-gray-900 placeholder:text-gray-400 
-                          focus:outline-none"
-              />
-            </div>
-            <div id="password-error" aria-live="polite" aria-atomic="true">
-              {loginState.errors?.password &&
-                loginState.errors.password.map((error: string) => (
-                  <p className="mt-1 text-xs text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div>
-          </div>
-          
-          <div id="login-error" aria-live="polite" aria-atomic="true">
-            {loginState?.message && !loginState?.errors?.email?.length && !loginState?.errors?.password?.length &&
-            (
-              <p className="mt-2 text-xs text-red-500" key={loginState?.message}>
-                {loginState?.message}
-              </p>
-            )}
-          </div> */}
-
           {/* Login button */}
           <button
             formAction={loginAction}
-            className="w-full rounded-md md:rounded-lg bg-brand-main text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
+            className="w-full rounded-md md:rounded-lg bg-primary text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
                       font-medium text-white hover:bg-brand-700 transition-all duration-300 ease-in-out focus:outline-brand-700 cursor-pointer"
           >
             Login

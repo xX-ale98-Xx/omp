@@ -1,6 +1,5 @@
 import NavLinks from './nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
-// import { signOut } from '@/auth';
 
 export default function SideNav() {
   return (
@@ -12,7 +11,7 @@ export default function SideNav() {
         <NavLinks />
 
         {/* A cosa serve sto div? */}
-        <div className="hidden bg-red-400 h-auto w-full grow rounded-md md:block"></div>
+        <div className="hidden bg-myRed-100 h-auto w-full grow rounded-md md:block"></div>
 
         <form action="/auth/signout" method="post">
           <button type="submit" className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-brand-background md:flex-none md:justify-start md:p-2 md:px-3">
