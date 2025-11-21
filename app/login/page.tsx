@@ -12,7 +12,7 @@ export default function LoginPage() {
   
   return (
     <div className="flex min-h-screen items-center justify-center  bg-background">
-      <div className="w-full max-w-md rounded-2xl bg-white p-4 md:p-8 shadow-lg">
+      <div className="w-full max-w-md rounded-2xl bg-background-sec p-4 md:p-8 shadow-lg">
         {/* Logo placeholder */}
         <div className="flex justify-center">
           <div className="relative w-full h-8 md:h-10 mb-8 mt-4">
@@ -26,10 +26,10 @@ export default function LoginPage() {
         </div>
 
         {/* Title */}
-        <h2 className="text-center text-lg md:text-2xl font-semibold text-black-text">
+        <h2 className="text-center text-lg md:text-2xl font-semibold text-foreground">
           Bentornato!
         </h2>
-        <p className="text-center text-sm md:text-base text-gray-500 mb-6">
+        <p className="text-center text-sm md:text-base text-myGray-text mb-6">
           Fai il login per continuare sul tuo account
         </p>
 
@@ -57,25 +57,25 @@ export default function LoginPage() {
           {/* Login button */}
           <button
             formAction={loginAction}
-            className="w-full rounded-md md:rounded-lg bg-primary text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 
-                      font-medium text-white hover:bg-brand-700 transition-all duration-300 ease-in-out focus:outline-brand-700 cursor-pointer"
+            className="w-full rounded-md md:rounded-lg bg-primary text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 font-medium text-background-sec 
+            hover:bg-primary-hover transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus: ring-primary cursor-pointer"
           >
             Login
           </button>
 
           {/* Separator */}
           <div className="flex items-center gap-2">
-            <div className="flex-1 border-t border-gray-border"></div>
-            <span className="text-gray-500 text-xs md:text-sm">oppure</span>
-            <div className="flex-1 border-t border-gray-border"></div>
+            <div className="flex-1 border-t border-myGray-border"></div>
+            <span className="text-myGray-text text-xs md:text-sm">oppure</span>
+            <div className="flex-1 border-t border-myGray-border"></div>
           </div>
 
           {/* Google login */}
           <button
             type="button"
-            className="w-full transition-all duration-300 ease-in-out rounded-md md:rounded-lg border text-gray-500 border-gray-border 
+            className="w-full transition-all duration-300 ease-in-out rounded-md md:rounded-lg border border-myGray-border text-myGray-text 
                       text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 flex items-center justify-center gap-2
-                      hover:bg-gray-100 hover:border-gray-300 focus:outline-brand-main cursor-pointer"
+                      hover:bg-myGray-hover focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
           >
             <Image
               src="https://www.svgrepo.com/show/355037/google.svg"
@@ -87,11 +87,12 @@ export default function LoginPage() {
           </button>
 
           {/* Signup */}
-          <p className="text-center text-xs md:text-sm text-gray-500">
+          <p className="text-center text-xs md:text-sm text-myGray-text">
             Non hai un account?{" "}
             <Link
               href="/signup"
-              className="transition-all duration-300 ease-in-out text-brand-main text-xs md:text-sm hover:text-brand-hover focus:outline-brand-main font-medium cursor-pointer"
+              className="transition-all duration-300 ease-in-out text-primary text-xs md:text-sm 
+              hover:text-primary-hover focus:outline-none focus:border-b-2 focus:border-primary-hover font-medium cursor-pointer"
             >
               Registrati
             </Link>

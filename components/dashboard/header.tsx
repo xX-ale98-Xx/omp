@@ -18,7 +18,7 @@ export default function Header() {
         <div className="relative px-4 py-2 bg-brand-main hover:bg-brand-600 rounded-xl text-white">
           Fai cose
         </div>
-        <div className=" relative w-10 h-10 rounded-full bg-gray-user" />
+        <div className=" relative w-10 h-10 rounded-full bg-gray-500" />
       </div>
     </div>
   )

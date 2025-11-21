@@ -9,12 +9,13 @@
 /* Colori base (Tema Chiaro) */
 :root {
   /* Base app colors */
-  --background: #ffffff;
+  --background-sec: #ffffff;
+  --background: #f7f7f7;
   --foreground: #171717;
 
   /* Primary color */
   --myPrimary-bg: var(--turquoise-600); /* APCA ~60 per sfondo chiaro */
-  --myPrimary-hover: var(--turquoise-700);
+  --myPrimary-hover: var(--turquoise-800);
 
   /* Secondary color */
   --mySecondary-bg: var(--turmeric-600);
@@ -31,16 +32,21 @@
   /* Accent / Info color */
   --myAccent-bg: var(--azure-600);
   --myAccent-hover: var(--azure-700);
+
+  --gray-border: var(--gray-100);
+  --gray-hover: var(--gray-50);
+  --gray-text: var(--gray-400);
 }
 
 /* Dark theme */
 .dark {
   --background: #171717;
+  --background-sec: #292929;
   --foreground: #ffffff;
 
   /* Primary color */
-  --myPrimary-bg: var(--turquoise-500); /* APCA ~60 per sfondo chiaro */
-  --myPrimary-hover: var(--turquoise-400);
+  --myPrimary-bg: var(--turquoise-400); 
+  --myPrimary-hover: var(--turquoise-600);
 
   /* Secondary color */
   --mySecondary-bg: var(--turmeric-500);
@@ -57,6 +63,11 @@
   /* Accent / Info color */
   --myAccent-bg: var(--azure-500);
   --myAccent-hover: var(--azure-400);
+
+  --gray-border: var(--gray-700);
+  --gray-hover: var(--gray-800);
+  --gray-text: var(--gray-400);
+
 }
 
 

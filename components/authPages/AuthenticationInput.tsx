@@ -20,10 +20,8 @@ type AuthInputProps = {
 export default function AuthInput({id, name, type, placeholder, errors}: AuthInputProps){
     return (
         <div className="space-y-1">
-            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg bg-white outline-1 
-                  -outline-offset-1 outline-gray-300 has-[input:focus-within]:bg-transparent hover:bg-gray-100 hover:border-gray-300
-                  has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-brand-main"
-            >
+            <div className="flex items-center transition-all duration-300 ease-in-out rounded-md md:rounded-lg border border-myGray-border
+                  hover:bg-myGray-hover focus-within:outline-none focus-within:ring-2 focus-within:ring-primary has-[input:focus-within]:bg-transparent">
               <input
                 suppressHydrationWarning
                 id={id}
@@ -33,7 +31,7 @@ export default function AuthInput({id, name, type, placeholder, errors}: AuthInp
                 placeholder={placeholder}
                 aria-describedby={`${name}-error`}
                 className="block min-w-0 grow  text-sm/6 py-2 px-3
-                          text-gray-900 placeholder:text-gray-400 focus:outline-none md:text-base/6 md:py-3 md:px-4"
+                          text-foreground placeholder:text-myGray-text focus:outline-none md:text-base/6 md:py-3 md:px-4"
               />
             </div>
 

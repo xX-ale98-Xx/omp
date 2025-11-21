@@ -16,6 +16,7 @@
 
   /* Background / Foreground */
   --color-background: var(--background);
+  --color-background-sec: var(--background-sec);
   --color-foreground: var(--foreground);
 
   /* Primary */
@@ -39,7 +40,8 @@
   --color-accent-hover: var(--myAccent-hover);
 
   /* Grigi */
-  --color-gray-border: #E0E0E0;
-  --color-gray-background: #82828221;
-  --color-gray-user: #82828240;
+  --color-myGray-border: var(--gray-border);
+  --color-myGray-hover: var(--gray-hover);
+  --color-myGray-text: var(--gray-text);
+
 }
