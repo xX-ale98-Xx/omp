@@ -18,10 +18,14 @@
 
   /* Fallback per browsers che non supportano oklch (opzionale) */
   /* definisci un fallback esadecimale ragionevole */
-  --color-brand-main-fallback: #109C90;
+  --color-brand-main-fallback: #109c90;
 
   /* Map the actual brand-main to var(--turquoise-500) with fallback hex */
-  --color-brand-main: color-mix(in srgb, var(--turquoise-500) 100%, var(--color-brand-main-fallback) 0%);
+  --color-brand-main: color-mix(
+    in srgb,
+    var(--turquoise-500) 100%,
+    var(--color-brand-main-fallback) 0%
+  );
 
   /*
     Complementary warning / error (mappiamo su coral / myRed)
@@ -39,10 +43,10 @@
 
   /* Test e nero */
   --color-testcolor: #ff00ff;
-  --color-black-text: #171D1C;
+  --color-black-text: #171d1c;
 
   /* Grigi */
-  --color-gray-border: #E0E0E0;
+  --color-gray-border: #e0e0e0;
   --color-gray-background: #82828221;
   --color-gray-user: #82828240;
 }

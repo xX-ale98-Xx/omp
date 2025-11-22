@@ -1,24 +1,19 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header() {
   return (
-    <div className="flex flex-row h-16 w-full border-b border-gray-border overflow-hidden items-center justify-between pl-3 pr-6 md:pl-4 md:pr-8">
+    <div className="border-gray-border flex h-16 w-full flex-row items-center justify-between overflow-hidden border-b pr-6 pl-3 md:pr-8 md:pl-4">
       <Link href="/">
-        <div className="relative h-8 aspect-[631/211] hidden md:block">
-          <Image
-            src="/OMP_logo.svg"
-            alt="Logo"
-            fill
-            className="object-contain"
-          />
+        <div className="relative hidden aspect-[631/211] h-8 md:block">
+          <Image src="/OMP_logo.svg" alt="Logo" fill className="object-contain" />
         </div>
       </Link>
-      <div className="relative w-auto flex flex-row items-center gap-2">
-        <div className="relative px-4 py-2 bg-brand-main hover:bg-brand-600 rounded-xl text-white">
+      <div className="relative flex w-auto flex-row items-center gap-2">
+        <div className="bg-brand-main hover:bg-brand-600 relative rounded-xl px-4 py-2 text-white">
           Fai cose
         </div>
-        <div className=" relative w-10 h-10 rounded-full bg-gray-500" />
+        <div className="relative h-10 w-10 rounded-full bg-gray-500" />
       </div>
     </div>
   )

@@ -1,10 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* 1) palette armonizzata (source of truth) - OMP */
-@import "./harmonized-palette.css" layer(theme);
+@import './harmonized-palette.css' layer(theme);
 
 /* File per aggiungere le calssi tailwind personalizzate con i colori della palette */
-@import "./theme.css" layer(theme);
+@import './theme.css' layer(theme);
 
 /* Colori base (Tema Chiaro) */
 :root {
@@ -45,7 +45,7 @@
   --foreground: #ffffff;
 
   /* Primary color */
-  --myPrimary-bg: var(--turquoise-400); 
+  --myPrimary-bg: var(--turquoise-400);
   --myPrimary-hover: var(--turquoise-600);
 
   /* Secondary color */
@@ -67,14 +67,12 @@
   --gray-border: var(--gray-700);
   --gray-hover: var(--gray-800);
   --gray-text: var(--gray-400);
-
 }
-
 
 body {
   /* Applica le variabili, che cambieranno automaticamente */
   background: var(--background);
   color: var(--foreground);
   /* ... altri stili ... */
-  font-family:  var(--font-inter), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }

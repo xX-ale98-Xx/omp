@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+# File binari (non toccarli mai)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.mp4 binary
+*.webp binary
+
+# Ignora conversioni su lock files
+pnpm-lock.yaml -text
+yarn.lock -text
+package-lock.json -text

@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
   const response = NextResponse.redirect(new URL('/home', request.url))
 
-  if (token_hash && type){
+  if (token_hash && type) {
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,

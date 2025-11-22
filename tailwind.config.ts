@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
-import forms from '@tailwindcss/forms'; // ✅ import ESM style
+import type { Config } from 'tailwindcss'
+import forms from '@tailwindcss/forms' // ✅ import ESM style
 
 const config: Config = {
   darkMode: 'class',
@@ -17,7 +17,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [forms], 
-};
+  plugins: [forms],
+}
 
-export default config;
+export default config

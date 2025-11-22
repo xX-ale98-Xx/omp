@@ -1,76 +1,70 @@
-"use client";
+'use client'
 
-import { useActionState, useState, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { signup, SignupState } from '@/utils/actions/actions';
+import { useActionState, useState, useEffect } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { signup, SignupState } from '@/utils/actions/actions'
 import SignupPopup from '@/components/authPages/SignupPopup'
 import AuthenticationInput from '@/components/authPages/AuthenticationInput'
 
 export default function SignupPage() {
-  const initialSignupState: SignupState = { success: null, message: null, errors: {} };
-  const [signupState, signupAction, isPendingSignup] = useActionState(signup, initialSignupState);
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupType, setPopupType] = useState<"success" | "error" | null>(null);
-
+  const initialSignupState: SignupState = { success: null, message: null, errors: {} }
+  const [signupState, signupAction, isPendingSignup] = useActionState(signup, initialSignupState)
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupType, setPopupType] = useState<'success' | 'error' | null>(null)
 
   useEffect(() => {
-  if (signupState.success === true) {
-    setPopupType("success");
-    setShowPopup(true);
-  } else if (signupState.success === false && signupState.message && !signupState.errors?.email && !signupState.errors?.password) {
-    // errori di processo (non validazione)
-    setPopupType("error");
-    setShowPopup(true);
-  }
-}, [signupState]);
-  
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
+    if (signupState.success === true) {
+      setPopupType('success')
+      setShowPopup(true)
+    } else if (
+      signupState.success === false &&
+      signupState.message &&
+      !signupState.errors?.email &&
+      !signupState.errors?.password
+    ) {
+      // errori di processo (non validazione)
+      setPopupType('error')
+      setShowPopup(true)
+    }
+  }, [signupState])
 
+  return (
+    <div className="bg-background flex min-h-screen items-center justify-center">
       {/* Popup for comunicating to user the state of the signup action*/}
       {showPopup && (
-        <SignupPopup
-          type={popupType}
-          message={signupState.message}
-          setShowPopup={setShowPopup}
-        />
+        <SignupPopup type={popupType} message={signupState.message} setShowPopup={setShowPopup} />
       )}
 
-      <div className="w-full max-w-md rounded-2xl bg-background-sec p-4 md:p-8 shadow-lg">
+      <div className="bg-background-sec w-full max-w-md rounded-2xl p-4 shadow-lg md:p-8">
         {/* Logo placeholder */}
         <div className="flex justify-center">
-          <div className="relative w-full h-8 md:h-10 mb-8 mt-4">
-            <Image
-              src="/OMP_logo.svg"
-              alt="Logo"
-              fill
-              className="object-contain"
-            />
+          <div className="relative mt-4 mb-8 h-8 w-full md:h-10">
+            <Image src="/OMP_logo.svg" alt="Logo" fill className="object-contain" />
           </div>
         </div>
 
         {/* Title */}
-        <h2 className="text-center text-lg md:text-2xl font-semibold text-foreground">
+        <h2 className="text-foreground text-center text-lg font-semibold md:text-2xl">
           Benvenuto!
         </h2>
-        <p className="text-center text-sm md:text-base text-myGray-text mb-6">
+        <p className="text-myGray-text mb-6 text-center text-sm md:text-base">
           Registrati per iniziare a usare il tuo account
         </p>
 
         {/* Form */}
         <form className="space-y-4" suppressHydrationWarning>
           {/* Name */}
-          <AuthenticationInput 
+          <AuthenticationInput
             id="name"
             name="name"
             type="text"
             placeholder="Nome"
             errors={signupState.errors?.name}
           />
-          
+
           {/* Surname */}
-          <AuthenticationInput 
+          <AuthenticationInput
             id="surname"
             name="surname"
             type="text"
@@ -79,7 +73,7 @@ export default function SignupPage() {
           />
 
           {/*Email*/}
-          <AuthenticationInput 
+          <AuthenticationInput
             id="email"
             name="email"
             type="email"
@@ -88,36 +82,33 @@ export default function SignupPage() {
           />
 
           {/*Password*/}
-          <AuthenticationInput 
+          <AuthenticationInput
             id="password"
             name="password"
             type="password"
             placeholder="Password"
             errors={signupState.errors?.password}
           />
-          
+
           {/* Signup button */}
           <button
             formAction={signupAction}
-            className="w-full rounded-md md:rounded-lg bg-primary text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 font-medium text-background-sec 
-            hover:bg-primary-hover transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus: ring-primary cursor-pointer"
+            className="bg-primary text-background-sec hover:bg-primary-hover focus: ring-primary w-full cursor-pointer rounded-md px-3 py-2 text-sm/6 font-medium transition-all duration-300 ease-in-out focus:ring-2 focus:outline-none md:rounded-lg md:px-4 md:py-3 md:text-base/6"
           >
             {isPendingSignup ? 'Registrazione in corso...⏳' : 'Registrati'}
           </button>
 
           {/* Separator */}
           <div className="flex items-center gap-2">
-            <div className="flex-1 border-t border-myGray-border"></div>
+            <div className="border-myGray-border flex-1 border-t"></div>
             <span className="text-myGray-text text-xs md:text-sm">oppure</span>
-            <div className="flex-1 border-t border-myGray-border"></div>
+            <div className="border-myGray-border flex-1 border-t"></div>
           </div>
 
           {/* Google login */}
           <button
             type="button"
-            className="w-full transition-all duration-300 ease-in-out rounded-md md:rounded-lg border border-myGray-border text-myGray-text 
-                      text-sm/6 px-3 py-2 md:text-base/6 md:py-3 md:px-4 flex items-center justify-center gap-2
-                      hover:bg-myGray-hover focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
+            className="border-myGray-border text-myGray-text hover:bg-myGray-hover focus:ring-primary flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm/6 transition-all duration-300 ease-in-out focus:ring-2 focus:outline-none md:rounded-lg md:px-4 md:py-3 md:text-base/6"
           >
             <Image
               src="https://www.svgrepo.com/show/355037/google.svg"
@@ -129,12 +120,11 @@ export default function SignupPage() {
           </button>
 
           {/* Login link */}
-          <p className="text-center text-xs md:text-sm text-myGray-text">
-            Hai già un account?{" "}
+          <p className="text-myGray-text text-center text-xs md:text-sm">
+            Hai già un account?{' '}
             <Link
               href="/login"
-              className="transition-all duration-300 ease-in-out text-primary text-xs md:text-sm 
-              hover:text-primary-hover focus:outline-none focus:border-b-2 focus:border-primary-hover font-medium cursor-pointer"
+              className="text-primary hover:text-primary-hover focus:border-primary-hover cursor-pointer text-xs font-medium transition-all duration-300 ease-in-out focus:border-b-2 focus:outline-none md:text-sm"
             >
               Login
             </Link>
@@ -142,5 +132,5 @@ export default function SignupPage() {
         </form>
       </div>
     </div>
-  );
+  )
 }
