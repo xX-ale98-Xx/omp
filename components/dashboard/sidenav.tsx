@@ -3,7 +3,7 @@ import { PowerIcon } from '@heroicons/react/24/outline'
 
 export default function SideNav() {
   return (
-    <div className="border-gray-border flex h-full flex-col px-3 py-4 md:border-r md:px-4 md:py-6">
+    <div className="border-myGray-border flex h-full flex-col px-3 py-4 md:border-r md:px-4 md:py-6">
       <h1 className={`mb-4 hidden text-xl font-semibold md:block md:text-2xl`}>Dashboard</h1>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-y-2 md:space-x-0">
         <NavLinks />

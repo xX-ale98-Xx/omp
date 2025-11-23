@@ -3,7 +3,7 @@
 import { useActionState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { login, LoginState } from '../../utils/actions/actions'
+import { login, LoginState } from '@/utils/actions/actions'
 import AuthenticationInput from '@/components/authPages/AuthenticationInput'
 
 export default function LoginPage() {

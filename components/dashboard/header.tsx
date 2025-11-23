@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <div className="border-gray-border flex h-16 w-full flex-row items-center justify-between overflow-hidden border-b pr-6 pl-3 md:pr-8 md:pl-4">
+    <div className="border-myGray-border flex h-16 w-full flex-row items-center justify-between overflow-hidden border-b pr-6 pl-3 md:pr-8 md:pl-4">
       <Link href="/">
         <div className="relative hidden aspect-[631/211] h-8 md:block">
           <Image src="/OMP_logo.svg" alt="Logo" fill className="object-contain" />

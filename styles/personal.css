@@ -10,7 +10,7 @@
 :root {
   /* Base app colors */
   --background-sec: #ffffff;
-  --background: #f7f7f7;
+  --background: #efefef;
   --foreground: #171717;
 
   /* Primary color */
@@ -41,7 +41,7 @@
 /* Dark theme */
 .dark {
   --background: #171717;
-  --background-sec: #292929;
+  --background-sec: #272727;
   --foreground: #ffffff;
 
   /* Primary color */
