@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { inter, lusitana } from '@/utils/ui/fonts'
+import { ThemeProvider } from '@/providers/theme-provider'
 import '@/styles/globals.css'
 import '@/styles/personal.css'
 import '@/styles/autofillFix.css'
@@ -15,9 +16,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} ${inter.variable} ${lusitana.variable} antialiased`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

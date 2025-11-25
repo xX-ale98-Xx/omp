@@ -1,40 +1,27 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
-export default function ThemeToggleButton() {
-  const [isDark, setIsDark] = useState(false)
+export default function ThemeToggle() {
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
 
-  // Carica tema salvato all'inizio
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark')
-      setIsDark(true)
-    } else {
-      document.documentElement.classList.remove('dark')
-      setIsDark(false)
-    }
+    setMounted(true)
   }, [])
 
-  const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-      setIsDark(false)
-    } else {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-      setIsDark(true)
-    }
+  if (!mounted) {
+    return <div className="h-10 w-10" />
   }
 
   return (
     <button
-      onClick={toggleTheme}
-      className="rounded-md border border-gray-400 px-4 py-2 text-sm transition-all duration-300 hover:bg-gray-200 md:text-base dark:hover:bg-gray-700"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="border-gray-border bg-background-sec hover:bg-gray-hover rounded-lg border-1 p-2 transition-all"
+      aria-label="Toggle theme"
     >
-      {isDark ? 'Light Mode' : 'Dark Mode'}
+      {theme === 'dark' ? '☀️' : '🌙'}
     </button>
   )
 }
