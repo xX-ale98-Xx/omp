@@ -11,9 +11,9 @@ export default function LoginPage() {
   const [loginState, loginAction] = useActionState(login, initialLoginState)
 
   return (
-    <div className="bg-background box-border flex min-h-screen w-full flex-col items-center justify-center overflow-auto p-6 md:p-8">
-      <div className="bg-background-sec border-myGray-border box-border flex w-full max-w-sm flex-1 flex-col items-center justify-between rounded-2xl border-1 p-8 shadow-lg md:px-16 md:py-12">
-        <div className="mb-4 flex w-full max-w-xs flex-col gap-4 md:mb-6 md:gap-8">
+    <div className="bg-background box-border flex min-h-screen w-full flex-col items-center justify-center overflow-auto p-5 md:p-8">
+      <div className="bg-background-sec border-myGray-border box-border flex w-full max-w-sm flex-1 flex-col items-center justify-between rounded-2xl border-1 p-8 shadow-lg md:max-w-md md:px-16 md:py-12">
+        <div className="mb-4 flex w-11/12 flex-col gap-4 md:mb-6 md:w-full md:gap-8">
           {/* Logo placeholder */}
           <div className="w-full p-2 md:p-3">
             <div className="relative flex h-8 w-full flex-none items-center justify-center md:h-10">
