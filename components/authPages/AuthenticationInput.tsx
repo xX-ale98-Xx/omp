@@ -19,7 +19,7 @@ type AuthInputProps = {
 
 export default function AuthInput({ id, name, type, placeholder, errors }: AuthInputProps) {
   return (
-    <div className="space-y-1">
+    <div className="w-full space-y-1">
       <div className="border-myGray-border hover:bg-myGray-hover focus-within:ring-primary flex items-center rounded-md border transition-all duration-300 ease-in-out focus-within:ring-2 focus-within:outline-none has-[input:focus-within]:bg-transparent md:rounded-lg">
         <input
           suppressHydrationWarning
