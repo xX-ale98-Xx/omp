@@ -14,7 +14,7 @@ export default function LoginPage() {
     <div className="bg-background box-border flex h-dvh w-full flex-col items-center justify-center overflow-hidden p-5 md:p-8">
       <div className="bg-background-sec border-myGray-border box-border flex max-h-full w-full max-w-sm flex-col items-center justify-between rounded-2xl border-1 px-8 py-6 shadow-lg md:max-w-md md:px-12 md:py-10">
         <div className="flex max-h-full w-full flex-col items-center justify-start overflow-y-auto">
-          <div className="mb-4 flex max-h-full w-11/12 flex-col gap-4 md:mb-6 md:w-full md:gap-8">
+          <div className="mb-4 flex max-w-11/12 flex-col gap-4 md:mb-6 md:w-full md:gap-8">
             {/* Logo placeholder */}
             <div className="w-full p-2 md:p-3">
               <div className="relative flex h-8 w-full flex-none items-center justify-center md:h-10">
@@ -23,12 +23,12 @@ export default function LoginPage() {
             </div>
 
             {/* Form */}
-            <form className="w-full space-y-4" suppressHydrationWarning>
+            <form className="w-full space-y-1 md:space-y-2" suppressHydrationWarning>
               {/* Title */}
               <h2 className="text-foreground text-center text-lg font-semibold md:text-2xl">
                 Bentornato!
               </h2>
-              <p className="text-myGray-text mb-6 text-center text-sm md:text-base">
+              <p className="text-myGray-text mb-2 text-center text-sm md:mb-4 md:text-base">
                 Fai il login per continuare sul tuo account
               </p>
 
@@ -59,7 +59,7 @@ export default function LoginPage() {
               </button>
 
               {/* Separator */}
-              <div className="flex items-center gap-2">
+              <div className="my-2 flex items-center gap-4 md:my-4">
                 <div className="border-myGray-border flex-1 border-t"></div>
                 <span className="text-myGray-text text-xs md:text-sm">oppure</span>
                 <div className="border-myGray-border flex-1 border-t"></div>
