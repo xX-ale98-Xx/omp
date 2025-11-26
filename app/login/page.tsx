@@ -1,14 +1,37 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState , useTransition} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { login, LoginState } from '@/utils/actions/actions'
+import { login, LoginState , signUpWithGoogle} from '@/utils/actions/actions'
+//import LoginPopup from '@/components/authPages/LoginPopup'
 import AuthenticationInput from '@/components/authPages/AuthenticationInput'
 
 export default function LoginPage() {
   const initialLoginState: LoginState = { message: null, errors: {} }
-  const [loginState, loginAction] = useActionState(login, initialLoginState)
+  const [loginState, loginAction, isPendingLogin] = useActionState(login, initialLoginState)
+  //const [showPopup, setShowPopup] = useState(false)
+  //const [popupType, setPopupType] = useState<'success' | 'error' | null>(null)
+  const [isPendingGoogle, startGoogleTransition] = useTransition()
+
+  const handleGoogleSignup = () => {
+    startGoogleTransition(async () => {
+      try {
+        const { error, url } = await signUpWithGoogle()
+        if (error) {
+          console.error('Google sign-up error:', error)
+          // setPopupType('error')
+          // setShowPopup(true)
+        } else if (url) {
+          window.location.href = url
+        }
+      } catch (err) {
+        console.error('Unexpected error during Google sign-up:', err)
+        // setPopupType('error')
+        // setShowPopup(true)
+      }
+    })
+  }
 
   return (
     <div className="bg-background box-border flex min-h-screen w-full flex-col items-center justify-center overflow-auto p-5 md:p-8">
@@ -67,6 +90,8 @@ export default function LoginPage() {
             {/* Google login */}
             <button
               type="button"
+              onClick={handleGoogleSignup}
+              disabled={isPendingGoogle || isPendingLogin}
               className="border-myGray-border text-myGray-text hover:bg-myGray-hover focus:ring-primary flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm/6 transition-all duration-300 ease-in-out focus:ring-2 focus:outline-none md:rounded-lg md:px-4 md:py-3 md:text-base/6"
             >
               <Image

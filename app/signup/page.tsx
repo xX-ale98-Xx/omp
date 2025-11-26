@@ -1,9 +1,9 @@
 'use client'
 
-import { useActionState, useState, useEffect } from 'react'
+import { useActionState, useState, useEffect, useTransition } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { signup, SignupState } from '@/utils/actions/actions'
+import { signup, signUpWithGoogle, SignupState } from '@/utils/actions/actions'
 import SignupPopup from '@/components/authPages/SignupPopup'
 import AuthenticationInput from '@/components/authPages/AuthenticationInput'
 
@@ -12,6 +12,7 @@ export default function SignupPage() {
   const [signupState, signupAction, isPendingSignup] = useActionState(signup, initialSignupState)
   const [showPopup, setShowPopup] = useState(false)
   const [popupType, setPopupType] = useState<'success' | 'error' | null>(null)
+  const [isPendingGoogle, startGoogleTransition] = useTransition()
 
   useEffect(() => {
     if (signupState.success === true) {
@@ -28,6 +29,25 @@ export default function SignupPage() {
       setShowPopup(true)
     }
   }, [signupState])
+
+  const handleGoogleSignup = () => {
+    startGoogleTransition(async () => {
+      try {
+        const { error, url } = await signUpWithGoogle()
+        if (error) {
+          console.error('Google sign-up error:', error)
+          setPopupType('error')
+          setShowPopup(true)
+        } else if (url) {
+          window.location.href = url
+        }
+      } catch (err) {
+        console.error('Unexpected error during Google sign-up:', err)
+        setPopupType('error')
+        setShowPopup(true)
+      }
+    })
+  }
 
   return (
     <div className="bg-background box-border flex min-h-screen w-full flex-col items-center justify-center overflow-auto p-5 md:p-8">
@@ -106,18 +126,28 @@ export default function SignupPage() {
               <div className="border-myGray-border flex-1 border-t"></div>
             </div>
 
-            {/* Google login */}
+            {/* Google signup */}
             <button
               type="button"
+              onClick={handleGoogleSignup}
+              disabled={isPendingGoogle || isPendingSignup}
               className="border-myGray-border text-myGray-text hover:bg-myGray-hover focus:ring-primary flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm/6 transition-all duration-300 ease-in-out focus:ring-2 focus:outline-none md:rounded-lg md:px-4 md:py-3 md:text-base/6"
             >
-              <Image
-                src="https://www.svgrepo.com/show/355037/google.svg"
-                alt="Google logo"
-                width={20}
-                height={20}
-              />
-              Continua con Google
+              {isPendingGoogle ? (
+                <>
+                  <span>Accesso con Google in corso...⏳</span>
+                </>
+              ) : (
+                <>
+                  <Image
+                    src="https://www.svgrepo.com/show/355037/google.svg"
+                    alt="Google logo"
+                    width={20}
+                    height={20}
+                  />
+                    Continua con Google
+                </>
+              )}
             </button>
           </form>
         </div>

@@ -57,7 +57,7 @@ export async function login(prevState: LoginState, formData: FormData) {
       message: 'Email o password non corretti.',
     }
   }
-
+  
   revalidatePath('/', 'layout')
   redirect('/home')
 }
@@ -151,5 +151,32 @@ export async function signup(prevState: SignupState, formData: FormData) {
     message:
       'Ti abbiamo inviato una mail di conferma.\nSegui il link per accedere al tuo nuovo profilo!',
     user: data.user,
+  }
+}
+
+export async function signUpWithGoogle() {
+  const supabase = await createClient()
+
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
+      },
+    })
+
+    if (error) {
+      console.error('OAuth error:', error)
+      return { error: error.message, url: null }
+    }
+
+    return { error: null, url: data.url }
+  } catch (error) {
+    console.error('Unexpected error:', error)
+    return { error: 'Errore durante il login con Google', url: null }
   }
 }
