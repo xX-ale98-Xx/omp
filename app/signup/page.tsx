@@ -1,5 +1,6 @@
 'use client'
 
+// import { useRouter } from 'next/router'
 import { useActionState, useState, useEffect, useTransition } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,6 +14,7 @@ export default function SignupPage() {
   const [showPopup, setShowPopup] = useState(false)
   const [popupType, setPopupType] = useState<'success' | 'error' | null>(null)
   const [isPendingGoogle, startGoogleTransition] = useTransition()
+  // const router = useRouter()
 
   useEffect(() => {
     if (signupState.success === true) {

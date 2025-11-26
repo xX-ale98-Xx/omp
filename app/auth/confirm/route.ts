@@ -6,10 +6,11 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
-
-  const response = NextResponse.redirect(new URL('/home', request.url))
+  const code = searchParams.get('code')
+  const next = searchParams.get('next') ?? '/home'
 
   if (token_hash && type) {
+    const response = NextResponse.redirect(new URL(next, request.url))
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
@@ -43,6 +44,34 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // fallback (sessione mancante)
-  return NextResponse.redirect(new URL('/login', request.url))
+  if (!code) {
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  const response = NextResponse.redirect(new URL(next, request.url))
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options)
+          })
+        },
+      },
+    }
+  )
+
+  const { error } = await supabase.auth.exchangeCodeForSession(code)
+
+  if (error) {
+    console.error('Errore autenticazione OAuth:', error)
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  return response
 }

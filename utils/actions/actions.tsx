@@ -57,7 +57,7 @@ export async function login(prevState: LoginState, formData: FormData) {
       message: 'Email o password non corretti.',
     }
   }
-  
+
   revalidatePath('/', 'layout')
   redirect('/home')
 }
@@ -161,7 +161,7 @@ export async function signUpWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?next=/home`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
@@ -173,7 +173,6 @@ export async function signUpWithGoogle() {
       console.error('OAuth error:', error)
       return { error: error.message, url: null }
     }
-
     return { error: null, url: data.url }
   } catch (error) {
     console.error('Unexpected error:', error)
