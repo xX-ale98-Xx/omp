@@ -59,7 +59,7 @@ export default function LoginPage() {
               </button>
 
               {/* Separator */}
-              <div className="mt-2 mb-3 flex items-center gap-4 md:t-4 md:mb-5">
+              <div className="mt-2 mb-3 flex items-center gap-4 md:mt-4 md:mb-5">
                 <div className="border-myGray-border flex-1 border-t"></div>
                 <span className="text-myGray-text text-xs md:text-sm">oppure</span>
                 <div className="border-myGray-border flex-1 border-t"></div>
