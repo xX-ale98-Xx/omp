@@ -50,14 +50,14 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="bg-background box-border flex min-h-screen w-full flex-col items-center justify-center overflow-auto p-5 md:p-8">
+    <div className="bg-background box-border flex min-h-dvh w-full flex-col items-center justify-center overflow-auto p-5 md:p-8">
       {/* Popup for comunicating to user the state of the signup action*/}
       {showPopup && (
         <SignupPopup type={popupType} message={signupState.message} setShowPopup={setShowPopup} />
       )}
 
-      <div className="bg-background-sec border-myGray-border box-border flex w-full max-w-sm flex-1 flex-col items-center justify-between rounded-2xl border-1 p-8 shadow-lg md:max-w-md md:px-16 md:py-12">
-        <div className="mb-4 flex w-11/12 flex-col gap-4 md:mb-6 md:w-full md:gap-8">
+      <div className="bg-background-sec border-myGray-border box-border flex w-full max-w-sm flex-col items-center justify-between rounded-2xl border-1 px-8 py-6 shadow-lg md:max-w-md md:px-12 md:py-10">
+        <div className="mb-4 flex max-w-11/12 flex-col items-center justify-start gap-2 md:mb-6 md:w-full md:gap-4">
           {/* Logo placeholder */}
           <div className="w-full p-2 md:p-3">
             <div className="relative flex h-8 w-full flex-none items-center justify-center md:h-10">
@@ -66,7 +66,7 @@ export default function SignupPage() {
           </div>
 
           {/* Form */}
-          <form className="w-full space-y-4" suppressHydrationWarning>
+          <form className="w-full space-y-1 md:space-y-2" suppressHydrationWarning>
             {/* Title */}
             <h2 className="text-foreground text-center text-lg font-semibold md:text-2xl">
               Benvenuto!
@@ -120,7 +120,7 @@ export default function SignupPage() {
             </button>
 
             {/* Separator */}
-            <div className="flex items-center gap-2">
+            <div className="mt-2 mb-3 flex items-center gap-4 md:mt-4 md:mb-5">
               <div className="border-myGray-border flex-1 border-t"></div>
               <span className="text-myGray-text text-xs md:text-sm">oppure</span>
               <div className="border-myGray-border flex-1 border-t"></div>

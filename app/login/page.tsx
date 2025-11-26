@@ -34,58 +34,59 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-background box-border flex min-h-screen w-full flex-col items-center justify-center overflow-auto p-5 md:p-8">
-      <div className="bg-background-sec border-myGray-border box-border flex w-full max-w-sm flex-1 flex-col items-center justify-between rounded-2xl border-1 p-8 shadow-lg md:max-w-md md:px-16 md:py-12">
-        <div className="mb-4 flex w-11/12 flex-col gap-4 md:mb-6 md:w-full md:gap-8">
-          {/* Logo placeholder */}
-          <div className="w-full p-2 md:p-3">
-            <div className="relative flex h-8 w-full flex-none items-center justify-center md:h-10">
-              <Image src="/OMP_logo.svg" alt="Logo" fill className="object-contain" />
+    <div className="bg-background box-border flex h-dvh w-full flex-col items-center justify-center overflow-hidden p-5 md:p-8">
+      <div className="bg-background-sec border-myGray-border box-border flex max-h-full w-full max-w-sm flex-col items-center justify-between rounded-2xl border-1 px-8 py-6 shadow-lg md:max-w-md md:px-12 md:py-10">
+        <div className="flex max-h-full w-full flex-col items-center justify-start overflow-y-auto">
+          <div className="mb-4 flex max-w-11/12 flex-col gap-4 md:mb-6 md:w-full md:gap-8">
+            {/* Logo placeholder */}
+            <div className="w-full p-2 md:p-3">
+              <div className="relative flex h-8 w-full flex-none items-center justify-center md:h-10">
+                <Image src="/OMP_logo.svg" alt="Logo" fill className="object-contain" />
+              </div>
             </div>
-          </div>
 
-          {/* Form */}
-          <form className="w-full space-y-4" suppressHydrationWarning>
-            {/* Title */}
-            <h2 className="text-foreground text-center text-lg font-semibold md:text-2xl">
-              Bentornato!
-            </h2>
-            <p className="text-myGray-text mb-6 text-center text-sm md:text-base">
-              Fai il login per continuare sul tuo account
-            </p>
+            {/* Form */}
+            <form className="w-full space-y-1 md:space-y-2" suppressHydrationWarning>
+              {/* Title */}
+              <h2 className="text-foreground text-center text-lg font-semibold md:text-2xl">
+                Bentornato!
+              </h2>
+              <p className="text-myGray-text mb-2 text-center text-sm md:mb-4 md:text-base">
+                Fai il login per continuare sul tuo account
+              </p>
 
-            {/* Email */}
-            <AuthenticationInput
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              errors={loginState?.errors?.email}
-            />
+              {/* Email */}
+              <AuthenticationInput
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                errors={loginState?.errors?.email}
+              />
 
-            {/* Password */}
-            <AuthenticationInput
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              errors={loginState?.errors?.password}
-            />
+              {/* Password */}
+              <AuthenticationInput
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                errors={loginState?.errors?.password}
+              />
 
-            {/* Login button */}
-            <button
-              formAction={loginAction}
-              className="bg-primary text-background-sec hover:bg-primary-hover focus: ring-primary w-full cursor-pointer rounded-md px-3 py-2 text-sm/6 font-medium transition-all duration-300 ease-in-out focus:ring-2 focus:outline-none md:rounded-lg md:px-4 md:py-3 md:text-base/6"
-            >
-              Login
-            </button>
+              {/* Login button */}
+              <button
+                formAction={loginAction}
+                className="bg-primary text-background-sec hover:bg-primary-hover focus: ring-primary w-full cursor-pointer rounded-md px-3 py-2 text-sm/6 font-medium transition-all duration-300 ease-in-out focus:ring-2 focus:outline-none md:rounded-lg md:px-4 md:py-3 md:text-base/6"
+              >
+                Login
+              </button>
 
-            {/* Separator */}
-            <div className="flex items-center gap-2">
-              <div className="border-myGray-border flex-1 border-t"></div>
-              <span className="text-myGray-text text-xs md:text-sm">oppure</span>
-              <div className="border-myGray-border flex-1 border-t"></div>
-            </div>
+              {/* Separator */}
+              <div className="mt-2 mb-3 flex items-center gap-4 md:mt-4 md:mb-5">
+                <div className="border-myGray-border flex-1 border-t"></div>
+                <span className="text-myGray-text text-xs md:text-sm">oppure</span>
+                <div className="border-myGray-border flex-1 border-t"></div>
+              </div>
 
             {/* Google login */}
             <button
@@ -105,16 +106,17 @@ export default function LoginPage() {
           </form>
         </div>
 
-        {/* Signup */}
-        <p className="text-myGray-text text-center text-xs md:text-sm">
-          Non hai un account?{' '}
-          <Link
-            href="/signup"
-            className="text-primary hover:text-primary-hover focus:border-primary-hover cursor-pointer text-xs font-medium transition-all duration-300 ease-in-out focus:border-b-2 focus:outline-none md:text-sm"
-          >
-            Registrati
-          </Link>
-        </p>
+          {/* Signup */}
+          <p className="text-myGray-text text-center text-xs md:text-sm">
+            Non hai un account?{' '}
+            <Link
+              href="/signup"
+              className="text-primary hover:text-primary-hover focus:border-primary-hover cursor-pointer text-xs font-medium transition-all duration-300 ease-in-out focus:border-b-2 focus:outline-none md:text-sm"
+            >
+              Registrati
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   )
