@@ -155,13 +155,15 @@ export async function signup(prevState: SignupState, formData: FormData) {
 }
 
 export async function signUpWithGoogle() {
+  console.log('🔍 NEXT_PUBLIC_APP_URL:', process.env.NEXT_PUBLIC_APP_URL)
+  console.log('🔍 redirectTo:', `${process.env.NEXT_PUBLIC_APP_URL}/auth/confirm?next=/home`)
   const supabase = await createClient()
 
   try {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?next=/home`,
+        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/confirm?next=/home`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
