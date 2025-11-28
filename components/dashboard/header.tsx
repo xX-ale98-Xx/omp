@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import MenuDropdown from './dropdown'
 
 export default function Header() {
   return (
@@ -13,6 +14,7 @@ export default function Header() {
         <div className="bg-brand-main hover:bg-brand-600 relative rounded-xl px-4 py-2 text-white">
           Fai cose
         </div>
+        <MenuDropdown />
         <div className="relative h-10 w-10 rounded-full bg-gray-500" />
       </div>
     </div>
