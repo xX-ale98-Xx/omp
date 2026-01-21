@@ -7,6 +7,9 @@
 @import './theme.css' layer(theme);
 
 /* Colori base (Tema Chiaro) */
+/* Questi colori sono usati come variabili in theme.css che serve a definire le classi da usare in Tailwind. */
+
+/* personal.css */
 :root {
   /* Base app colors */
   --background-sec: #ffffff;

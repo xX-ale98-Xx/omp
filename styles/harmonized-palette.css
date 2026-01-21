@@ -83,4 +83,17 @@
   --gray-800: oklch(0.25 0 0);
   --gray-850: oklch(0.2 0 0);
   --gray-900: oklch(0.15 0 0);
+
+  /* ============================
+     BASE APP COLORS (hard values)
+     derivati da personal.css
+     ============================ */
+
+  --app-bg-light: #efefef;
+  --app-bg-sec-light: #ffffff;
+  --app-fg-light: #171717;
+
+  --app-bg-dark: #171717;
+  --app-bg-sec-dark: #272727;
+  --app-fg-dark: #ffffff;
 }
