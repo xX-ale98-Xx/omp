@@ -181,3 +181,12 @@ export async function signUpWithGoogle() {
     return { error: 'Errore durante il login con Google', url: null }
   }
 }
+
+export async function logoutAction() {
+  const supabase = await createClient()
+  const { error } = await supabase.auth.signOut()
+  if (error) {
+    console.error('Logout error:', error)
+  }
+  redirect('/login')
+}

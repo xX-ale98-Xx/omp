@@ -8,7 +8,7 @@ export default function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-y-2 md:space-x-0">
         <NavLinks />
 
-        {/* A cosa serve sto div? */}
+        {/* A cosa serve sto div? -> a fare spazio tra menù e bottone al fondo */}
         <div className="bg-myRed-100 hidden h-auto w-full grow rounded-md md:block"></div>
 
         <form action="/auth/signout" method="post">

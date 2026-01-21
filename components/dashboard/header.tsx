@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import MenuDropdown from './dropdown'
+import { MenuDropdown } from './dropdown'
 
 export default function Header() {
   return (
