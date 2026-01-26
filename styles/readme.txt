@@ -1,2 +1,0 @@
-Per componenti che usano tailwind fare riferimento a variabili definite in theme.css
-Lo styling dei componenti shadcn è definito nelle variabili segnate in global.css (non modificare la struttura di quel file perchè è definita così dalla libreria di shadcn)

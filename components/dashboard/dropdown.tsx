@@ -1,17 +1,17 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { ChevronDownIcon, Bars3Icon , PowerIcon} from '@heroicons/react/24/outline'
+import { ChevronDownIcon, Bars3Icon, PowerIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/shadcn/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/shadcn/ui/dropdown-menu'
 import { logoutAction } from '@/utils/actions/actions'
 
 // Tipi TypeScript per le voci del menu
@@ -28,14 +28,14 @@ const userMenuItems: UserMenuItem[] = [
 
 function LogoutItem({ onClose }: { onClose: () => void }) {
   return (
-    <form action={ logoutAction } className="w-full" onSubmit={onClose}>
-        <button
-          type="submit"
-          className="hover:bg-brand-background flex h-[48px] w-full grow items-center justify-center gap-2 bg-red-500 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3"
-        >
-          <PowerIcon className="w-6" />
-          <span className="hidden md:block">Sign Out</span>
-        </button>
+    <form action={logoutAction} className="w-full" onSubmit={onClose}>
+      <button
+        type="submit"
+        className="hover:bg-brand-background flex h-[48px] w-full grow items-center justify-center gap-2 bg-red-500 p-3 text-sm font-medium md:flex-none md:justify-start md:p-2 md:px-3"
+      >
+        <PowerIcon className="w-6" />
+        <span className="hidden md:block">Sign Out</span>
+      </button>
     </form>
   )
 }
@@ -50,43 +50,32 @@ export function MenuDropdown() {
         <Button
           variant="ghost"
           size="sm"
-          className={clsx(
-            'h-[48px] flex items-center gap-2 p-3 text-sm font-medium',
-            {
-              'bg-primary-hover text-white': open,
-              'hover:bg-background-sec hover:text-brand-main hover:font-semibold': !open,
-            }
-          )}
+          className={clsx('flex h-[48px] items-center gap-2 p-3 text-sm font-medium', {
+            'bg-primary-hover text-white': open,
+            'hover:bg-background-sec hover:text-brand-main hover:font-semibold': !open,
+          })}
           aria-haspopup="true"
           aria-expanded={open}
         >
           <Bars3Icon className="w-6" />
-          <ChevronDownIcon 
-            className={clsx('w-4 h-4 transition-transform duration-200', {
+          <ChevronDownIcon
+            className={clsx('h-4 w-4 transition-transform duration-200', {
               'rotate-180': open,
-            })} 
+            })}
           />
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent
-        align="end" 
-        className="w-48 mt-2 border-gray-200 shadow-lg z-[9999]"
-      >
+      <DropdownMenuContent align="end" className="z-[9999] mt-2 w-48 border-gray-200 shadow-lg">
         {userMenuItems.map((item) => (
-          <DropdownMenuItem 
-            key={item.name}
-            asChild
-          >
+          <DropdownMenuItem key={item.name} asChild>
             <Link
               href={item.href}
-              className={clsx(
-                'flex items-center gap-2 text-sm font-medium text-gray-700 w-full',
-                {
-                  'bg-primary-hover text-white': pathname === item.href,
-                  'hover:bg-background-sec hover:text-brand-main hover:font-semibold': pathname !== item.href,
-                }
-              )}
+              className={clsx('flex w-full items-center gap-2 text-sm font-medium text-gray-700', {
+                'bg-primary-hover text-white': pathname === item.href,
+                'hover:bg-background-sec hover:text-brand-main hover:font-semibold':
+                  pathname !== item.href,
+              })}
               onClick={() => setOpen(false)}
             >
               {item.name}
