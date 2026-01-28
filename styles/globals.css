@@ -81,7 +81,7 @@
   --sidebar-ring: var(--myPrimary-bg);
 
   /* Radius */
-  --radius: 0.625rem;
+  --radius: 0.5rem;
 }
 
 .dark {
@@ -152,6 +152,7 @@
   --sidebar-accent-foreground: var(--gray-50);
   --sidebar-border: var(--gray-700);
   --sidebar-ring: var(--myPrimary-bg);
+
 }
 
 /* ==========================================
@@ -223,11 +224,16 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Radius */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* ✅ SOVRASCRIVI I RADIUS DI TAILWIND */
+  --radius-none: 0;
+  --radius-sm: calc(var(--radius) - 0.25rem);    /* 0.75rem se --radius = 1rem */
+  --radius-DEFAULT: var(--radius);                /* 1rem */
+  --radius-md: var(--radius);                     /* 1rem (stesso di default) */
+  --radius-lg: calc(var(--radius) + 0.25rem);    /* 1.25rem */
+  --radius-xl: calc(var(--radius) + 0.5rem);     /* 1.5rem */
+  --radius-2xl: calc(var(--radius) + 1rem);      /* 2rem */
+  --radius-3xl: calc(var(--radius) + 1.5rem);    /* 2.5rem */
+  --radius-full: 9999px;
 }
 
 /* ==========================================
