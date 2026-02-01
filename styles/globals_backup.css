@@ -13,56 +13,56 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-
-  /* Radius */
-  --radius: 0.5rem;
-
   /* ---- Background & Foreground ---- */
   --background: var(--app-bg-light);
+  --background-sec: var(--app-bg-sec-light);
   --foreground: var(--app-fg-light);
 
   /* ---- Colori Funzionali App ---- */
-  --myPrimary: var(--turquoise-600);
+  --myPrimary-bg: var(--turquoise-600);
   --myPrimary-hover: var(--turquoise-700);
 
-  --mySecondary: var(--turmeric-400);
+  --mySecondary-bg: var(--turmeric-400);
   --mySecondary-hover: var(--turmeric-500);
 
-  --mySuccess: var(--green-600);
+  --mySuccess-bg: var(--green-600);
   --mySuccess-hover: var(--green-700);
 
-  --myWarning: var(--coral-600);
+  --myWarning-bg: var(--coral-600);
   --myWarning-hover: var(--coral-700);
+
+  --myAccent-bg: var(--turquoise-600);
+  --myAccent-hover: var(--turquoise-500);
 
   --gray-border: var(--gray-200);
   --gray-hover: var(--gray-100);
   --gray-text: var(--gray-500);
 
   /* ---- shadcn/ui Tokens (Light) ---- */
-  --card: var(--app-bg-light);
-  --card-foreground: var(--app-fg-light);
+  --card: var(--app-bg-sec-light);
+  --card-foreground: var(--gray-900);
 
-  --popover: var(--app-bg-light);
-  --popover-foreground: var(--app-fg-light);
+  --popover: var(--app-bg-sec-light);
+  --popover-foreground: var(--gray-900);
 
-  --primary: var(--myPrimary);
-  --primary-foreground: var(--app-bg-light);
+  --primary: var(--myPrimary-bg);
+  --primary-foreground: var(--gray-50);
 
-  --secondary: var(--mySecondary);
-  --secondary-foreground: var(--app-fg-light);
+  --secondary: var(--gray-100);
+  --secondary-foreground: var(--gray-900);
 
   --muted: var(--gray-100);
   --muted-foreground: var(--gray-600);
 
-  --accent: var(--myPrimary);
-  --accent-foreground: var(--app-bg-light);
+  --accent: var(--myAccent-bg);
+  --accent-foreground: var(--background-sec);
 
-  --destructive: var(--myWarning);
+  --destructive: var(--myWarning-bg);
   --destructive-foreground: var(--gray-50);
 
   --border: var(--gray-200);
   --input: var(--gray-200);
-  --ring: var(--myPrimary);
+  --ring: var(--myPrimary-bg);
 
   /* Charts */
   --chart-1: var(--coral-600);
@@ -74,61 +74,68 @@
   /* Sidebar */
   --sidebar: var(--gray-50);
   --sidebar-foreground: var(--gray-900);
-  --sidebar-primary: var(--myPrimary);
+  --sidebar-primary: var(--myPrimary-bg);
   --sidebar-primary-foreground: var(--gray-50);
   --sidebar-accent: var(--gray-100);
   --sidebar-accent-foreground: var(--gray-900);
   --sidebar-border: var(--gray-200);
-  --sidebar-ring: var(--myPrimary);
+  --sidebar-ring: var(--myPrimary-bg);
+
+  /* Radius */
+  --radius: 0.5rem;
 }
 
 .dark {
   /* ---- Background & Foreground ---- */
   --background: var(--app-bg-dark);
+  --background-sec: var(--app-bg-sec-dark);
   --foreground: var(--app-fg-dark);
 
   /* ---- Colori Funzionali App ---- */
-  --myPrimary: var(--turquoise-500);
+  --myPrimary-bg: var(--turquoise-500);
   --myPrimary-hover: var(--turquoise-400);
 
-  --mySecondary: var(--turmeric-500);
+  --mySecondary-bg: var(--turmeric-500);
   --mySecondary-hover: var(--turmeric-400);
 
-  --mySuccess: var(--green-500);
+  --mySuccess-bg: var(--green-500);
   --mySuccess-hover: var(--green-400);
 
-  --myWarning: var(--coral-600);
+  --myWarning-bg: var(--coral-600);
   --myWarning-hover: var(--coral-500);
+
+  --myAccent-bg: var(--turquoise-500);
+  --myAccent-hover: var(--turquoise-400);
 
   --gray-border: var(--gray-700);
   --gray-hover: var(--gray-800);
   --gray-text: var(--gray-400);
 
   /* ---- shadcn/ui Tokens (Dark) ---- */
-  --card: var(--gray-850);
-  --card-foreground: var(--app-fg-dark);
+  --card: var(--app-bg-sec-dark);
+  --card-foreground: var(--gray-50);
 
-  --popover: var(--app-bg-dark);
-  --popover-foreground: var(--app-fg-dark);
+  --popover: var(--app-bg-sec-dark);
+  --popover-foreground: var(--gray-50);
 
-  --primary: var(--myPrimary);
-  --primary-foreground: var(--app-bg-dark);
+  --primary: var(--myPrimary-bg);
+  --primary-foreground: var(--gray-900);
 
-  --secondary: var(--mySecondary);
-  --secondary-foreground: var(--app-fg-dark);
+  --secondary: var(--gray-800);
+  --secondary-foreground: var(--gray-50);
 
   --muted: var(--gray-800);
   --muted-foreground: var(--gray-400);
 
-  --accent: var(--myPrimary);
-  --accent-foreground: var(--app-bg-dark);
+  --accent: var(--myAccent-bg);
+  --accent-foreground: var(--background-sec);
 
-  --destructive: var(--myWarning);
+  --destructive: var(--myWarning-bg);
   --destructive-foreground: var(--gray-900);
 
   --border: var(--gray-700);
   --input: var(--gray-800);
-  --ring: var(--myPrimary);
+  --ring: var(--myPrimary-bg);
 
   /* Charts */
   --chart-1: var(--coral-500);
@@ -140,12 +147,12 @@
   /* Sidebar */
   --sidebar: var(--gray-850);
   --sidebar-foreground: var(--gray-50);
-  --sidebar-primary: var(--myPrimary);
+  --sidebar-primary: var(--myPrimary-bg);
   --sidebar-primary-foreground: var(--gray-900);
   --sidebar-accent: var(--gray-800);
   --sidebar-accent-foreground: var(--gray-50);
   --sidebar-border: var(--gray-700);
-  --sidebar-ring: var(--myPrimary);
+  --sidebar-ring: var(--myPrimary-bg);
 }
 
 /* ==========================================
@@ -166,20 +173,23 @@
 
   /* App semantics */
   --color-background: var(--background);
-  --color-background-sec: var(--gray-850);
+  --color-background-sec: var(--background-sec);
   --color-foreground: var(--foreground);
 
-  --color-primary: var(--myPrimary);
+  --color-primary: var(--myPrimary-bg);
   --color-primary-hover: var(--myPrimary-hover);
 
-  --color-secondary: var(--mySecondary);
+  --color-secondary: var(--mySecondary-bg);
   --color-secondary-hover: var(--mySecondary-hover);
 
-  --color-success: var(--mySuccess);
+  --color-success: var(--mySuccess-bg);
   --color-success-hover: var(--mySuccess-hover);
 
-  --color-warning: var(--myWarning);
+  --color-warning: var(--myWarning-bg);
   --color-warning-hover: var(--myWarning-hover);
+
+  --color-accent: var(--myAccent-bg);
+  --color-accent-hover: var(--myAccent-hover);
 
   --color-myGray-border: var(--gray-border);
   --color-myGray-hover: var(--gray-hover);
@@ -194,7 +204,6 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
