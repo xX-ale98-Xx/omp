@@ -5,7 +5,6 @@ export default function landingPage() {
     <div>
       Questa potrebbe essere ad esempio la landing page
       <ThemeToggle />
-      {/* resto del contenuto */}
     </div>
   )
 }

@@ -125,7 +125,7 @@
   --destructive: var(--myWarning);
   --destructive-foreground: var(--gray-900);
 
-  --border: var(--gray-700);
+  --border: var(--gray-750);
   --input: var(--gray-800);
   --ring: var(--myPrimary);
 
@@ -163,9 +163,23 @@
   --color-brand-800: var(--turquoise-800);
   --color-brand-900: var(--turquoise-900);
 
+  --color-myGray-50: var(--gray-50);
+  --color-myGray-75: var(--gray-75);
+  --color-myGray-100: var(--gray-100);
+  --color-myGray-150: var(--gray-150);
+  --color-myGray-200: var(--gray-200);
+  --color-myGray-300: var(--gray-300);
+  --color-myGray-400: var(--gray-400);
+  --color-myGray-500: var(--gray-500);
+  --color-myGray-600: var(--gray-600);
+  --color-myGray-700: var(--gray-700);
+  --color-myGray-750: var(--gray-750);
+  --color-myGray-800: var(--gray-800);
+  --color-myGray-850: var(--gray-850);
+  --color-myGray-900: var(--gray-900);
+
   /* App semantics */
   --color-background: var(--background);
-  --color-background-sec: var(--gray-850);
   --color-foreground: var(--foreground);
 
   --color-primary: var(--myPrimary);
@@ -179,10 +193,6 @@
 
   --color-warning: var(--myWarning);
   --color-warning-hover: var(--myWarning-hover);
-
-  --color-myGray-border: var(--gray-border);
-  --color-myGray-hover: var(--gray-hover);
-  --color-myGray-text: var(--gray-text);
 
   /* shadcn/ui tokens */
   --color-card: var(--card);

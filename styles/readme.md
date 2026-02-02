@@ -1,6 +1,7 @@
 # Sistema di Stili - Guida Completa
 
-> **RECAP**: Questo file documenta il sistema di colori e stili dell'applicazione. Spiega come usare la palette armonizzata, i token semantici per light/dark mode, e le best practices per mantenere coerenza cromatica. Consultalo quando devi scegliere colori, customizzare temi, o capire come funziona il sistema di design.
+> **RECAP**: NON AGGIORNATO, LE INFO ATTUALMENTE PRESENTI IN QUESTO FILE NON SONO INLINEA CON L'ATTUALE SISTEMA DI ESIGN IN USO. 
+Questo file documenta il sistema di colori e stili dell'applicazione. Spiega come usare la palette armonizzata, i token semantici per light/dark mode, e le best practices per mantenere coerenza cromatica. Consultalo quando devi scegliere colori, customizzare temi, o capire come funziona il sistema di design.
 
 ---
 
@@ -29,12 +30,14 @@
 ## 🎨 Panoramica
 
 Il nostro design system è basato su:
+
 - **Tailwind CSS v4** - Utility-first framework
 - **shadcn/ui** - Componenti headless customizzabili
 - **Palette armonizzata** - Generata con [Harmonizer](https://harmonizer.evilmartians.com/)
 - **OKLCH** - Spazio colore moderno per accessibilità garantita
 
 ### Obiettivi
+
 - ✅ Coerenza cromatica in tutta l'app
 - ✅ Contrasti WCAG 2.2 Level AA
 - ✅ Dark mode first-class
@@ -83,47 +86,51 @@ root/
 
 Colore principale dell'applicazione, usato per azioni primarie e brand identity.
 
-| Token | Light | Dark | Uso |
-|-------|-------|------|-----|
-| `turquoise-100` | `oklch(0.97 0.03 185)` | - | Sfondi hover leggeri |
-| `turquoise-600` | `oklch(0.62 0.15 185)` | - | Primary light mode |
-| `turquoise-500` | `oklch(0.74 0.18 185)` | - | Primary dark mode |
-| `turquoise-700` | `oklch(0.56 0.13 185)` | - | Hover light mode |
+| Token           | Light                  | Dark | Uso                  |
+| --------------- | ---------------------- | ---- | -------------------- |
+| `turquoise-100` | `oklch(0.97 0.03 185)` | -    | Sfondi hover leggeri |
+| `turquoise-600` | `oklch(0.62 0.15 185)` | -    | Primary light mode   |
+| `turquoise-500` | `oklch(0.74 0.18 185)` | -    | Primary dark mode    |
+| `turquoise-700` | `oklch(0.56 0.13 185)` | -    | Hover light mode     |
 
 [↑ Torna all'indice](#-indice)
 
 ### Colori Funzionali
 
 #### Coral (Warning/Destructive)
+
 Usato per azioni pericolose, alert, errori.
 
 ```css
---coral-600: oklch(0.67 0.28 25);   /* Light mode */
---coral-500: oklch(0.78 0.16 25);   /* Dark mode */
+--coral-600: oklch(0.67 0.28 25); /* Light mode */
+--coral-500: oklch(0.78 0.16 25); /* Dark mode */
 ```
 
 #### Green (Success)
+
 Usato per conferme, successi, stati positivi.
 
 ```css
---green-600: oklch(0.62 0.26 145);  /* Light mode */
---green-500: oklch(0.73 0.31 145);  /* Dark mode */
+--green-600: oklch(0.62 0.26 145); /* Light mode */
+--green-500: oklch(0.73 0.31 145); /* Dark mode */
 ```
 
 #### Turmeric (Secondary)
+
 Colore secondario, usato per evidenziare info secondarie.
 
 ```css
---turmeric-600: oklch(0.64 0.16 105);  /* Light mode */
---turmeric-500: oklch(0.76 0.19 105);  /* Dark mode */
+--turmeric-600: oklch(0.64 0.16 105); /* Light mode */
+--turmeric-500: oklch(0.76 0.19 105); /* Dark mode */
 ```
 
 #### Azure (Accent)
+
 Usato per hover states, highlight, elementi interattivi.
 
 ```css
---azure-600: oklch(0.63 0.16 225);  /* Light mode */
---azure-500: oklch(0.75 0.19 225);  /* Dark mode */
+--azure-600: oklch(0.63 0.16 225); /* Light mode */
+--azure-500: oklch(0.75 0.19 225); /* Dark mode */
 ```
 
 [↑ Torna all'indice](#-indice)
@@ -131,14 +138,14 @@ Usato per hover states, highlight, elementi interattivi.
 ### Grays (Neutri)
 
 ```css
---gray-50:  oklch(0.95 0 0);  /* Quasi bianco */
---gray-100: oklch(0.9 0 0);   /* Bordi light */
---gray-200: oklch(0.85 0 0);  /* Bordi, input */
---gray-400: oklch(0.65 0 0);  /* Testo secondario */
---gray-500: oklch(0.55 0 0);  /* Testo disabilitato */
---gray-700: oklch(0.35 0 0);  /* Bordi dark */
---gray-800: oklch(0.25 0 0);  /* Superfici dark */
---gray-900: oklch(0.15 0 0);  /* Testo principale light */
+--gray-50: oklch(0.95 0 0); /* Quasi bianco */
+--gray-100: oklch(0.9 0 0); /* Bordi light */
+--gray-200: oklch(0.85 0 0); /* Bordi, input */
+--gray-400: oklch(0.65 0 0); /* Testo secondario */
+--gray-500: oklch(0.55 0 0); /* Testo disabilitato */
+--gray-700: oklch(0.35 0 0); /* Bordi dark */
+--gray-800: oklch(0.25 0 0); /* Superfici dark */
+--gray-900: oklch(0.15 0 0); /* Testo principale light */
 ```
 
 [↑ Torna all'indice](#-indice)
@@ -153,17 +160,15 @@ Usato per hover states, highlight, elementi interattivi.
 Usa invece i token semantici definiti in `global.css`.
 
 #### ❌ SBAGLIATO
+
 ```tsx
-<div className="bg-turquoise-600 text-white">
-  Bottone primario
-</div>
+<div className="bg-turquoise-600 text-white">Bottone primario</div>
 ```
 
 #### ✅ CORRETTO
+
 ```tsx
-<div className="bg-primary text-primary-foreground">
-  Bottone primario
-</div>
+<div className="bg-primary text-primary-foreground">Bottone primario</div>
 ```
 
 [↑ Torna all'indice](#-indice)
@@ -171,49 +176,52 @@ Usa invece i token semantici definiti in `global.css`.
 ### Token Disponibili
 
 #### Background & Foreground
+
 ```tsx
-bg-background        /* Sfondo principale app */
-bg-background-sec    /* Sfondo card, superfici */
-text-foreground      /* Testo principale */
+bg - background /* Sfondo principale app */
+bg - background - sec /* Sfondo card, superfici */
+text - foreground /* Testo principale */
 ```
 
 #### Colori Funzionali
+
 ```tsx
 /* Primary (Turquoise) */
-bg-primary
-hover:bg-primary-hover
-text-primary-foreground
+bg - primary
+hover: bg - primary - hover
+text - primary - foreground
 
 /* Secondary (Turmeric) */
-bg-secondary
-hover:bg-secondary-hover
-text-secondary-foreground
+bg - secondary
+hover: bg - secondary - hover
+text - secondary - foreground
 
 /* Success (Green) */
-bg-success
-hover:bg-success-hover
+bg - success
+hover: bg - success - hover
 
 /* Warning (Coral) */
-bg-warning
-hover:bg-warning-hover
+bg - warning
+hover: bg - warning - hover
 
 /* Accent (Azure) */
-bg-accent
-hover:bg-accent-hover
-text-accent-foreground
+bg - accent
+hover: bg - accent - hover
+text - accent - foreground
 
 /* Destructive (Coral) */
-bg-destructive
-hover:bg-destructive-hover
-text-destructive-foreground
+bg - destructive
+hover: bg - destructive - hover
+text - destructive - foreground
 ```
 
 #### Utility
+
 ```tsx
-border-border        /* Bordi generici */
-bg-muted            /* Sfondi disabilitati */
-text-muted-foreground  /* Testo secondario */
-ring-ring           /* Focus outline */
+border - border /* Bordi generici */
+bg - muted /* Sfondi disabilitati */
+text - muted - foreground /* Testo secondario */
+ring - ring /* Focus outline */
 ```
 
 [↑ Torna all'indice](#-indice)
@@ -221,6 +229,7 @@ ring-ring           /* Focus outline */
 ### Esempi Pratici
 
 #### Button Primario
+
 ```tsx
 <button className="bg-primary text-primary-foreground hover:bg-primary-hover">
   Prenota Appuntamento
@@ -228,17 +237,15 @@ ring-ring           /* Focus outline */
 ```
 
 #### Alert Successo
+
 ```tsx
-<div className="bg-success text-white p-4 rounded-lg">
-  Appuntamento confermato!
-</div>
+<div className="bg-success rounded-lg p-4 text-white">Appuntamento confermato!</div>
 ```
 
 #### Card con Bordo
+
 ```tsx
-<div className="bg-background-sec border border-border rounded-lg p-6">
-  Contenuto card
-</div>
+<div className="bg-background-sec border-border rounded-lg border p-6">Contenuto card</div>
 ```
 
 [↑ Torna all'indice](#-indice)
@@ -254,9 +261,7 @@ Il dark mode si attiva automaticamente aggiungendo la classe `.dark` al root:
 ```tsx
 // layout.tsx o root component
 <html className={isDark ? 'dark' : ''}>
-  <body>
-    {children}
-  </body>
+  <body>{children}</body>
 </html>
 ```
 
@@ -266,13 +271,13 @@ Il dark mode si attiva automaticamente aggiungendo la classe `.dark` al root:
 
 Tutti i token semantici si adattano automaticamente:
 
-| Token | Light | Dark |
-|-------|-------|------|
-| `--background` | `#efefef` | `#171717` |
-| `--background-sec` | `#ffffff` | `#272727` |
-| `--foreground` | `#171717` | `#ffffff` |
-| `--primary` | `turquoise-600` | `turquoise-500` |
-| `--primary-hover` | `turquoise-700` | `turquoise-400` |
+| Token              | Light           | Dark            |
+| ------------------ | --------------- | --------------- |
+| `--background`     | `#efefef`       | `#171717`       |
+| `--background-sec` | `#ffffff`       | `#272727`       |
+| `--foreground`     | `#171717`       | `#ffffff`       |
+| `--primary`        | `turquoise-600` | `turquoise-500` |
+| `--primary-hover`  | `turquoise-700` | `turquoise-400` |
 
 **Non devi fare nulla!** I colori cambiano automaticamente.
 
@@ -300,6 +305,7 @@ Questo garantisce contrasto ottimale in entrambi i temi.
 ```
 
 **Perché?**
+
 - Manutenibilità: cambi il colore in un solo posto
 - Dark mode automatico
 - Coerenza garantita
@@ -338,6 +344,7 @@ bg-warning          → Attenzione, Verifica
 ```
 
 **Perché?**
+
 - Controllo cromatico preciso
 - Progressione coerente (600→700)
 - No opacità generiche
@@ -364,12 +371,12 @@ Ogni componente deve essere leggibile e accessibile in entrambi i temi.
 
 ```css
 :root {
-  --myNewColor-bg: var(--neon-600);      /* Light */
+  --myNewColor-bg: var(--neon-600); /* Light */
   --myNewColor-hover: var(--neon-700);
 }
 
 .dark {
-  --myNewColor-bg: var(--neon-500);      /* Dark */
+  --myNewColor-bg: var(--neon-500); /* Dark */
   --myNewColor-hover: var(--neon-400);
 }
 ```
@@ -415,6 +422,7 @@ Tutti i nostri token rispettano WCAG AA.
 ## 📞 Supporto
 
 Per domande sul design system:
+
 - Consulta `components/shadcn/ui/CUSTOMIZATION_GUIDE.md` per shadcn
 - Consulta `docs/DESIGN_SYSTEM.md` per panoramica completa
 - Contatta il team design

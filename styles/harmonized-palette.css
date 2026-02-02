@@ -98,14 +98,16 @@
      GRAYS (INVARIATO)
      ========================================== */
   --gray-50: oklch(0.98 0 0);
-  --gray-75:  oklch(0.955 0 0);
+  --gray-75: oklch(0.955 0 0);
   --gray-100: oklch(0.93 0 0);
+  --gray-150: oklch(0.905 0 0);
   --gray-200: oklch(0.88 0 0);
   --gray-300: oklch(0.83 0 0);
   --gray-400: oklch(0.75 0 0);
   --gray-500: oklch(0.65 0 0);
   --gray-600: oklch(0.55 0 0);
   --gray-700: oklch(0.45 0 0);
+  --gray-750: oklch(0.35 0 0);
   --gray-800: oklch(0.25 0 0);
   --gray-850: oklch(0.2 0 0);
   --gray-900: oklch(0.15 0 0);

@@ -37,7 +37,7 @@ export async function login(prevState: LoginState, formData: FormData) {
         email: fieldErrors.email,
         password: fieldErrors.password,
       },
-      message: 'Mail o password sbagliati, riprova',
+      message: 'Formato email o password non validi',
     }
   }
 
@@ -59,7 +59,7 @@ export async function login(prevState: LoginState, formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/home')
+  redirect('/dashboard')
 }
 
 const FormSignupSchema = z.object({
