@@ -1,6 +1,8 @@
 /* Fix autofill Chrome per input e textarea */
 
-/* Nel file layout generale dell'app, inseriscilo dopo personal.css e dopo globals.css così che tutte le variabili che usi siano già state definite */
+/* Nel file layout generale dell'app, inseriscilo dopo globals.css così che tutte le variabili che usi siano già state definite */
+
+/* Fix autofill Chrome - mantieni design coerente */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -10,8 +12,8 @@ textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus,
 textarea:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0px 1000px var(--background-sec) inset;
-  -webkit-text-fill-color: var(--foreground);
-  border-radius: inherit;
-  transition: background-color 5000s ease-in-out 0s; /* evita flash giallo in Chrome */
+  -webkit-box-shadow: 0 0 0px 1000px var(--background) inset !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+  border-radius: calc(var(--radius) - 0.125rem) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
