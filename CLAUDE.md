@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-OhMyPhysio (OMP) — a physiotherapy management web application built with Next.js 15 App Router, React 19, TypeScript, Supabase, and shadcn/ui.
+OhMyPhysio (OMP) — a physiotherapy management web application built with Next.js 15 App Router, React 19, TypeScript, Supabase, and shadcn/ui. Deployed on **Vercel**.
 
 ## Commands
 
@@ -12,12 +12,30 @@ OhMyPhysio (OMP) — a physiotherapy management web application built with Next.
 pnpm dev              # Dev server with Turbopack
 pnpm build            # Production build with Turbopack
 pnpm start            # Start production server
-pnpm lint             # ESLint
+pnpm lint             # ESLint (v9 flat config)
 pnpm format:write     # Prettier format all files
 pnpm format:check     # Check formatting
 ```
 
-Package manager is **pnpm**. No test framework is configured.
+Package manager is **pnpm**. No test framework is configured. No CI/CD pipeline exists yet.
+
+## Key Libraries
+
+| Library | Purpose | Used in |
+|---|---|---|
+| `@supabase/ssr` + `@supabase/supabase-js` | Auth & database | Auth flow, middleware, data access |
+| `zod` | Schema validation | Server actions (form validation) |
+| `next-themes` | Dark/light mode | Theme provider, toggle button |
+| `sonner` | Toast notifications | Configured (`components/shadcn/ui/sonner.tsx`), not yet widely used |
+| `framer-motion` | Animations | Only in deprecated `components/authPages/` |
+| `@tanstack/react-table` | Data tables | Dashboard block (`dashboard-01`) |
+| `@dnd-kit/*` | Drag-and-drop | Dashboard block (`dashboard-01`) |
+| `recharts` | Charts | Dashboard block (`dashboard-01`) |
+| `vaul` | Drawer component | shadcn drawer primitive |
+| `lucide-react` | Icons (primary) | Throughout the app |
+| `@heroicons/react`, `@tabler/icons-react`, `react-icons` | Icons (secondary) | Various components |
+
+> **Note**: Prisma (`@prisma/client`, `prisma`) and `@auth/prisma-adapter` are installed but **not configured** — no schema exists. They can be removed or set up when needed.
 
 ## Project Structure
 
@@ -27,16 +45,16 @@ omp-app/
 │   ├── (dashboard)/                  # Route group with sidebar layout
 │   │   ├── account/                  # Account page
 │   │   ├── home/                     # Home page
-│   │   ├── prova/                    # Test page
+│   │   ├── prova/                    # Test page (placeholder)
 │   │   └── layout.tsx                # Dashboard layout (sidebar + content)
 │   ├── auth/
 │   │   ├── confirm/route.ts          # Auth callback (email verify, OAuth)
-│   │   └── signout/                  # Sign out route
+│   │   └── signout/route.ts          # Sign out (POST route, not server action)
 │   ├── dashboard/                    # Standalone dashboard (shadcn block)
 │   │   ├── page.tsx
 │   │   └── data.json
 │   ├── error/                        # Error pages
-│   ├── landing/                      # Landing page
+│   ├── landing/                      # Landing page (placeholder)
 │   ├── login/                        # Login page (current)
 │   ├── login_old/                    # Login page (deprecated)
 │   ├── signup/                       # Signup page (current)
@@ -45,7 +63,7 @@ omp-app/
 │   └── page.tsx                      # Root page (landing)
 │
 ├── components/
-│   ├── authPages/                    # Legacy auth components (deprecated)
+│   ├── authPages/                    # Legacy auth components (DEPRECATED — uses framer-motion)
 │   ├── dashboard/                    # Custom dashboard components
 │   │   ├── dropdown.tsx
 │   │   ├── header.tsx
@@ -59,6 +77,7 @@ omp-app/
 │       │   ├── login-03/components/      # Login form block
 │       │   └── signup-03/components/     # Signup form block
 │       └── ui/                       # shadcn UI primitives (button, card, input, etc.)
+│                                     # Also contains customization_guide.md
 │
 ├── docs/
 │   └── design_system.md              # Design system documentation
@@ -67,27 +86,32 @@ omp-app/
 │   └── use-mobile.ts                 # Mobile breakpoint hook
 │
 ├── lib/
-│   └── utils.ts                      # cn() utility
+│   └── utils.ts                      # cn() utility (clsx + tailwind-merge)
 │
 ├── providers/
 │   └── theme-provider.tsx            # next-themes wrapper
 │
+├── public/                           # Static assets
+│   └── OMP_logo.svg                  # App logo (+ Next/Vercel defaults)
+│
 ├── styles/
-│   ├── globals.css                   # Main styles + semantic tokens
+│   ├── globals.css                   # Main styles + semantic tokens (light/dark)
 │   ├── harmonized-palette.css        # OKLCH color palette (immutable source of truth)
+│   ├── theme.css                     # Tailwind v4 @theme directive (maps semantic tokens)
 │   ├── autofillFix.css               # Browser autofill styling fix
-│   └── theme.css
+│   └── readme.md                     # Styles documentation
 │
 ├── utils/
-│   ├── actions/actions.tsx           # Server actions (login, signup, logout)
+│   ├── actions/actions.tsx           # Server actions (login, signup, Google OAuth, logout)
 │   ├── supabase/
 │   │   ├── client.ts                 # Supabase browser client
 │   │   ├── server.ts                 # Supabase server client
 │   │   └── middleware.ts             # Auth session management
 │   └── ui/fonts.ts                   # Google Fonts (Inter, Lusitana)
 │
+├── components.json                    # shadcn/ui CLI configuration
 ├── middleware.ts                      # Next.js middleware (auth protection)
-└── .env                               # Environment variables
+└── .env                               # Environment variables (gitignored)
 ```
 
 ## Architecture
@@ -105,42 +129,119 @@ omp-app/
 - Middleware (`middleware.ts` → `utils/supabase/middleware.ts`) protects all routes, redirecting unauthenticated users to `/login`
 - Public routes: `/login`, `/signup`, `/auth`, `/error`, `/landing`
 - Auth mutations use **Server Actions** in `utils/actions/actions.tsx` (login, signup, Google OAuth, logout)
+- Exception: `/auth/signout/route.ts` uses a POST route handler (not a server action)
 - Auth callback flow: `/auth/confirm/route.ts` handles email verification and OAuth code exchange
 - Supabase has a `profiles` table with a trigger that auto-creates a profile on user signup
 
 ### Database
 
-- **Supabase PostgreSQL** accessed via Supabase client (not Prisma — Prisma is installed but not configured with a schema)
+- **Supabase PostgreSQL** accessed via Supabase client (not Prisma)
 - Server-side client: `utils/supabase/server.ts`; browser client: `utils/supabase/client.ts`
-- Env vars: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (client-side), `SUPABASE_SERVICE_ROLE_KEY` (server-only)
+- Database schema is evolving — currently only the `profiles` table is in use
+
+### Form & Error Handling Patterns
+
+Forms use React 19's `useActionState` hook with Server Actions:
+
+```tsx
+// Pattern: useActionState + Server Action + Zod validation
+const [state, formAction, pending] = useActionState(login, initialState)
+
+<form action={formAction}>
+  <Input name="email" />
+  {state.errors?.email && <p className="text-sm text-red-500">{state.errors.email[0]}</p>}
+  <Button type="submit" disabled={pending}>
+    {pending && <Spinner />}
+    Login
+  </Button>
+</form>
+```
+
+**Server action return shape** (follow this pattern for new actions):
+```tsx
+type ActionState = {
+  errors?: { [field: string]: string[] }  // Field-level validation errors (from Zod)
+  message?: string | null                  // General error/success message
+  success?: boolean | null                 // Outcome flag (used in signup)
+}
+```
+
+- **Validation**: Zod schemas validate form input server-side; field errors are returned and displayed inline
+- **Loading**: `pending` from `useActionState` disables the submit button and shows a spinner
+- **Success**: redirect via `redirect()` (login) or return success state (signup)
+- **Toast notifications**: `sonner` is installed and configured but not yet used in auth flows
 
 ### UI Components & Design System
 
 - **shadcn/ui** components live in `components/shadcn/ui/` — these are owned code, freely modifiable
 - **shadcn blocks** (page templates) in `components/shadcn/blocks/` (dashboard-01, login-03, signup-03)
+- **shadcn CLI config**: `components.json` — style: `new-york`, aliases point ui to `@/components/shadcn/ui`, blocks to `@/components/shadcn/blocks`
 - Custom components in `components/dashboard/`, `components/dark-light/`
-- Built on Radix UI primitives, styled with Tailwind CSS v4, variants via CVA (Class Variance Authority)
+- Built on Radix UI primitives, styled with **Tailwind CSS v4**, variants via CVA (Class Variance Authority)
+- Tailwind v4 has **no `tailwind.config.ts`** — configuration is done via the `@theme` directive in `styles/theme.css`
 - `cn()` utility from `lib/utils.ts` for class merging (clsx + tailwind-merge)
 
 ### Design System Color Architecture
 
 ```
-harmonized-palette.css  →  globals.css  →  Tailwind classes
-(OKLCH base colors)       (semantic tokens)   (bg-primary, text-foreground, etc.)
+harmonized-palette.css  →  globals.css  →  theme.css        →  Tailwind classes
+(OKLCH base colors)       (semantic tokens)  (@theme mapping)   (bg-primary, text-foreground, etc.)
 ```
 
 - `styles/harmonized-palette.css` is the **immutable** source of truth for base colors (OKLCH)
 - `styles/globals.css` maps base colors to semantic tokens (`--primary`, `--background`, `--card`, etc.) with light/dark variants
-- Custom semantic tokens: `--myPrimary`, `--mySecondary`, `--mySuccess`, `--myWarning`
+- `styles/theme.css` maps semantic tokens to Tailwind via `@theme` (e.g. `--color-primary: var(--myPrimary-bg)`)
+- Custom semantic tokens: `--myPrimary`, `--mySecondary`, `--mySuccess`, `--myWarning`, `--myAccent`
 - Always use semantic Tailwind classes (`bg-primary`, `text-muted-foreground`), never raw palette values
 - Full design system documentation: `docs/design_system.md`
 - Component customization guide: `components/shadcn/ui/customization_guide.md`
 
+## Environment Variables
+
+All env vars are in `.env` (gitignored). There is no `.env.example` file yet.
+
+| Variable | Scope | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Client + Server | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Client + Server | Supabase anon/public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server only | Supabase admin key (never expose to client) |
+| `SUPABASE_JWT_SECRET` | Server only | JWT verification secret |
+| `NEXT_PUBLIC_SITE_URL` | Client + Server | App base URL (e.g. `http://localhost:3000`) |
+| `AUTH_SECRET` | Server only | Auth.js secret (added by `npx auth`, not actively used) |
+| `POSTGRES_*` | Server only | Direct Postgres connection strings (for future Prisma use) |
+
+> **Known issue**: `signUpWithGoogle()` in `utils/actions/actions.tsx` references `process.env.NEXT_PUBLIC_APP_URL`, but the actual env var is `NEXT_PUBLIC_SITE_URL`. This needs to be aligned.
+
+> **Note**: `NEXT_PUBLIC_SUPABASE_ANON_KEY` also exists in `.env` as a duplicate of `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Only `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is used in code.
+
 ## Key Conventions
 
+- **Language**: all user-facing text (labels, validation messages, toasts, placeholders) must be in **Italian**. Code identifiers and comments can be in either language.
 - **Server Actions over API routes** — use `'use server'` functions for mutations, don't create API routes
 - **Import alias**: `@/*` maps to project root
-- **Code style** (Prettier): single quotes, no semicolons, 100 char width, trailing commas (ES5)
+- **Code style** (Prettier): single quotes, no semicolons, 100 char width, trailing commas (ES5), Tailwind class sorting (`prettier-plugin-tailwindcss`)
 - **Theme**: dark/light mode via `next-themes`, toggled with `ThemeToggleButton`
 - **Validation**: Zod schemas for form input validation in server actions
-- **Icons**: lucide-react is the primary icon library (also has heroicons, tabler, react-icons installed)
+- **Icons**: `lucide-react` is the primary icon library (also has heroicons, tabler, react-icons installed)
+
+## Tech Debt
+
+Items marked for cleanup or completion:
+
+| Item | Status | Notes |
+|---|---|---|
+| `app/login_old/`, `app/signup_old/` | Deprecated | Old auth pages, safe to delete |
+| `components/authPages/` | Deprecated | Legacy auth components with framer-motion animations |
+| `app/prova/` | Placeholder | Test route, safe to delete |
+| `app/landing/` | Placeholder | Stub landing page, needs real content |
+| Prisma packages | Installed, unused | `@prisma/client`, `@auth/prisma-adapter`, `prisma` — no schema configured |
+| `@supabase/auth-helpers-react`, `@supabase/auth-ui-react` | Likely unused | Old Supabase auth packages, superseded by `@supabase/ssr` |
+| Signup form | Not wired | `signup-form.tsx` lacks `useActionState` integration |
+| `NEXT_PUBLIC_APP_URL` bug | Bug | Used in `signUpWithGoogle()` but env var is `NEXT_PUBLIC_SITE_URL` |
+| No `.env.example` | Missing | Should be created for onboarding |
+
+## Deployment
+
+- **Hosting**: Vercel
+- **No CI/CD pipeline** configured (no GitHub Actions, no `vercel.json`)
+- **No Docker** setup
