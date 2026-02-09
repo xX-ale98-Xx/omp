@@ -1,26 +1,23 @@
-import { AppSidebar } from "@/components/shadcn/blocks/dashboard-01/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/shadcn/blocks/dashboard-01/components/chart-area-interactive"
-import { DataTable } from "@/components/shadcn/blocks/dashboard-01/components/data-table"
-import { SectionCards } from "@/components/shadcn/blocks/dashboard-01/components/section-cards"
-import { SiteHeader } from "@/components/shadcn/blocks/dashboard-01/components/site-header"
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/shadcn/ui/sidebar"
+import { AppSidebar } from '@/components/shadcn/blocks/dashboard-01/components/app-sidebar'
+import { ChartAreaInteractive } from '@/components/shadcn/blocks/dashboard-01/components/chart-area-interactive'
+import { DataTable } from '@/components/shadcn/blocks/dashboard-01/components/data-table'
+import { SectionCards } from '@/components/shadcn/blocks/dashboard-01/components/section-cards'
+import { SiteHeader } from '@/components/shadcn/blocks/dashboard-01/components/site-header'
+import { SidebarInset, SidebarProvider } from '@/components/shadcn/ui/sidebar'
 
-import data from "./data.json"
+import data from './data.json'
 
 export default function Page() {
   return (
     <SidebarProvider
       style={
         {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
+          '--sidebar-width': 'calc(var(--spacing) * 72)',
+          '--header-height': 'calc(var(--spacing) * 12)',
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset"/>
+      <AppSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">

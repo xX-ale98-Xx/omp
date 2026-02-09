@@ -27,7 +27,6 @@ Package manager is **pnpm**. No test framework is configured. No CI/CD pipeline 
 | `zod` | Schema validation | Server actions (form validation) |
 | `next-themes` | Dark/light mode | Theme provider, toggle button |
 | `sonner` | Toast notifications | Configured (`components/shadcn/ui/sonner.tsx`), not yet widely used |
-| `framer-motion` | Animations | Only in deprecated `components/authPages/` (unused) |
 | `@tanstack/react-table` | Data tables | Dashboard block (`dashboard-01`) |
 | `@dnd-kit/*` | Drag-and-drop | Dashboard block (`dashboard-01`) |
 | `recharts` | Charts | Dashboard block (`dashboard-01`) |
@@ -60,8 +59,7 @@ omp-app/
 │   └── page.tsx                      # Root page (landing)
 │
 ├── components/
-│   ├── authPages/                    # Legacy auth components (DEPRECATED — uses framer-motion)
-│   ├── dashboard/                    # Custom dashboard components
+│   ├── dashboard/                    # Custom dashboard components (used by (dashboard) route group)
 │   │   ├── dropdown.tsx
 │   │   ├── header.tsx
 │   │   ├── nav-links.tsx
@@ -74,10 +72,6 @@ omp-app/
 │       │   ├── login-03/components/      # Login form block
 │       │   └── signup-03/components/     # Signup form block
 │       └── ui/                       # shadcn UI primitives (button, card, input, etc.)
-│                                     # Also contains customization_guide.md
-│
-├── docs/
-│   └── design_system.md              # Design system documentation
 │
 ├── hooks/
 │   └── use-mobile.ts                 # Mobile breakpoint hook
@@ -92,11 +86,9 @@ omp-app/
 │   └── OMP_logo.svg                  # App logo (+ Next/Vercel defaults)
 │
 ├── styles/
-│   ├── globals.css                   # Main styles + semantic tokens (light/dark)
+│   ├── globals.css                   # Main styles + semantic tokens + @theme (light/dark)
 │   ├── harmonized-palette.css        # OKLCH color palette (immutable source of truth)
-│   ├── theme.css                     # Tailwind v4 @theme directive (maps semantic tokens)
-│   ├── autofillFix.css               # Browser autofill styling fix
-│   └── readme.md                     # Styles documentation
+│   └── autofillFix.css               # Browser autofill styling fix
 │
 ├── utils/
 │   ├── actions/actions.tsx           # Server actions (login, signup, Google OAuth, logout)
@@ -174,23 +166,20 @@ type ActionState = {
 - **shadcn CLI config**: `components.json` — style: `new-york`, aliases point ui to `@/components/shadcn/ui`, blocks to `@/components/shadcn/blocks`
 - Custom components in `components/dashboard/`, `components/dark-light/`
 - Built on Radix UI primitives, styled with **Tailwind CSS v4**, variants via CVA (Class Variance Authority)
-- Tailwind v4 has **no `tailwind.config.ts`** — configuration is done via the `@theme` directive in `styles/theme.css`
+- Tailwind v4 has **no `tailwind.config.ts`** — configuration is done via the `@theme` directive in `styles/globals.css`
 - `cn()` utility from `lib/utils.ts` for class merging (clsx + tailwind-merge)
 
 ### Design System Color Architecture
 
 ```
-harmonized-palette.css  →  globals.css  →  theme.css        →  Tailwind classes
-(OKLCH base colors)       (semantic tokens)  (@theme mapping)   (bg-primary, text-foreground, etc.)
+harmonized-palette.css  →  globals.css              →  Tailwind classes
+(OKLCH base colors)       (semantic tokens + @theme)   (bg-primary, text-foreground, etc.)
 ```
 
 - `styles/harmonized-palette.css` is the **immutable** source of truth for base colors (OKLCH)
-- `styles/globals.css` maps base colors to semantic tokens (`--primary`, `--background`, `--card`, etc.) with light/dark variants
-- `styles/theme.css` maps semantic tokens to Tailwind via `@theme` (e.g. `--color-primary: var(--myPrimary-bg)`)
+- `styles/globals.css` maps base colors to semantic tokens (`--primary`, `--background`, `--card`, etc.) with light/dark variants, and maps them to Tailwind via `@theme`
 - Custom semantic tokens: `--myPrimary`, `--mySecondary`, `--mySuccess`, `--myWarning`, `--myAccent`
 - Always use semantic Tailwind classes (`bg-primary`, `text-muted-foreground`), never raw palette values
-- Full design system documentation: `docs/design_system.md`
-- Component customization guide: `components/shadcn/ui/customization_guide.md`
 
 ## Environment Variables
 
@@ -224,8 +213,7 @@ Items marked for cleanup or completion:
 
 | Item | Status | Notes |
 |---|---|---|
-| `components/authPages/` | Deprecated | Legacy auth components with framer-motion animations, safe to delete |
-| `app/prova/` | Placeholder | Test route, safe to delete |
+| `app/prova/` | Placeholder | Test route, needs real content |
 | `app/landing/` | Placeholder | Stub landing page, needs real content |
 | `(dashboard)` route group | Being abandoned | `components/dashboard/`, `app/(dashboard)/` — being replaced by `/dashboard` route |
 | Prisma packages | Installed, unused | `@prisma/client`, `@auth/prisma-adapter`, `prisma` — no schema configured |
