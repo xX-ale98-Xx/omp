@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { createClient } from '@/utils/supabase/server'
-import type { User } from '@supabase/supabase-js'
 
 const FormLoginSchema = z.object({
   email: z.email({ message: 'Inserire una email valida.' }),
@@ -78,13 +77,10 @@ export type SignupState = {
   }
   message?: string | null
   success?: boolean | null
-  user?: User | null
 }
 
 export async function signup(prevState: SignupState, formData: FormData) {
   const supabase = await createClient()
-
-  await supabase.auth.signOut()
 
   // Estraggo valori come stringhe sicure
   const email = formData.get('email')?.toString() ?? ''
@@ -99,17 +95,19 @@ export async function signup(prevState: SignupState, formData: FormData) {
       success: false,
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Errore di validazione',
-      user: null,
     }
   }
 
+  const { email: validEmail, password: validPassword, name: validName, surname: validSurname } =
+    validatedFields.data
+
   const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
+    email: validEmail,
+    password: validPassword,
     options: {
       data: {
-        name,
-        surname,
+        name: validName,
+        surname: validSurname,
       },
     },
   })
@@ -117,8 +115,7 @@ export async function signup(prevState: SignupState, formData: FormData) {
   if (error) {
     return {
       success: false,
-      message: error.message,
-      user: null,
+      message: 'Si è verificato un errore durante la registrazione.',
     }
   }
 
@@ -127,22 +124,20 @@ export async function signup(prevState: SignupState, formData: FormData) {
   if (!user) {
     return {
       success: false,
-      message: 'Errore: utente non creato',
-      user: null,
+      message: 'Si è verificato un errore durante la registrazione.',
     }
   }
 
   // Aggiorna i dati del profilo creato dal trigger su auth.users
   const { error: profileError } = await supabase
     .from('profiles')
-    .update({ name, surname })
+    .update({ name: validName, surname: validSurname })
     .eq('user_id', user.id)
 
   if (profileError) {
     return {
       success: false,
-      message: 'Errore aggiornamento profilo: ' + profileError.message,
-      user: null,
+      message: 'Si è verificato un errore durante la registrazione.',
     }
   }
 
@@ -150,35 +145,29 @@ export async function signup(prevState: SignupState, formData: FormData) {
     success: true,
     message:
       'Ti abbiamo inviato una mail di conferma.\nSegui il link per accedere al tuo nuovo profilo!',
-    user: data.user,
   }
 }
 
 export async function signUpWithGoogle() {
-  console.log('🔍 NEXT_PUBLIC_APP_URL:', process.env.NEXT_PUBLIC_APP_URL)
-  console.log('🔍 redirectTo:', `${process.env.NEXT_PUBLIC_APP_URL}/auth/confirm?next=/home`)
   const supabase = await createClient()
 
-  try {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/confirm?next=/home`,
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
-        },
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm?next=/home`,
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent',
       },
-    })
+    },
+  })
 
-    if (error) {
-      console.error('OAuth error:', error)
-      return { error: error.message, url: null }
-    }
-    return { error: null, url: data.url }
-  } catch (error) {
-    console.error('Unexpected error:', error)
-    return { error: 'Errore durante il login con Google', url: null }
+  if (error) {
+    return
+  }
+
+  if (data.url) {
+    redirect(data.url)
   }
 }
 
