@@ -27,7 +27,7 @@ Package manager is **pnpm**. No test framework is configured. No CI/CD pipeline 
 | `zod` | Schema validation | Server actions (form validation) |
 | `next-themes` | Dark/light mode | Theme provider, toggle button |
 | `sonner` | Toast notifications | Configured (`components/shadcn/ui/sonner.tsx`), not yet widely used |
-| `framer-motion` | Animations | Only in deprecated `components/authPages/` |
+| `framer-motion` | Animations | Only in deprecated `components/authPages/` (unused) |
 | `@tanstack/react-table` | Data tables | Dashboard block (`dashboard-01`) |
 | `@dnd-kit/*` | Drag-and-drop | Dashboard block (`dashboard-01`) |
 | `recharts` | Charts | Dashboard block (`dashboard-01`) |
@@ -48,17 +48,14 @@ omp-app/
 │   │   ├── prova/                    # Test page (placeholder)
 │   │   └── layout.tsx                # Dashboard layout (sidebar + content)
 │   ├── auth/
-│   │   ├── confirm/route.ts          # Auth callback (email verify, OAuth)
-│   │   └── signout/route.ts          # Sign out (POST route, not server action)
+│   │   └── confirm/route.ts          # Auth callback (email verify, OAuth)
 │   ├── dashboard/                    # Standalone dashboard (shadcn block)
 │   │   ├── page.tsx
 │   │   └── data.json
 │   ├── error/                        # Error pages
 │   ├── landing/                      # Landing page (placeholder)
-│   ├── login/                        # Login page (current)
-│   ├── login_old/                    # Login page (deprecated)
-│   ├── signup/                       # Signup page (current)
-│   ├── signup_old/                   # Signup page (deprecated)
+│   ├── login/                        # Login page
+│   ├── signup/                       # Signup page
 │   ├── layout.tsx                    # Root layout (theme provider)
 │   └── page.tsx                      # Root page (landing)
 │
@@ -121,16 +118,15 @@ omp-app/
 - **Next.js App Router** (`app/` directory) with Server Components by default
 - `(dashboard)` route group has its own layout with sidebar navigation
 - `/dashboard` is a separate route using the shadcn dashboard-01 block template
-- `/login` and `/signup` are the current auth pages (shadcn-based); `login_old/` and `signup_old/` are deprecated
+- `/login` and `/signup` are the auth pages (shadcn-based)
 
 ### Authentication
 
 - **Supabase Auth** with `@supabase/ssr` for cookie-based session management
-- Middleware (`middleware.ts` → `utils/supabase/middleware.ts`) protects all routes, redirecting unauthenticated users to `/login`
+- Middleware (`middleware.ts` → `utils/supabase/middleware.ts`) protects all routes, redirecting unauthenticated users to `/login` and authenticated users away from `/login` and `/signup`
 - Public routes: `/login`, `/signup`, `/auth`, `/error`, `/landing`
 - Auth mutations use **Server Actions** in `utils/actions/actions.tsx` (login, signup, Google OAuth, logout)
-- Exception: `/auth/signout/route.ts` uses a POST route handler (not a server action)
-- Auth callback flow: `/auth/confirm/route.ts` handles email verification and OAuth code exchange
+- Auth callback flow: `/auth/confirm/route.ts` handles email verification and OAuth code exchange, with open-redirect protection via `sanitizeRedirectPath()`
 - Supabase has a `profiles` table with a trigger that auto-creates a profile on user signup
 
 ### Database
@@ -210,8 +206,6 @@ All env vars are in `.env` (gitignored). There is no `.env.example` file yet.
 | `AUTH_SECRET` | Server only | Auth.js secret (added by `npx auth`, not actively used) |
 | `POSTGRES_*` | Server only | Direct Postgres connection strings (for future Prisma use) |
 
-> **Known issue**: `signUpWithGoogle()` in `utils/actions/actions.tsx` references `process.env.NEXT_PUBLIC_APP_URL`, but the actual env var is `NEXT_PUBLIC_SITE_URL`. This needs to be aligned.
-
 > **Note**: `NEXT_PUBLIC_SUPABASE_ANON_KEY` also exists in `.env` as a duplicate of `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Only `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is used in code.
 
 ## Key Conventions
@@ -230,15 +224,21 @@ Items marked for cleanup or completion:
 
 | Item | Status | Notes |
 |---|---|---|
-| `app/login_old/`, `app/signup_old/` | Deprecated | Old auth pages, safe to delete |
-| `components/authPages/` | Deprecated | Legacy auth components with framer-motion animations |
+| `components/authPages/` | Deprecated | Legacy auth components with framer-motion animations, safe to delete |
 | `app/prova/` | Placeholder | Test route, safe to delete |
 | `app/landing/` | Placeholder | Stub landing page, needs real content |
+| `(dashboard)` route group | Being abandoned | `components/dashboard/`, `app/(dashboard)/` — being replaced by `/dashboard` route |
 | Prisma packages | Installed, unused | `@prisma/client`, `@auth/prisma-adapter`, `prisma` — no schema configured |
 | `@supabase/auth-helpers-react`, `@supabase/auth-ui-react` | Likely unused | Old Supabase auth packages, superseded by `@supabase/ssr` |
-| Signup form | Not wired | `signup-form.tsx` lacks `useActionState` integration |
-| `NEXT_PUBLIC_APP_URL` bug | Bug | Used in `signUpWithGoogle()` but env var is `NEXT_PUBLIC_SITE_URL` |
 | No `.env.example` | Missing | Should be created for onboarding |
+
+## Security
+
+- **Security headers** configured in `next.config.ts`: CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy
+- `poweredByHeader: false` in Next.js config
+- **Open redirect protection** in `/auth/confirm` via `sanitizeRedirectPath()` (decoding, backslash normalization, protocol-relative URL blocking, control char stripping)
+- **CSRF protection**: all mutations use Server Actions (built-in CSRF tokens), no unprotected route handlers
+- **Reverse auth guard**: middleware redirects authenticated users away from `/login` and `/signup`
 
 ## Deployment
 
