@@ -62,8 +62,7 @@ export default function LandingHeader() {
         </div>
 
         {/* Mobile menu */}
-        <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
+        <div className="md:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
@@ -86,6 +85,11 @@ export default function LandingHeader() {
                     {link.label}
                   </a>
                 ))}
+                <div className="border-border my-2 border-t" />
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground text-sm">Tema</span>
+                  <ThemeToggle />
+                </div>
                 <div className="border-border my-2 border-t" />
                 <Button variant="outline" asChild className="w-full">
                   <Link href="/login">Accedi</Link>
