@@ -28,6 +28,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/shadcn/ui/sidebar"
+import { logoutAction } from "@/utils/actions/actions"
 
 export function NavUser({
   user,
@@ -98,9 +99,13 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <IconLogout />
-              Log out
+            <DropdownMenuItem asChild>
+              <form action={logoutAction} className="w-full">
+                <button type="submit" className="flex w-full items-center gap-2">
+                  <IconLogout />
+                  Esci
+                </button>
+              </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
