@@ -207,6 +207,77 @@ All env vars are in `.env` (gitignored). There is no `.env.example` file yet.
 - **Validation**: Zod schemas for form input validation in server actions
 - **Icons**: `lucide-react` is the primary icon library (also has heroicons, tabler, react-icons installed)
 
+
+## Development Rules for Claude Code
+
+These rules guide how new code should be written in this repository. The goal is to keep the MVP maintainable, secure, and consistent without over-engineering.
+
+---
+
+### UI Component Rules (shadcn First)
+
+- When creating new UI, ALWAYS try to build using existing **shadcn/ui components** located in `components/shadcn/ui`.
+- Before creating any new custom component, ALWAYS check the **official shadcn/ui component library online** to see if a suitable component already exists but is not yet installed in the project.
+- If a matching component exists in the official shadcn registry, install it via the shadcn CLI instead of building a custom solution.
+- Do NOT create new base UI primitives (Button, Input, Modal, Dropdown, Card, etc.) if a shadcn equivalent exists either locally **or in the official shadcn library online**.
+- Prefer **composition of existing shadcn components** over creating new ones.
+- Only create a new custom UI component if:
+  1. No suitable shadcn component exists locally  
+  2. No suitable component exists in the official shadcn library  
+  In this case, clearly explain why before introducing it.
+- Follow the existing design system and always use **semantic Tailwind classes** (e.g. `bg-primary`, `text-muted-foreground`), never raw color values.
+
+**Goal:** keep the UI consistent, leverage the shadcn ecosystem as much as possible, and avoid unnecessary custom components that increase long-term maintenance cost.
+
+---
+
+### Security Rules (Mandatory Double-Check)
+
+Whenever writing or modifying code that touches:
+- authentication or authorization  
+- sessions or cookies  
+- database queries  
+- server actions  
+- user input or form handling  
+
+Claude must perform a **security double-check** before finalizing the solution.
+
+Security expectations:
+- Always validate and sanitize user input using **Zod** on the server
+- Never rely solely on client-side validation for security decisions
+- Ensure sensitive logic runs only on the server
+- Prevent common vulnerabilities (injection, broken access control, privilege escalation)
+- Never expose secrets, service keys, or internal security logic to the client
+
+**Goal:** avoid introducing security regressions as the app grows.
+
+---
+
+### Testing Rules (MVP-Aware)
+
+We are currently in **MVP phase**, so testing should be **prioritized strategically**, not blindly.
+
+#### Tests are REQUIRED for:
+- Business logic
+- Data validation and transformation logic
+- Security-related logic
+- Utility functions with non-trivial behavior
+
+#### Tests are OPTIONAL (if time allows) for:
+- Complex custom React hooks
+- Non-trivial state management
+
+#### Tests are NOT a priority yet for:
+- Pure presentational UI components
+- Layout wrappers
+- Static or marketing pages
+
+When writing tests:
+- Cover normal usage and important edge cases
+- Prefer meaningful protection over artificial 100% coverage
+
+**Goal:** protect critical logic without slowing down MVP iteration speed.
+
 ## Tech Debt
 
 Items marked for cleanup or completion:
