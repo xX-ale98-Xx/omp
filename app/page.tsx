@@ -1,10 +1,15 @@
-import ThemeToggle from '@/components/dark-light/ThemeToggleButton'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server'
 
-export default function landingPage() {
-  return (
-    <div>
-      Questa potrebbe essere ad esempio la landing page
-      <ThemeToggle />
-    </div>
-  )
+export default async function RootPage() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (user) {
+    redirect('/dashboard')
+  } else {
+    redirect('/landing')
+  }
 }
