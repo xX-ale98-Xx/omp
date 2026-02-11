@@ -1,28 +1,23 @@
-"use client"
+'use client'
 
-import * as React from "react"
+import * as React from 'react'
 import {
-  IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
-} from "@tabler/icons-react"
+  Activity,
+  BarChart3,
+  CalendarDays,
+  ClipboardList,
+  GraduationCap,
+  LayoutDashboard,
+  Receipt,
+  Settings,
+  Store,
+  Users,
+} from 'lucide-react'
+import Image from 'next/image'
 
-import { NavDocuments } from "@/components/shadcn/blocks/dashboard-01/components/nav-documents"
-import { NavMain } from "@/components/shadcn/blocks/dashboard-01/components/nav-main"
-import { NavSecondary } from "@/components/shadcn/blocks/dashboard-01/components/nav-secondary"
-import { NavUser } from "@/components/shadcn/blocks/dashboard-01/components/nav-user"
+import { NavMain } from '@/components/shadcn/blocks/dashboard-01/components/nav-main'
+import { NavSecondary } from '@/components/shadcn/blocks/dashboard-01/components/nav-secondary'
+import { NavUser } from '@/components/shadcn/blocks/dashboard-01/components/nav-user'
 import {
   Sidebar,
   SidebarContent,
@@ -31,121 +26,81 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/shadcn/ui/sidebar"
+} from '@/components/shadcn/ui/sidebar'
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: 'Utente',
+    email: 'utente@esempio.it',
+    avatar: '',
   },
-  navMain: [
+  navGroups: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: IconDashboard,
-    },
-    {
-      title: "Lifecycle",
-      url: "#",
-      icon: IconListDetails,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
+      label: 'Principale',
       items: [
         {
-          title: "Active Proposals",
-          url: "#",
+          title: 'Dashboard',
+          url: '/dashboard',
+          icon: LayoutDashboard,
         },
         {
-          title: "Archived",
-          url: "#",
+          title: 'Agenda',
+          url: '/dashboard/agenda',
+          icon: CalendarDays,
+        },
+        {
+          title: 'Pazienti',
+          url: '/dashboard/pazienti',
+          icon: Users,
         },
       ],
     },
     {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
+      label: 'Clinica',
       items: [
         {
-          title: "Active Proposals",
-          url: "#",
+          title: 'Cartella Clinica',
+          url: '/dashboard/cartella-clinica',
+          icon: ClipboardList,
         },
         {
-          title: "Archived",
-          url: "#",
+          title: 'Tele-riabilitazione',
+          url: '/dashboard/teleriabilitazione',
+          icon: Activity,
         },
       ],
     },
     {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
+      label: 'Gestione',
       items: [
         {
-          title: "Active Proposals",
-          url: "#",
+          title: 'Fatturazione',
+          url: '/dashboard/fatturazione',
+          icon: Receipt,
         },
         {
-          title: "Archived",
-          url: "#",
+          title: 'Analytics',
+          url: '/dashboard/analytics',
+          icon: BarChart3,
         },
       ],
     },
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
+      title: 'Marketplace',
+      url: '/dashboard/marketplace',
+      icon: Store,
     },
     {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
+      title: 'Formazione',
+      url: '/dashboard/formazione',
+      icon: GraduationCap,
     },
     {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
+      title: 'Impostazioni',
+      url: '/dashboard/impostazioni',
+      icon: Settings,
     },
   ],
 }
@@ -160,17 +115,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+              <a href="/dashboard">
+                <Image
+                  src="/OMP_logo.svg"
+                  alt="OhMyPhysio"
+                  width={20}
+                  height={20}
+                  className="size-5"
+                />
+                <span className="text-base font-semibold">OhMyPhysio</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        <NavMain groups={data.navGroups} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

@@ -1,7 +1,9 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { type Icon } from "@tabler/icons-react"
+import * as React from 'react'
+import type { LucideIcon } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import {
   SidebarGroup,
@@ -9,7 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/shadcn/ui/sidebar"
+} from '@/components/shadcn/ui/sidebar'
 
 export function NavSecondary({
   items,
@@ -18,20 +20,22 @@ export function NavSecondary({
   items: {
     title: string
     url: string
-    icon: Icon
+    icon: LucideIcon
   }[]
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
+  const pathname = usePathname()
+
   return (
     <SidebarGroup {...props}>
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <a href={item.url}>
+              <SidebarMenuButton asChild isActive={pathname === item.url}>
+                <Link href={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

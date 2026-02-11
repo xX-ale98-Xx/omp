@@ -44,7 +44,7 @@ omp-app/
 │   ├── (dashboard)/                  # Route group with sidebar layout
 │   │   ├── account/                  # Account page
 │   │   ├── home/                     # Home page
-│   │   ├── prova/                    # Test page (placeholder)
+│   │   ├── prova/                    # Component catalog (dev-only)
 │   │   └── layout.tsx                # Dashboard layout (sidebar + content)
 │   ├── auth/
 │   │   └── confirm/route.ts          # Auth callback (email verify, OAuth)
@@ -52,11 +52,11 @@ omp-app/
 │   │   ├── page.tsx
 │   │   └── data.json
 │   ├── error/                        # Error pages
-│   ├── landing/                      # Landing page (placeholder)
+│   ├── landing/                      # Landing page (full implementation)
 │   ├── login/                        # Login page
 │   ├── signup/                       # Signup page
 │   ├── layout.tsx                    # Root layout (theme provider)
-│   └── page.tsx                      # Root page (landing)
+│   └── page.tsx                      # Root page (auth redirect → /dashboard or /landing)
 │
 ├── components/
 │   ├── dashboard/                    # Custom dashboard components (used by (dashboard) route group)
@@ -64,6 +64,17 @@ omp-app/
 │   │   ├── header.tsx
 │   │   ├── nav-links.tsx
 │   │   └── sidenav.tsx
+│   ├── landing/                      # Landing page section components
+│   │   ├── landing-header.tsx
+│   │   ├── hero-section.tsx
+│   │   ├── problem-section.tsx
+│   │   ├── solution-section.tsx
+│   │   ├── how-it-works-section.tsx
+│   │   ├── benefits-section.tsx
+│   │   ├── differentiator-section.tsx
+│   │   ├── faq-section.tsx
+│   │   ├── cta-section.tsx
+│   │   └── landing-footer.tsx
 │   ├── dark-light/                   # Theme toggle
 │   │   └── ThemeToggleButton.tsx
 │   └── shadcn/
@@ -108,6 +119,7 @@ omp-app/
 ### Routing & Layouts
 
 - **Next.js App Router** (`app/` directory) with Server Components by default
+- **Root page** (`/`) is a server component that checks authentication: authenticated users → `/dashboard`, unauthenticated → `/landing`
 - `(dashboard)` route group has its own layout with sidebar navigation
 - `/dashboard` is a separate route using the shadcn dashboard-01 block template
 - `/login` and `/signup` are the auth pages (shadcn-based)
@@ -116,7 +128,7 @@ omp-app/
 
 - **Supabase Auth** with `@supabase/ssr` for cookie-based session management
 - Middleware (`middleware.ts` → `utils/supabase/middleware.ts`) protects all routes, redirecting unauthenticated users to `/login` and authenticated users away from `/login` and `/signup`
-- Public routes: `/login`, `/signup`, `/auth`, `/error`, `/landing`
+- Public routes: `/`, `/login`, `/signup`, `/auth`, `/error`, `/landing`
 - Auth mutations use **Server Actions** in `utils/actions/actions.tsx` (login, signup, Google OAuth, logout)
 - Auth callback flow: `/auth/confirm/route.ts` handles email verification and OAuth code exchange, with open-redirect protection via `sanitizeRedirectPath()`
 - Supabase has a `profiles` table with a trigger that auto-creates a profile on user signup
@@ -164,7 +176,7 @@ type ActionState = {
 - **shadcn/ui** components live in `components/shadcn/ui/` — these are owned code, freely modifiable
 - **shadcn blocks** (page templates) in `components/shadcn/blocks/` (dashboard-01, login-03, signup-03)
 - **shadcn CLI config**: `components.json` — style: `new-york`, aliases point ui to `@/components/shadcn/ui`, blocks to `@/components/shadcn/blocks`
-- Custom components in `components/dashboard/`, `components/dark-light/`
+- Custom components in `components/dashboard/`, `components/dark-light/`, `components/landing/`
 - Built on Radix UI primitives, styled with **Tailwind CSS v4**, variants via CVA (Class Variance Authority)
 - Tailwind v4 has **no `tailwind.config.ts`** — configuration is done via the `@theme` directive in `styles/globals.css`
 - `cn()` utility from `lib/utils.ts` for class merging (clsx + tailwind-merge)
@@ -203,7 +215,7 @@ All env vars are in `.env` (gitignored). There is no `.env.example` file yet.
 - **Server Actions over API routes** — use `'use server'` functions for mutations, don't create API routes
 - **Import alias**: `@/*` maps to project root
 - **Code style** (Prettier): single quotes, no semicolons, 100 char width, trailing commas (ES5), Tailwind class sorting (`prettier-plugin-tailwindcss`)
-- **Theme**: dark/light mode via `next-themes`, toggled with `ThemeToggleButton`
+- **Theme**: dark/light mode via `next-themes`, toggled with `ThemeToggleButton` (lucide Sun/Moon icons, 2-state, rotate+fade animation)
 - **Validation**: Zod schemas for form input validation in server actions
 - **Icons**: `lucide-react` is the primary icon library (also has heroicons, tabler, react-icons installed)
 
@@ -284,8 +296,7 @@ Items marked for cleanup or completion:
 
 | Item | Status | Notes |
 |---|---|---|
-| `app/prova/` | Placeholder | Test route, needs real content |
-| `app/landing/` | Placeholder | Stub landing page, needs real content |
+| `app/(dashboard)/prova/` | Dev-only | Component catalog page; evaluate whether to keep or remove |
 | `(dashboard)` route group | Being abandoned | `components/dashboard/`, `app/(dashboard)/` — being replaced by `/dashboard` route |
 | Prisma packages | Installed, unused | `@prisma/client`, `@auth/prisma-adapter`, `prisma` — no schema configured |
 | `@supabase/auth-helpers-react`, `@supabase/auth-ui-react` | Likely unused | Old Supabase auth packages, superseded by `@supabase/ssr` |
