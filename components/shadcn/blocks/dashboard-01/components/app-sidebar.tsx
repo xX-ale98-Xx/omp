@@ -14,6 +14,7 @@ import {
   Users,
 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { NavMain } from '@/components/shadcn/blocks/dashboard-01/components/nav-main'
 import { NavSecondary } from '@/components/shadcn/blocks/dashboard-01/components/nav-secondary'
@@ -115,7 +116,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="/dashboard">
+              <Link href="/dashboard">
                 <Image
                   src="/OMP_logo.svg"
                   alt="OhMyPhysio"
@@ -124,7 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   className="size-5"
                 />
                 <span className="text-base font-semibold">OhMyPhysio</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
