@@ -1,18 +1,18 @@
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import { Button } from '@/components/shadcn/ui/button'
+import { notFound } from 'next/navigation'
+import { mockPatients } from '@/lib/mock-patients'
+import { PatientDetailShell } from '@/components/pazienti/patient-detail-shell'
 
-export default function PatientDetailPage() {
-  return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-4 p-4">
-      <h1 className="text-2xl font-semibold">Dettaglio Paziente</h1>
-      <p className="text-muted-foreground">In fase di sviluppo</p>
-      <Button variant="outline" asChild>
-        <Link href="/dashboard/pazienti">
-          <ArrowLeft className="size-4" />
-          Torna alla lista
-        </Link>
-      </Button>
-    </div>
-  )
+interface PatientDetailPageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function PatientDetailPage({ params }: PatientDetailPageProps) {
+  const { id } = await params
+  const patient = mockPatients.find((p) => p.id === id)
+
+  if (!patient) {
+    notFound()
+  }
+
+  return <PatientDetailShell patient={patient} />
 }

@@ -13,6 +13,11 @@ import {
   SidebarMenuItem,
 } from '@/components/shadcn/ui/sidebar'
 
+function isRouteActive(pathname: string, url: string) {
+  if (url === '/dashboard') return pathname === '/dashboard'
+  return pathname === url || pathname.startsWith(url + '/')
+}
+
 export function NavSecondary({
   items,
   ...props
@@ -31,7 +36,7 @@ export function NavSecondary({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild isActive={pathname === item.url}>
+              <SidebarMenuButton asChild isActive={isRouteActive(pathname, item.url)}>
                 <Link href={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
