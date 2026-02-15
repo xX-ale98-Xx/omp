@@ -1,18 +1,18 @@
-import { ChartAreaInteractive } from '@/components/shadcn/blocks/dashboard-01/components/chart-area-interactive'
-import { DataTable } from '@/components/shadcn/blocks/dashboard-01/components/data-table'
-import { SectionCards } from '@/components/shadcn/blocks/dashboard-01/components/section-cards'
+import { StatsCards } from '@/components/dashboard-home/stats-cards'
+import { TodayAppointments } from '@/components/dashboard-home/today-appointments'
+import { QuickActions } from '@/components/dashboard-home/quick-actions'
 
-import data from './data.json'
-
-export default function Page() {
+export default function DashboardPage() {
   return (
-    <div className="@container/main flex flex-1 flex-col gap-2">
-      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        <SectionCards />
-        <div className="px-4 lg:px-6">
-          <ChartAreaInteractive />
-        </div>
-        <DataTable data={data} />
+    <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+        <p className="text-muted-foreground">Panoramica del tuo studio</p>
+      </div>
+      <StatsCards />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <TodayAppointments />
+        <QuickActions />
       </div>
     </div>
   )

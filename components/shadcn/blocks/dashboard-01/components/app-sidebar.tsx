@@ -1,18 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import {
-  Activity,
-  BarChart3,
-  CalendarDays,
-  ClipboardList,
-  GraduationCap,
-  LayoutDashboard,
-  Receipt,
-  Settings,
-  Store,
-  Users,
-} from 'lucide-react'
+import { CalendarDays, Dumbbell, Eye, LayoutDashboard, Receipt, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -37,7 +26,7 @@ const data = {
   },
   navGroups: [
     {
-      label: 'Principale',
+      label: '',
       items: [
         {
           title: 'Dashboard',
@@ -54,54 +43,24 @@ const data = {
           url: '/dashboard/pazienti',
           icon: Users,
         },
-      ],
-    },
-    {
-      label: 'Clinica',
-      items: [
         {
-          title: 'Cartella Clinica',
-          url: '/dashboard/cartella-clinica',
-          icon: ClipboardList,
+          title: 'Terapia Attiva',
+          url: '/dashboard/terapia-attiva',
+          icon: Dumbbell,
         },
-        {
-          title: 'Tele-riabilitazione',
-          url: '/dashboard/teleriabilitazione',
-          icon: Activity,
-        },
-      ],
-    },
-    {
-      label: 'Gestione',
-      items: [
         {
           title: 'Fatturazione',
           url: '/dashboard/fatturazione',
           icon: Receipt,
-        },
-        {
-          title: 'Analytics',
-          url: '/dashboard/analytics',
-          icon: BarChart3,
         },
       ],
     },
   ],
   navSecondary: [
     {
-      title: 'Marketplace',
-      url: '/dashboard/marketplace',
-      icon: Store,
-    },
-    {
-      title: 'Formazione',
-      url: '/dashboard/formazione',
-      icon: GraduationCap,
-    },
-    {
-      title: 'Impostazioni',
-      url: '/dashboard/impostazioni',
-      icon: Settings,
+      title: 'Area Paziente Demo',
+      url: '/dashboard/area-paziente',
+      icon: Eye,
     },
   ],
 }

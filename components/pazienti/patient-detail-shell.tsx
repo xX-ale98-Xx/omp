@@ -12,23 +12,17 @@ import {
   BreadcrumbSeparator,
 } from '@/components/shadcn/ui/breadcrumb'
 import { PatientHeader } from './patient-header'
-import { AnagraficaSection } from './sections/anagrafica-section'
-import { StileVitaSection } from './sections/stile-vita-section'
-import { SportivoSection } from './sections/sportivo-section'
-import { TestFisiciSection } from './sections/test-fisici-section'
-import { AnamnesiGeneraleSection } from './sections/anamnesi-generale-section'
-import { AnamnesiSpecificaSection } from './sections/anamnesi-specifica-section'
-import { RefertiSection } from './sections/referti-section'
+import { PercorsoTab } from './tabs/percorso-tab'
+import { ProfiloTab } from './tabs/profilo-tab'
+import { ValutazioneTab } from './tabs/valutazione-tab'
+import { ComunicazioneTab } from './tabs/comunicazione-tab'
 import type { Patient } from '@/types/patient'
 
 const TAB_CONFIG = [
-  { value: 'anagrafica', label: 'Anagrafica', sportOnly: false },
-  { value: 'stile-vita', label: 'Stile di Vita', sportOnly: false },
-  { value: 'sportivo', label: 'Sportivo', sportOnly: true },
-  { value: 'test-fisici', label: 'Test Fisici', sportOnly: false },
-  { value: 'anamnesi-generale', label: 'Anamnesi Generale', sportOnly: false },
-  { value: 'anamnesi-specifica', label: 'Anamnesi Specifica', sportOnly: false },
-  { value: 'referti', label: 'Referti', sportOnly: false },
+  { value: 'percorso', label: 'Percorso' },
+  { value: 'profilo', label: 'Profilo' },
+  { value: 'valutazione', label: 'Valutazione' },
+  { value: 'comunicazione', label: 'Comunicazione' },
 ] as const
 
 interface PatientDetailShellProps {
@@ -39,11 +33,11 @@ export function PatientDetailShell({ patient: initialPatient }: PatientDetailShe
   const [patient, setPatient] = useState<Patient>(initialPatient)
   const [isSportivo, setIsSportivo] = useState(initialPatient.isSportivo)
 
-  const visibleTabs = TAB_CONFIG.filter((tab) => !tab.sportOnly || isSportivo)
-
   function handlePatientUpdate(updates: Partial<Patient>) {
     setPatient((prev) => ({ ...prev, ...updates }))
   }
+
+  const fullName = `${patient.anagrafica.nome} ${patient.anagrafica.cognome}`
 
   return (
     <div className="mx-auto w-full max-w-5xl space-y-6 p-4 sm:p-6">
@@ -63,9 +57,7 @@ export function PatientDetailShell({ patient: initialPatient }: PatientDetailShe
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>
-              {patient.anagrafica.nome} {patient.anagrafica.cognome}
-            </BreadcrumbPage>
+            <BreadcrumbPage>{fullName}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -78,67 +70,53 @@ export function PatientDetailShell({ patient: initialPatient }: PatientDetailShe
       />
 
       {/* Tabs */}
-      <Tabs defaultValue="anagrafica">
+      <Tabs defaultValue="percorso">
         <TabsList
           variant="line"
           className="w-full justify-start overflow-x-auto overflow-y-hidden"
         >
-          {visibleTabs.map((tab) => (
+          {TAB_CONFIG.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value} className="shrink-0">
               {tab.label}
             </TabsTrigger>
           ))}
         </TabsList>
 
-        <TabsContent value="anagrafica">
-          <AnagraficaSection
+        <TabsContent value="percorso">
+          <PercorsoTab patientId={patient.id} />
+        </TabsContent>
+
+        <TabsContent value="profilo">
+          <ProfiloTab
             anagrafica={patient.anagrafica}
-            onSave={(data) => handlePatientUpdate({ anagrafica: data })}
+            stileVita={patient.stileVita}
+            sportivo={patient.sportivo}
+            refertiMedici={patient.refertiMedici}
+            isSportivo={isSportivo}
+            onSaveAnagrafica={(data) => handlePatientUpdate({ anagrafica: data })}
+            onSaveStileVita={(data) => handlePatientUpdate({ stileVita: data })}
+            onSaveSportivo={(data) => handlePatientUpdate({ sportivo: data })}
+            onSaveReferti={(data) => handlePatientUpdate({ refertiMedici: data })}
           />
         </TabsContent>
 
-        <TabsContent value="stile-vita">
-          <StileVitaSection
-            data={patient.stileVita}
-            onSave={(data) => handlePatientUpdate({ stileVita: data })}
-          />
-        </TabsContent>
-
-        {isSportivo && (
-          <TabsContent value="sportivo">
-            <SportivoSection
-              data={patient.sportivo}
-              onSave={(data) => handlePatientUpdate({ sportivo: data })}
-            />
-          </TabsContent>
-        )}
-
-        <TabsContent value="test-fisici">
-          <TestFisiciSection
-            data={patient.testFisici}
-            onSave={(data) => handlePatientUpdate({ testFisici: data })}
-          />
-        </TabsContent>
-
-        <TabsContent value="anamnesi-generale">
-          <AnamnesiGeneraleSection
-            data={patient.anamnesiGenerale}
+        <TabsContent value="valutazione">
+          <ValutazioneTab
+            anamnesiGenerale={patient.anamnesiGenerale}
+            anamnesiSpecifica={patient.anamnesiSpecifica}
+            testFisici={patient.testFisici}
             sesso={patient.anagrafica.sesso}
-            onSave={(data) => handlePatientUpdate({ anamnesiGenerale: data })}
+            onSaveAnamnesiGenerale={(data) => handlePatientUpdate({ anamnesiGenerale: data })}
+            onSaveAnamnesiSpecifica={(data) => handlePatientUpdate({ anamnesiSpecifica: data })}
+            onSaveTestFisici={(data) => handlePatientUpdate({ testFisici: data })}
           />
         </TabsContent>
 
-        <TabsContent value="anamnesi-specifica">
-          <AnamnesiSpecificaSection
-            data={patient.anamnesiSpecifica}
-            onSave={(data) => handlePatientUpdate({ anamnesiSpecifica: data })}
-          />
-        </TabsContent>
-
-        <TabsContent value="referti">
-          <RefertiSection
-            referti={patient.refertiMedici}
-            onSave={(data) => handlePatientUpdate({ refertiMedici: data })}
+        <TabsContent value="comunicazione">
+          <ComunicazioneTab
+            patientId={patient.id}
+            patientName={fullName}
+            perspective="fisioterapista"
           />
         </TabsContent>
       </Tabs>

@@ -1,3 +1,5 @@
+import { mockPatients } from '@/lib/mock-patients'
+
 export function calcolaEta(dataNascita: string | null): number | null {
   if (!dataNascita) return null
   const nascita = new Date(dataNascita)
@@ -42,4 +44,14 @@ export function getAvatarColor(id: string): string {
     hash = id.charCodeAt(i) + ((hash << 5) - hash)
   }
   return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length]
+}
+
+export function formatCurrency(amount: number): string {
+  return `€ ${amount.toFixed(2).replace('.', ',')}`
+}
+
+export function getPatientFullName(patientId: string): string {
+  const patient = mockPatients.find((p) => p.id === patientId)
+  if (!patient) return 'Sconosciuto'
+  return `${patient.anagrafica.nome} ${patient.anagrafica.cognome}`
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import { Phone, Mail, Dumbbell, Camera } from 'lucide-react'
 import { Badge } from '@/components/shadcn/ui/badge'
 import { Switch } from '@/components/shadcn/ui/switch'
@@ -60,10 +61,13 @@ export function PatientHeader({ patient, isSportivo, onToggleSportivo }: Patient
         className="group relative size-16 shrink-0 cursor-pointer rounded-full sm:size-20"
       >
         {avatarUrl ? (
-          <img
+          <Image
             src={avatarUrl}
             alt={`${anagrafica.nome} ${anagrafica.cognome}`}
-            className="size-full rounded-full object-cover"
+            fill
+            unoptimized
+            sizes="80px"
+            className="rounded-full object-cover"
           />
         ) : (
           <div className="bg-primary text-primary-foreground flex size-full items-center justify-center rounded-full text-xl font-bold sm:text-2xl">

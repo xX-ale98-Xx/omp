@@ -33,8 +33,8 @@ export function NavMain({ groups }: { groups: NavGroup[] }) {
   return (
     <>
       {groups.map((group) => (
-        <SidebarGroup key={group.label}>
-          <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+        <SidebarGroup key={group.label || '__main'}>
+          {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
           <SidebarGroupContent>
             <SidebarMenu>
               {group.items.map((item) => (
