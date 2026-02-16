@@ -15,7 +15,7 @@ export function TimeGrid({ columns, children }: TimeGridProps) {
   const hours = Array.from({ length: TOTAL_HOURS + 1 }, (_, i) => START_HOUR + i)
 
   return (
-    <div className="relative overflow-y-auto" style={{ maxHeight: 'calc(100vh - 16rem)' }}>
+    <div className="relative">
       <div className="relative" style={{ height: TOTAL_HEIGHT }}>
         {/* Time labels + gridlines */}
         {hours.map((hour) => {

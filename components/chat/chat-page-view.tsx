@@ -92,7 +92,7 @@ export function ChatPageView() {
   if (isMobile) {
     if (selectedPatientId && selectedPatient) {
       return (
-        <div className="flex h-[calc(100vh-4rem)] flex-col">
+        <div className="flex h-full min-h-0 flex-col">
           <ChatPanel
             patientId={selectedPatientId}
             patientName={selectedPatient.anagrafica.nome}
@@ -106,7 +106,7 @@ export function ChatPageView() {
       )
     }
     return (
-      <div className="flex h-[calc(100vh-4rem)] flex-col">
+      <div className="flex h-full min-h-0 flex-col">
         <ConversationList
           conversations={conversations}
           selectedPatientId={selectedPatientId}
@@ -118,7 +118,7 @@ export function ChatPageView() {
 
   // Desktop: side by side
   return (
-    <div className="flex h-[calc(100vh-4rem)]">
+    <div className="flex h-full min-h-0">
       <div className="w-80 shrink-0 border-r">
         <ConversationList
           conversations={conversations}
