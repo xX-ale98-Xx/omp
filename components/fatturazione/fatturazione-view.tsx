@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { Euro, TrendingUp, TrendingDown } from 'lucide-react'
 import { toast } from 'sonner'
-import { Card, CardContent } from '@/components/shadcn/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/shadcn/ui/card'
 import {
   Select,
   SelectContent,
@@ -13,7 +14,7 @@ import {
 import { mockInvoices } from '@/lib/mock-invoices'
 import { mockPatients } from '@/lib/mock-patients'
 import { formatCurrency } from '@/lib/patient-utils'
-import { InvoiceCard } from './invoice-card'
+import { InvoiceTable } from './invoice-table'
 import { NewInvoiceDialog } from './new-invoice-dialog'
 import type { Invoice } from '@/types/invoice'
 
@@ -61,15 +62,61 @@ export function FatturazioneView() {
     setInvoices((prev) => [...prev, invoice])
   }
 
+  const summaryCards = [
+    {
+      title: 'Totale Fatturato',
+      value: formatCurrency(totFatturato),
+      icon: Euro,
+      iconBg: 'bg-blue-50 dark:bg-blue-950/40',
+      iconColor: 'text-blue-600 dark:text-blue-400',
+      valueColor: 'text-blue-700 dark:text-blue-400',
+    },
+    {
+      title: 'Incassato',
+      value: formatCurrency(totIncassato),
+      icon: TrendingUp,
+      iconBg: 'bg-emerald-50 dark:bg-emerald-950/40',
+      iconColor: 'text-emerald-600 dark:text-emerald-400',
+      valueColor: 'text-emerald-700 dark:text-emerald-400',
+    },
+    {
+      title: 'Da Incassare',
+      value: formatCurrency(totDaIncassare),
+      icon: TrendingDown,
+      iconBg: 'bg-red-50 dark:bg-red-950/40',
+      iconColor: 'text-red-600 dark:text-red-400',
+      valueColor: 'text-red-700 dark:text-red-400',
+    },
+  ]
+
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
-      {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      {/* Header with gradient */}
+      <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-white shadow-sm sm:flex-row sm:items-center sm:justify-between dark:from-brand-800 dark:to-brand-600">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Fatturazione</h1>
-          <p className="text-muted-foreground">Gestisci le fatture dei tuoi pazienti</p>
+          <p className="mt-1 text-sm text-white/80">Gestisci le fatture dei tuoi pazienti</p>
         </div>
         <NewInvoiceDialog nextNumber={nextNumber} onAdd={handleAddInvoice} />
+      </div>
+
+      {/* Summary cards */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        {summaryCards.map((card) => (
+          <Card key={card.title} className="gap-4 py-5">
+            <CardHeader className="flex flex-row items-center justify-between pb-0">
+              <CardTitle className="text-muted-foreground text-sm font-medium">
+                {card.title}
+              </CardTitle>
+              <div className={`rounded-lg p-2 ${card.iconBg}`}>
+                <card.icon className={`size-4 ${card.iconColor}`} />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className={`text-2xl font-bold ${card.valueColor}`}>{card.value}</div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
       {/* Filters */}
@@ -101,42 +148,8 @@ export function FatturazioneView() {
         </Select>
       </div>
 
-      {/* Summary bar */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        <Card>
-          <CardContent className="p-4">
-            <p className="text-muted-foreground text-sm">Totale fatturato</p>
-            <p className="text-xl font-bold">{formatCurrency(totFatturato)}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <p className="text-muted-foreground text-sm">Incassato</p>
-            <p className="text-xl font-bold text-green-600">{formatCurrency(totIncassato)}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <p className="text-muted-foreground text-sm">Da incassare</p>
-            <p className="text-xl font-bold text-red-600">{formatCurrency(totDaIncassare)}</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Invoice list */}
-      {filtered.length === 0 ? (
-        <p className="text-muted-foreground py-8 text-center text-sm">
-          Nessuna fattura trovata
-        </p>
-      ) : (
-        <div className="space-y-3">
-          {filtered
-            .sort((a, b) => b.dataEmissione.localeCompare(a.dataEmissione))
-            .map((inv) => (
-              <InvoiceCard key={inv.id} invoice={inv} onMarkPaid={handleMarkPaid} />
-            ))}
-        </div>
-      )}
+      {/* Invoice table */}
+      <InvoiceTable invoices={filtered} onMarkPaid={handleMarkPaid} />
     </div>
   )
 }

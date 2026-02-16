@@ -1,7 +1,15 @@
 'use client'
 
 import * as React from 'react'
-import { CalendarDays, Dumbbell, Eye, LayoutDashboard, Receipt, Users } from 'lucide-react'
+import {
+  CalendarDays,
+  Dumbbell,
+  Eye,
+  LayoutDashboard,
+  MessageCircle,
+  Receipt,
+  Users,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -26,13 +34,18 @@ const data = {
   },
   navGroups: [
     {
-      label: '',
+      label: 'Panoramica',
       items: [
         {
           title: 'Dashboard',
           url: '/dashboard',
           icon: LayoutDashboard,
         },
+      ],
+    },
+    {
+      label: 'Clinica',
+      items: [
         {
           title: 'Agenda',
           url: '/dashboard/agenda',
@@ -44,10 +57,20 @@ const data = {
           icon: Users,
         },
         {
+          title: 'Chat',
+          url: '/dashboard/chat',
+          icon: MessageCircle,
+        },
+        {
           title: 'Terapia Attiva',
           url: '/dashboard/terapia-attiva',
           icon: Dumbbell,
         },
+      ],
+    },
+    {
+      label: 'Gestione',
+      items: [
         {
           title: 'Fatturazione',
           url: '/dashboard/fatturazione',

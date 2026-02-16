@@ -33,38 +33,54 @@ export function StatsCards() {
       value: pazientiAttivi.toString(),
       icon: Users,
       description: 'Pazienti in carico',
+      iconBg: 'bg-brand-100 dark:bg-brand-900/40',
+      iconColor: 'text-brand-600 dark:text-brand-400',
+      valueColor: 'text-brand-700 dark:text-brand-400',
     },
     {
       title: 'Sedute Oggi',
       value: seduteOggi.toString(),
       icon: Activity,
       description: 'Appuntamenti programmati',
+      iconBg: 'bg-blue-50 dark:bg-blue-950/40',
+      iconColor: 'text-blue-600 dark:text-blue-400',
+      valueColor: 'text-blue-700 dark:text-blue-400',
     },
     {
       title: 'Fatturato Mese',
       value: formatCurrency(fatturatoMese),
       icon: Euro,
       description: 'Mese corrente',
+      iconBg: 'bg-emerald-50 dark:bg-emerald-950/40',
+      iconColor: 'text-emerald-600 dark:text-emerald-400',
+      valueColor: 'text-emerald-700 dark:text-emerald-400',
     },
     {
       title: 'Pagamenti in Sospeso',
       value: pagamentiSospeso.toString(),
       icon: CreditCard,
       description: 'Fatture non pagate',
+      iconBg: 'bg-amber-50 dark:bg-amber-950/40',
+      iconColor: 'text-amber-600 dark:text-amber-400',
+      valueColor: 'text-amber-700 dark:text-amber-400',
     },
   ]
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {cards.map((card) => (
-        <Card key={card.title}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
-            <card.icon className="text-muted-foreground size-4" />
+        <Card key={card.title} className="gap-4 py-5">
+          <CardHeader className="flex flex-row items-center justify-between pb-0">
+            <CardTitle className="text-muted-foreground text-sm font-medium">
+              {card.title}
+            </CardTitle>
+            <div className={`rounded-lg p-2 ${card.iconBg}`}>
+              <card.icon className={`size-4 ${card.iconColor}`} />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{card.value}</div>
-            <p className="text-muted-foreground text-xs">{card.description}</p>
+            <div className={`text-2xl font-bold ${card.valueColor}`}>{card.value}</div>
+            <p className="text-muted-foreground mt-1 text-xs">{card.description}</p>
           </CardContent>
         </Card>
       ))}

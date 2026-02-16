@@ -34,7 +34,11 @@ export function NavMain({ groups }: { groups: NavGroup[] }) {
     <>
       {groups.map((group) => (
         <SidebarGroup key={group.label || '__main'}>
-          {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
+          {group.label && (
+            <SidebarGroupLabel className="text-[10px] uppercase tracking-widest text-muted-foreground/70">
+              {group.label}
+            </SidebarGroupLabel>
+          )}
           <SidebarGroupContent>
             <SidebarMenu>
               {group.items.map((item) => (

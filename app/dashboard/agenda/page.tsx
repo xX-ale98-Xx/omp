@@ -1,5 +1,5 @@
-import { AgendaView } from '@/components/agenda/agenda-view'
+import { AgendaPageView } from '@/components/agenda/agenda-page-view'
 
 export default function AgendaPage() {
-  return <AgendaView />
+  return <AgendaPageView />
 }
