@@ -35,7 +35,7 @@ export function PatientListHeader({ onSearch }: PatientListHeaderProps) {
         <Button
           asChild
           variant="secondary"
-          className="bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30"
+          className="bg-primary-foreground/15 text-primary-foreground hover:bg-primary-foreground/30"
         >
           <Link href="/dashboard/pazienti/nuovo">
             <UserPlus className="size-4" />

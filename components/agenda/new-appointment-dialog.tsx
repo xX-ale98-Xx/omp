@@ -84,7 +84,10 @@ export function NewAppointmentDialog({ selectedDate, onAdd }: NewAppointmentDial
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button
+          variant="secondary"
+          className="bg-primary-foreground/15 text-primary-foreground hover:bg-primary-foreground/30"
+        >
           <Plus className="mr-1 size-4" />
           Nuovo Appuntamento
         </Button>
