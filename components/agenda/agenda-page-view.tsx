@@ -88,11 +88,11 @@ export function AgendaPageView() {
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
       {/* Header with gradient */}
-      <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-white shadow-sm dark:from-brand-800 dark:to-brand-600">
+      <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-primary-foreground shadow-sm dark:from-brand-500 dark:to-brand-300">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Agenda</h1>
-            <p className="mt-1 text-sm capitalize text-white/80">{dateLabel}</p>
+            <p className="mt-1 text-sm capitalize text-primary-foreground/80">{dateLabel}</p>
           </div>
           <div className="flex items-center gap-2">
             <NewAppointmentDialog

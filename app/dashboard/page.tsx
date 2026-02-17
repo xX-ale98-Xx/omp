@@ -33,10 +33,10 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
-      <div className="rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-white shadow-sm dark:from-brand-800 dark:to-brand-600">
+      <div className="rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-primary-foreground shadow-sm dark:from-brand-500 dark:to-brand-300">
         <h1 className="text-2xl font-bold tracking-tight">{greeting}!</h1>
-        <p className="mt-1 text-sm capitalize text-white/80">{dateStr}</p>
-        <p className="mt-0.5 text-sm text-white/70">
+        <p className="mt-1 text-sm capitalize text-primary-foreground/80">{dateStr}</p>
+        <p className="mt-0.5 text-sm text-primary-foreground/70">
           {appointmentCount === 0
             ? 'Nessun appuntamento in programma oggi'
             : `Hai ${appointmentCount} appuntament${appointmentCount === 1 ? 'o' : 'i'} oggi`}

@@ -27,15 +27,15 @@ export function PatientListHeader({ onSearch }: PatientListHeaderProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-white shadow-sm dark:from-brand-800 dark:to-brand-600 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-primary-foreground shadow-sm dark:from-brand-500 dark:to-brand-300 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Pazienti</h1>
-          <p className="mt-1 text-sm text-white/80">Gestisci i tuoi pazienti</p>
+          <p className="mt-1 text-sm text-primary-foreground/80">Gestisci i tuoi pazienti</p>
         </div>
         <Button
           asChild
           variant="secondary"
-          className="bg-white/20 text-white hover:bg-white/30"
+          className="bg-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/30"
         >
           <Link href="/dashboard/pazienti/nuovo">
             <UserPlus className="size-4" />
