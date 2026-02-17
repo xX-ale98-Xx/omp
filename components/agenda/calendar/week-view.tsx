@@ -21,17 +21,19 @@ export function WeekView({ currentDate, appointments }: WeekViewProps) {
   })
 
   return (
-    <div className="rounded-lg border">
-      <WeekHeader days={days} />
-      <TimeGrid columns={7}>
-        {columnAppointments.map((dayApts, colIndex) => (
-          <div key={colIndex} className="relative border-l first:border-l-0">
-            {dayApts.map((apt) => (
-              <CalendarAppointmentCard key={apt.id} appointment={apt} />
-            ))}
-          </div>
-        ))}
-      </TimeGrid>
+    <div className="overflow-x-auto rounded-lg border">
+      <div className="min-w-[640px]">
+        <WeekHeader days={days} />
+        <TimeGrid columns={7}>
+          {columnAppointments.map((dayApts, colIndex) => (
+            <div key={colIndex} className="relative border-l first:border-l-0">
+              {dayApts.map((apt) => (
+                <CalendarAppointmentCard key={apt.id} appointment={apt} />
+              ))}
+            </div>
+          ))}
+        </TimeGrid>
+      </div>
     </div>
   )
 }

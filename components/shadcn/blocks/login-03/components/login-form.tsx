@@ -66,7 +66,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                     required
                   />
                   {state.errors?.email && (
-                    <p className="mt-1 text-sm text-red-500">{state.errors.email[0]}</p>
+                    <p className="mt-1 text-sm text-destructive">{state.errors.email[0]}</p>
                   )}
                 </Field>
 
@@ -81,12 +81,12 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                   <Input id="password" name="password" type="password" required />
 
                   {state.errors?.password && (
-                    <p className="mt-1 text-sm text-red-500">{state.errors.password[0]}</p>
+                    <p className="mt-1 text-sm text-destructive">{state.errors.password[0]}</p>
                   )}
                 </Field>
 
                 {state.message && (
-                  <p className="text-center text-sm text-red-500">{state.message}</p>
+                  <p className="text-center text-sm text-destructive">{state.message}</p>
                 )}
 
                 <Field>

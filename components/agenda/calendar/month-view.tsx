@@ -29,36 +29,37 @@ export function MonthView({ currentDate, appointments, onDayClick }: MonthViewPr
   }
 
   return (
-    <div className="rounded-lg border">
-      {/* Weekday header */}
-      <div className="grid grid-cols-7 border-b">
-        {WEEKDAY_LABELS.map((label) => (
-          <div
-            key={label}
-            className="text-muted-foreground py-2 text-center text-xs font-medium"
-          >
-            {label}
-          </div>
-        ))}
-      </div>
-
-      {/* Calendar grid - 6 rows of 7 days */}
-      <div className="grid grid-cols-7">
-        {grid.map((day, i) => {
-          const dateStr = toDateString(day)
-          const dayApts = appointmentsByDate.get(dateStr) || []
-          const isCurrentMonth = day.getMonth() === currentMonth
-          const today = isToday(day)
-
-          return (
-            <button
-              key={i}
-              onClick={() => onDayClick(day)}
-              className={cn(
-                'flex min-h-[80px] flex-col border-b border-r p-1.5 text-left transition-colors hover:bg-muted/50 md:min-h-[100px]',
-                !isCurrentMonth && 'opacity-40'
-              )}
+    <div className="overflow-x-auto rounded-lg border">
+      <div className="min-w-[480px]">
+        {/* Weekday header */}
+        <div className="grid grid-cols-7 border-b">
+          {WEEKDAY_LABELS.map((label) => (
+            <div
+              key={label}
+              className="text-muted-foreground py-2 text-center text-xs font-medium"
             >
+              {label}
+            </div>
+          ))}
+        </div>
+
+        {/* Calendar grid - 6 rows of 7 days */}
+        <div className="grid grid-cols-7">
+          {grid.map((day, i) => {
+            const dateStr = toDateString(day)
+            const dayApts = appointmentsByDate.get(dateStr) || []
+            const isCurrentMonth = day.getMonth() === currentMonth
+            const today = isToday(day)
+
+            return (
+              <button
+                key={i}
+                onClick={() => onDayClick(day)}
+                className={cn(
+                  'flex min-h-[60px] flex-col border-b border-r p-1.5 text-left transition-colors hover:bg-muted/50 md:min-h-[100px]',
+                  !isCurrentMonth && 'opacity-40'
+                )}
+              >
               <span
                 className={cn(
                   'mb-1 inline-flex size-7 items-center justify-center rounded-full text-sm',
@@ -91,7 +92,8 @@ export function MonthView({ currentDate, appointments, onDayClick }: MonthViewPr
               </div>
             </button>
           )
-        })}
+          })}
+        </div>
       </div>
     </div>
   )

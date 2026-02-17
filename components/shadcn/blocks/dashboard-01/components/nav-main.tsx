@@ -11,6 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/shadcn/ui/sidebar'
 
 type NavGroup = {
@@ -29,6 +30,11 @@ function isRouteActive(pathname: string, url: string) {
 
 export function NavMain({ groups }: { groups: NavGroup[] }) {
   const pathname = usePathname()
+  const { isMobile, setOpenMobile } = useSidebar()
+
+  function handleNavClick() {
+    if (isMobile) setOpenMobile(false)
+  }
 
   return (
     <>
@@ -48,7 +54,7 @@ export function NavMain({ groups }: { groups: NavGroup[] }) {
                     tooltip={item.title}
                     isActive={isRouteActive(pathname, item.url)}
                   >
-                    <Link href={item.url}>
+                    <Link href={item.url} onClick={handleNavClick}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
                     </Link>

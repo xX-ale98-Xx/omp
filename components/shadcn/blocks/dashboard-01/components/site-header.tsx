@@ -1,5 +1,6 @@
 import { Separator } from '@/components/shadcn/ui/separator'
 import { SidebarTrigger } from '@/components/shadcn/ui/sidebar'
+import ThemeToggle from '@/components/dark-light/ThemeToggleButton'
 
 export function SiteHeader() {
   return (
@@ -10,6 +11,9 @@ export function SiteHeader() {
         <h1 className="text-base font-medium">
           <span className="text-primary">OhMy</span>Physio
         </h1>
+        <div className="ml-auto">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   )

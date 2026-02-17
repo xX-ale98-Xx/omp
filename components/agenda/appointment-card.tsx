@@ -24,8 +24,8 @@ const statusConfig: Record<
 }
 
 const paymentConfig: Record<string, { label: string; className: string }> = {
-  pagato: { label: 'Pagato', className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' },
-  da_pagare: { label: 'Da pagare', className: 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200' },
+  pagato: { label: 'Pagato', className: 'border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300' },
+  da_pagare: { label: 'Da pagare', className: 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-300' },
 }
 
 interface AppointmentCardProps {
@@ -44,33 +44,30 @@ export function AppointmentCard({
 
   return (
     <Card>
-      <CardContent className="flex items-center justify-between p-4">
-        <div className="flex items-center gap-4">
-          <div className="min-w-[100px] text-sm font-medium tabular-nums">
-            {appointment.oraInizio} - {appointment.oraFine}
-          </div>
-          <div>
-            <Link
-              href={`/dashboard/pazienti/${appointment.patientId}`}
-              className="text-sm font-medium hover:underline"
-            >
-              {getPatientFullName(appointment.patientId)}
-            </Link>
-            <div className="text-muted-foreground flex items-center gap-2 text-xs">
-              <span>{appointment.tipo}</span>
-              <span>·</span>
-              <span>{formatCurrency(appointment.importo)}</span>
+      <CardContent className="p-4">
+        {/* Top row: time + name + dropdown */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
+            <div className="whitespace-nowrap text-sm font-medium tabular-nums">
+              {appointment.oraInizio} - {appointment.oraFine}
+            </div>
+            <div>
+              <Link
+                href={`/dashboard/pazienti/${appointment.patientId}`}
+                className="text-sm font-medium hover:underline"
+              >
+                {getPatientFullName(appointment.patientId)}
+              </Link>
+              <div className="text-muted-foreground flex items-center gap-2 text-xs">
+                <span>{appointment.tipo}</span>
+                <span>·</span>
+                <span>{formatCurrency(appointment.importo)}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Badge variant={status.variant}>{status.label}</Badge>
-          <Badge className={payment.className} variant="outline">
-            {payment.label}
-          </Badge>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-8">
+              <Button variant="ghost" size="icon" className="size-8 shrink-0">
                 <MoreHorizontal className="size-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -87,6 +84,13 @@ export function AppointmentCard({
               )}
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+        {/* Bottom row: badges */}
+        <div className="mt-2 flex items-center gap-2">
+          <Badge variant={status.variant}>{status.label}</Badge>
+          <Badge className={payment.className} variant="outline">
+            {payment.label}
+          </Badge>
         </div>
       </CardContent>
     </Card>

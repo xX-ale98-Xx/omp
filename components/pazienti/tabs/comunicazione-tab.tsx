@@ -100,7 +100,7 @@ export function ComunicazioneTab({
   }
 
   return (
-    <div className="flex h-[500px] flex-col rounded-lg border">
+    <div className="flex min-h-[300px] flex-col rounded-lg border" style={{ height: 'min(500px, 60vh)' }}>
       {/* Header */}
       <div className="border-b px-4 py-3">
         <h3 className="font-medium">{patientName}</h3>

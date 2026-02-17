@@ -48,14 +48,14 @@ export function SignupForm({ className, ...props }: React.ComponentProps<'div'>)
                     <FieldLabel htmlFor="name">Nome</FieldLabel>
                     <Input id="name" name="name" type="text" placeholder="Mario" required />
                     {state.errors?.name && (
-                      <p className="mt-1 text-sm text-red-500">{state.errors.name[0]}</p>
+                      <p className="mt-1 text-sm text-destructive">{state.errors.name[0]}</p>
                     )}
                   </Field>
                   <Field>
                     <FieldLabel htmlFor="surname">Cognome</FieldLabel>
                     <Input id="surname" name="surname" type="text" placeholder="Rossi" required />
                     {state.errors?.surname && (
-                      <p className="mt-1 text-sm text-red-500">{state.errors.surname[0]}</p>
+                      <p className="mt-1 text-sm text-destructive">{state.errors.surname[0]}</p>
                     )}
                   </Field>
                 </Field>
@@ -63,7 +63,7 @@ export function SignupForm({ className, ...props }: React.ComponentProps<'div'>)
                   <FieldLabel htmlFor="email">Email</FieldLabel>
                   <Input id="email" name="email" type="email" placeholder="m@example.com" required />
                   {state.errors?.email && (
-                    <p className="mt-1 text-sm text-red-500">{state.errors.email[0]}</p>
+                    <p className="mt-1 text-sm text-destructive">{state.errors.email[0]}</p>
                   )}
                 </Field>
                 <Field>
@@ -71,12 +71,12 @@ export function SignupForm({ className, ...props }: React.ComponentProps<'div'>)
                   <Input id="password" name="password" type="password" required />
                   <FieldDescription>Minimo 6 caratteri.</FieldDescription>
                   {state.errors?.password && (
-                    <p className="mt-1 text-sm text-red-500">{state.errors.password[0]}</p>
+                    <p className="mt-1 text-sm text-destructive">{state.errors.password[0]}</p>
                   )}
                 </Field>
 
                 {state.message && !state.success && (
-                  <p className="text-center text-sm text-red-500">{state.message}</p>
+                  <p className="text-center text-sm text-destructive">{state.message}</p>
                 )}
 
                 <Field>

@@ -1,12 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { CalendarPlus, Receipt, UserPlus, Zap } from 'lucide-react'
+import { CalendarPlus, Receipt, UserPlus, MessageSquare, Dumbbell, Zap } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/shadcn/ui/card'
 
 const actions = [
   {
     label: 'Nuova seduta',
+    description: 'Pianifica un appuntamento',
     href: '/dashboard/agenda',
     icon: CalendarPlus,
     iconBg: 'bg-blue-50 dark:bg-blue-950/40',
@@ -14,6 +15,7 @@ const actions = [
   },
   {
     label: 'Nuovo paziente',
+    description: 'Aggiungi un paziente al registro',
     href: '/dashboard/pazienti/nuovo',
     icon: UserPlus,
     iconBg: 'bg-brand-100 dark:bg-brand-900/40',
@@ -21,10 +23,27 @@ const actions = [
   },
   {
     label: 'Nuova fattura',
+    description: 'Emetti una fattura',
     href: '/dashboard/fatturazione',
     icon: Receipt,
     iconBg: 'bg-emerald-50 dark:bg-emerald-950/40',
     iconColor: 'text-emerald-600 dark:text-emerald-400',
+  },
+  {
+    label: 'Invia messaggio',
+    description: 'Contatta un paziente',
+    href: '/dashboard/chat',
+    icon: MessageSquare,
+    iconBg: 'bg-violet-50 dark:bg-violet-950/40',
+    iconColor: 'text-violet-600 dark:text-violet-400',
+  },
+  {
+    label: 'Nuovo esercizio',
+    description: 'Crea un programma di esercizi',
+    href: '/dashboard/terapia-attiva',
+    icon: Dumbbell,
+    iconBg: 'bg-orange-50 dark:bg-orange-950/40',
+    iconColor: 'text-orange-600 dark:text-orange-400',
   },
 ]
 
@@ -39,17 +58,20 @@ export function QuickActions() {
           Azioni Rapide
         </CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-3">
+      <CardContent className="grid gap-3 sm:grid-cols-2">
         {actions.map((action) => (
           <Link
             key={action.label}
             href={action.href}
             className="flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"
           >
-            <div className={`rounded-lg p-2 ${action.iconBg}`}>
+            <div className={`shrink-0 rounded-lg p-2 ${action.iconBg}`}>
               <action.icon className={`size-4 ${action.iconColor}`} />
             </div>
-            <span className="text-sm font-medium">{action.label}</span>
+            <div className="min-w-0">
+              <span className="text-sm font-medium">{action.label}</span>
+              <p className="text-muted-foreground truncate text-xs">{action.description}</p>
+            </div>
           </Link>
         ))}
       </CardContent>

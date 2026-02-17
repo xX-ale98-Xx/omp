@@ -1,5 +1,6 @@
 'use client'
 
+import { CalendarOff } from 'lucide-react'
 import { AppointmentCard } from './appointment-card'
 import type { Appointment } from '@/types/appointment'
 
@@ -27,8 +28,16 @@ export function AgendaListView({
 
   if (dayAppointments.length === 0) {
     return (
-      <div className="flex flex-1 items-center justify-center py-12">
-        <p className="text-muted-foreground">Nessun appuntamento per questa giornata</p>
+      <div className="flex flex-1 flex-col items-center justify-center gap-3 py-16">
+        <div className="flex size-12 items-center justify-center rounded-full bg-muted">
+          <CalendarOff className="text-muted-foreground size-6" />
+        </div>
+        <div className="text-center">
+          <p className="text-sm font-medium">Nessun appuntamento</p>
+          <p className="text-muted-foreground mt-0.5 text-xs">
+            Non ci sono appuntamenti per questa giornata
+          </p>
+        </div>
       </div>
     )
   }

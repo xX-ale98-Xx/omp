@@ -112,20 +112,20 @@ export function AgendaPageView() {
           onValueChange={(v) => v && setViewMode(v as ViewMode)}
         >
           <ToggleGroupItem value="lista" aria-label="Vista lista">
-            <List className="mr-1.5 size-4" />
-            Lista
+            <List className="size-4 sm:mr-1.5" />
+            <span className="hidden sm:inline">Lista</span>
           </ToggleGroupItem>
           <ToggleGroupItem value="giorno" aria-label="Vista giorno">
-            <CalendarDays className="mr-1.5 size-4" />
-            Giorno
+            <CalendarDays className="size-4 sm:mr-1.5" />
+            <span className="hidden sm:inline">Giorno</span>
           </ToggleGroupItem>
           <ToggleGroupItem value="settimana" aria-label="Vista settimana">
-            <CalendarRange className="mr-1.5 size-4" />
-            Settimana
+            <CalendarRange className="size-4 sm:mr-1.5" />
+            <span className="hidden sm:inline">Settimana</span>
           </ToggleGroupItem>
           <ToggleGroupItem value="mese" aria-label="Vista mese">
-            <Grid3X3 className="mr-1.5 size-4" />
-            Mese
+            <Grid3X3 className="size-4 sm:mr-1.5" />
+            <span className="hidden sm:inline">Mese</span>
           </ToggleGroupItem>
         </ToggleGroup>
 

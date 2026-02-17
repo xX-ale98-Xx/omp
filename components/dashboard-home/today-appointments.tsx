@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Clock } from 'lucide-react'
+import { CalendarCheck, Clock } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/shadcn/ui/card'
 import { Badge } from '@/components/shadcn/ui/badge'
 import { mockAppointments } from '@/lib/mock-appointments'
@@ -44,7 +44,17 @@ export function TodayAppointments() {
       </CardHeader>
       <CardContent>
         {todayAppointments.length === 0 ? (
-          <p className="text-muted-foreground text-sm">Nessun appuntamento oggi</p>
+          <div className="flex flex-col items-center gap-3 py-8">
+            <div className="flex size-10 items-center justify-center rounded-full bg-muted">
+              <CalendarCheck className="text-muted-foreground size-5" />
+            </div>
+            <div className="text-center">
+              <p className="text-sm font-medium">Giornata libera</p>
+              <p className="text-muted-foreground mt-0.5 text-xs">
+                Nessun appuntamento in programma oggi
+              </p>
+            </div>
+          </div>
         ) : (
           <div className="space-y-3">
             {todayAppointments.map((apt) => {

@@ -69,7 +69,7 @@ export function StatsCards() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {cards.map((card) => (
-        <Card key={card.title} className="gap-4 py-5">
+        <Card key={card.title} className="gap-4 py-5 transition-shadow hover:shadow-md">
           <CardHeader className="flex flex-row items-center justify-between pb-0">
             <CardTitle className="text-muted-foreground text-sm font-medium">
               {card.title}
