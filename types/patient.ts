@@ -104,6 +104,28 @@ export interface AnamnesiSpecifica {
   diagnosiPregresse: string
 }
 
+// ─── Note del Fisioterapista ─────────────────────────────────────────────────
+
+export type CategoriaNota =
+  | 'Osservazione clinica'
+  | 'Obiettivo terapeutico'
+  | 'Evoluzione'
+  | 'Comunicazione paziente'
+  | 'Promemoria'
+  | 'Altro'
+
+export type PrioritaNota = 'alta' | 'media' | 'bassa'
+
+export interface NotaFisioterapista {
+  id: string
+  titolo: string
+  contenuto: string
+  categoria: CategoriaNota
+  priorita: PrioritaNota
+  dataCreazione: string // ISO
+  dataModifica: string // ISO
+}
+
 // ─── Referti Medici ──────────────────────────────────────────────────────────
 
 export interface RefertoMedico {
@@ -127,6 +149,7 @@ export interface Patient {
   anamnesiGenerale: AnamnesiGenerale
   anamnesiSpecifica: AnamnesiSpecifica
   refertiMedici: RefertoMedico[]
+  noteFisioterapista: NotaFisioterapista[]
   isSportivo: boolean
   createdAt: string // ISO date string
   updatedAt: string // ISO date string

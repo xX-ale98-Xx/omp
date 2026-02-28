@@ -102,10 +102,12 @@ export function PatientDetailShell({ patient: initialPatient }: PatientDetailShe
 
         <TabsContent value="valutazione">
           <ValutazioneTab
+            noteFisioterapista={patient.noteFisioterapista}
             anamnesiGenerale={patient.anamnesiGenerale}
             anamnesiSpecifica={patient.anamnesiSpecifica}
             testFisici={patient.testFisici}
             sesso={patient.anagrafica.sesso}
+            onSaveNoteFisioterapista={(data) => handlePatientUpdate({ noteFisioterapista: data })}
             onSaveAnamnesiGenerale={(data) => handlePatientUpdate({ anamnesiGenerale: data })}
             onSaveAnamnesiSpecifica={(data) => handlePatientUpdate({ anamnesiSpecifica: data })}
             onSaveTestFisici={(data) => handlePatientUpdate({ testFisici: data })}

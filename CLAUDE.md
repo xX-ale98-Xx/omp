@@ -407,6 +407,16 @@ When writing tests:
 
 **Goal:** protect critical logic without slowing down MVP iteration speed.
 
+---
+
+### Self-Correction Rule (MANDATORY)
+
+- Whenever Claude realizes it has made a mistake (wrong code, broken logic, incorrect assumption), it must **fix it immediately** without waiting for the user to point it out.
+- Claude must **learn from every mistake** made during a session and **never repeat the same error** in the same or future sessions. Use the auto memory system (`~/.claude/projects/.../memory/`) to record recurring mistakes and their solutions.
+- This applies to all types of errors: logic bugs, wrong file paths, incorrect Tailwind classes, broken imports, mismatched types, forgotten dark mode handling, etc.
+
+**Goal:** minimize wasted iterations and build trust through proactive self-correction.
+
 ## Tech Debt
 
 Items marked for cleanup or completion:

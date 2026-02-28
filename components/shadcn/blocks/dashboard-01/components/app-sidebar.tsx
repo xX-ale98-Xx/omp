@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Receipt,
   Users,
+  Video,
   X,
 } from 'lucide-react'
 import Image from 'next/image'
@@ -63,6 +64,11 @@ const data = {
           title: 'Chat',
           url: '/dashboard/chat',
           icon: MessageCircle,
+        },
+        {
+          title: 'Teleriabilitazione',
+          url: '/dashboard/teleriabilitazione',
+          icon: Video,
         },
         {
           title: 'Terapia Attiva',
