@@ -14,6 +14,7 @@ import {
 import { mockInvoices } from '@/lib/mock-invoices'
 import { mockPatients } from '@/lib/mock-patients'
 import { formatCurrency } from '@/lib/patient-utils'
+import { SensitiveValue } from '@/providers/sensitive-data-provider'
 import { InvoiceTable } from './invoice-table'
 import { NewInvoiceDialog } from './new-invoice-dialog'
 import type { Invoice } from '@/types/invoice'
@@ -113,7 +114,9 @@ export function FatturazioneView() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className={`text-2xl font-bold ${card.valueColor}`}>{card.value}</div>
+              <div className={`text-2xl font-bold ${card.valueColor}`}>
+                <SensitiveValue value={card.value} />
+              </div>
             </CardContent>
           </Card>
         ))}

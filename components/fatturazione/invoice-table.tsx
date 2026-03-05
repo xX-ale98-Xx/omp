@@ -19,6 +19,7 @@ import {
   TableRow,
 } from '@/components/shadcn/ui/table'
 import { getPatientFullName, formatDateIT, formatCurrency } from '@/lib/patient-utils'
+import { SensitiveValue } from '@/providers/sensitive-data-provider'
 import type { Invoice } from '@/types/invoice'
 
 const statusConfig: Record<string, { label: string; className: string }> = {
@@ -87,7 +88,7 @@ export function InvoiceTable({ invoices, onMarkPaid }: InvoiceTableProps) {
                     {inv.descrizione}
                   </TableCell>
                   <TableCell className="text-right text-sm font-semibold">
-                    {formatCurrency(inv.importo)}
+                    <SensitiveValue value={formatCurrency(inv.importo)} />
                   </TableCell>
                   <TableCell>
                     <Badge className={status.className} variant="outline">

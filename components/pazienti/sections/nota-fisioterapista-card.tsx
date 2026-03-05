@@ -86,35 +86,20 @@ export function NotaFisioterapistaCard({ nota, onEdit, onDelete }: NotaFisiotera
   return (
     <Card className={`border-l-4 ${getPrioritaBorderClass(nota.priorita)}`}>
       <CardContent className="p-4">
-        <div className="flex items-start gap-3">
-          <div className="text-muted-foreground mt-0.5 shrink-0">
+        {/* Header row: icon + badges + date + actions */}
+        <div className="flex items-center gap-3">
+          <div className="text-muted-foreground shrink-0">
             {getCategoriaIcon(nota.categoria)}
           </div>
 
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="secondary">{nota.categoria}</Badge>
-              <Badge variant="outline" className={getPrioritaBadgeClass(nota.priorita)}>
-                {getPrioritaLabel(nota.priorita)}
-              </Badge>
-              <span className="text-muted-foreground text-sm">
-                {formatDate(nota.dataCreazione)}
-              </span>
-            </div>
-
-            <p className="mt-1.5 text-sm font-medium">{nota.titolo}</p>
-
-            <p className="text-muted-foreground mt-1 text-sm">
-              {expanded || !isLong
-                ? nota.contenuto
-                : `${nota.contenuto.slice(0, 150)}...`}
-            </p>
-
-            {expanded && nota.dataModifica !== nota.dataCreazione && (
-              <p className="text-muted-foreground mt-2 text-xs">
-                Modificata il {formatDate(nota.dataModifica)}
-              </p>
-            )}
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+            <Badge variant="secondary">{nota.categoria}</Badge>
+            <Badge variant="outline" className={getPrioritaBadgeClass(nota.priorita)}>
+              {getPrioritaLabel(nota.priorita)}
+            </Badge>
+            <span className="text-muted-foreground text-sm">
+              {formatDate(nota.dataCreazione)}
+            </span>
           </div>
 
           {/* Actions */}
@@ -147,6 +132,21 @@ export function NotaFisioterapistaCard({ nota, onEdit, onDelete }: NotaFisiotera
             </Button>
           </div>
         </div>
+
+        {/* Title + content: full width below header */}
+        <p className="mt-2 text-sm font-medium">{nota.titolo}</p>
+
+        <p className="text-muted-foreground mt-1 text-sm">
+          {expanded || !isLong
+            ? nota.contenuto
+            : `${nota.contenuto.slice(0, 150)}...`}
+        </p>
+
+        {expanded && nota.dataModifica !== nota.dataCreazione && (
+          <p className="text-muted-foreground mt-2 text-xs">
+            Modificata il {formatDate(nota.dataModifica)}
+          </p>
+        )}
       </CardContent>
     </Card>
   )

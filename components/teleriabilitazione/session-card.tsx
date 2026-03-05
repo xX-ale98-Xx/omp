@@ -55,33 +55,33 @@ export function SessionCard({ session, onStartCall }: SessionCardProps) {
   const canStart = session.stato === 'programmata'
 
   return (
-    <div className="flex items-center gap-4 rounded-lg border p-4 transition-colors hover:bg-muted/50">
-      {/* Time */}
-      <div className="w-16 shrink-0 text-center">
-        <p className="text-sm font-semibold">{session.oraInizio}</p>
-        <p className="text-xs text-muted-foreground">{session.oraFine}</p>
+    <div className="flex flex-col gap-3 rounded-lg border p-4 transition-colors hover:bg-muted/50 sm:flex-row sm:items-center">
+      {/* Row 1: Time + Avatar + Info */}
+      <div className="flex min-w-0 flex-1 items-center gap-3">
+        <div className="w-14 shrink-0 text-center">
+          <p className="text-sm font-semibold">{session.oraInizio}</p>
+          <p className="text-xs text-muted-foreground">{session.oraFine}</p>
+        </div>
+
+        <Avatar className="size-10 shrink-0">
+          <AvatarFallback className={`${avatarColor} text-sm font-medium text-white`}>
+            {initials}
+          </AvatarFallback>
+        </Avatar>
+
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-medium">{nome} {cognome}</p>
+          <p className="truncate text-sm text-muted-foreground">{session.motivo}</p>
+        </div>
       </div>
 
-      {/* Avatar */}
-      <Avatar className="size-10 shrink-0">
-        <AvatarFallback className={`${avatarColor} text-sm font-medium text-white`}>
-          {initials}
-        </AvatarFallback>
-      </Avatar>
-
-      {/* Info */}
-      <div className="min-w-0 flex-1">
-        <p className="truncate font-medium">{nome} {cognome}</p>
-        <p className="truncate text-sm text-muted-foreground">{session.motivo}</p>
-      </div>
-
-      {/* Status + Action */}
-      <div className="flex shrink-0 items-center gap-2">
+      {/* Row 2 (mobile) / inline (sm+): Status + Action */}
+      <div className="flex items-center justify-between gap-2 sm:justify-end">
         {getStatusBadge(session.stato)}
         {canStart && (
           <Button size="sm" onClick={() => onStartCall(session)}>
-            <Phone className="mr-1.5 size-3.5" />
-            Avvia Chiamata
+            <Phone className="size-3.5" />
+            <span className="sr-only sm:not-sr-only sm:ml-1.5">Avvia Chiamata</span>
           </Button>
         )}
       </div>

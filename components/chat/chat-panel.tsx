@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ArrowLeft, Send } from 'lucide-react'
 import { Button } from '@/components/shadcn/ui/button'
 import { Textarea } from '@/components/shadcn/ui/textarea'
-import { ScrollArea } from '@/components/shadcn/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import { getInitials, getAvatarColor } from '@/lib/patient-utils'
 import { formatChatTime } from '@/lib/chat-utils'
@@ -24,11 +23,11 @@ function ChatBubble({
         className={cn(
           'max-w-[75%] rounded-2xl px-4 py-2',
           isOwnMessage
-            ? 'bg-primary text-primary-foreground rounded-br-md'
-            : 'bg-muted rounded-bl-md'
+            ? 'bg-primary text-primary-foreground rounded-br-sm'
+            : 'bg-background rounded-bl-sm border shadow-sm'
         )}
       >
-        <p className="text-sm">{message.testo}</p>
+        <p className="break-words text-sm">{message.testo}</p>
         <p
           className={cn(
             'mt-1 text-xs',
@@ -62,15 +61,15 @@ export function ChatPanel({
   showBackButton,
 }: ChatPanelProps) {
   const [newMessage, setNewMessage] = useState('')
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const messagesRef = useRef<HTMLDivElement>(null)
   const mySender: ChatSender = 'fisioterapista'
 
   const initials = getInitials(patientName, patientSurname)
   const avatarColor = getAvatarColor(patientId)
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight
     }
   }, [messages])
 
@@ -119,7 +118,7 @@ export function ChatPanel({
       </div>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 p-4" ref={scrollRef}>
+      <div ref={messagesRef} className="flex-1 overflow-y-auto bg-muted/20 p-4">
         <div className="space-y-3">
           {messages.length === 0 ? (
             <p className="text-muted-foreground text-center text-sm">
@@ -135,7 +134,7 @@ export function ChatPanel({
             ))
           )}
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input */}
       <div className="flex items-end gap-2 border-t p-3">

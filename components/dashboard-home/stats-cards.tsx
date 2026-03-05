@@ -6,6 +6,7 @@ import { mockPatients } from '@/lib/mock-patients'
 import { mockAppointments } from '@/lib/mock-appointments'
 import { mockInvoices } from '@/lib/mock-invoices'
 import { formatCurrency } from '@/lib/patient-utils'
+import { SensitiveValue } from '@/providers/sensitive-data-provider'
 
 function getToday(): string {
   return new Date().toISOString().split('T')[0]
@@ -31,6 +32,7 @@ export function StatsCards() {
     {
       title: 'Pazienti Attivi',
       value: pazientiAttivi.toString(),
+      sensitive: false,
       icon: Users,
       description: 'Pazienti in carico',
       iconBg: 'bg-brand-100 dark:bg-brand-900/40',
@@ -40,6 +42,7 @@ export function StatsCards() {
     {
       title: 'Sedute Oggi',
       value: seduteOggi.toString(),
+      sensitive: false,
       icon: Activity,
       description: 'Appuntamenti programmati',
       iconBg: 'bg-blue-50 dark:bg-blue-950/40',
@@ -49,6 +52,7 @@ export function StatsCards() {
     {
       title: 'Fatturato Mese',
       value: formatCurrency(fatturatoMese),
+      sensitive: true,
       icon: Euro,
       description: 'Mese corrente',
       iconBg: 'bg-emerald-50 dark:bg-emerald-950/40',
@@ -58,6 +62,7 @@ export function StatsCards() {
     {
       title: 'Pagamenti in Sospeso',
       value: pagamentiSospeso.toString(),
+      sensitive: false,
       icon: CreditCard,
       description: 'Fatture non pagate',
       iconBg: 'bg-amber-50 dark:bg-amber-950/40',
@@ -79,7 +84,9 @@ export function StatsCards() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className={`text-2xl font-bold ${card.valueColor}`}>{card.value}</div>
+            <div className={`text-2xl font-bold ${card.valueColor}`}>
+              {card.sensitive ? <SensitiveValue value={card.value} /> : card.value}
+            </div>
             <p className="text-muted-foreground mt-1 text-xs">{card.description}</p>
           </CardContent>
         </Card>

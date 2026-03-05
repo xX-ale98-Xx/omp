@@ -32,7 +32,7 @@ export function AppointmentPopover({ appointment, children }: AppointmentPopover
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent className="w-72" side="right" align="start">
+      <PopoverContent className="w-[min(18rem,calc(100vw-2rem))]" side="bottom" align="start" collisionPadding={16}>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <div

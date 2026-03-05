@@ -32,13 +32,13 @@ export function ConversationItem({
     <button
       onClick={onClick}
       className={cn(
-        'flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left transition-colors',
+        'flex w-full items-center gap-3 rounded-lg px-4 py-3.5 text-left transition-colors',
         isSelected ? 'bg-accent' : 'hover:bg-muted/50'
       )}
     >
       <div
         className={cn(
-          'flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white',
+          'flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white',
           avatarColor
         )}
       >
@@ -46,18 +46,20 @@ export function ConversationItem({
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between">
-          <span className="truncate text-sm font-medium">
+          <span className={cn('truncate text-sm', unreadCount > 0 ? 'font-semibold' : 'font-medium')}>
             {patientName} {patientSurname}
           </span>
           <span className="text-muted-foreground shrink-0 text-xs">
             {formatRelativeTime(lastTimestamp)}
           </span>
         </div>
-        <div className="flex items-center justify-between">
-          <p className="text-muted-foreground truncate text-xs">{lastMessage}</p>
+        <div className="flex items-center justify-between gap-2">
+          <p className={cn('truncate text-xs', unreadCount > 0 ? 'font-medium text-foreground' : 'text-muted-foreground')}>
+            {lastMessage}
+          </p>
           {unreadCount > 0 && (
-            <span className="ml-2 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-              {unreadCount}
+            <span className="shrink-0 rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold text-primary-foreground">
+              {unreadCount > 1 ? unreadCount : 'NUOVO'}
             </span>
           )}
         </div>

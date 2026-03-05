@@ -95,7 +95,7 @@ export function PatientCard({ patient }: PatientCardProps) {
           {anagrafica.telefono && (
             <a
               href={`tel:${anagrafica.telefono}`}
-              className="text-muted-foreground hover:text-foreground relative z-10 flex items-center gap-2 text-xs transition-colors"
+              className="text-muted-foreground hover:text-foreground relative z-10 flex w-fit items-center gap-2 text-xs transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               <Phone className="size-3 shrink-0" />
@@ -105,7 +105,7 @@ export function PatientCard({ patient }: PatientCardProps) {
           {anagrafica.email && (
             <a
               href={`mailto:${anagrafica.email}`}
-              className="text-muted-foreground hover:text-foreground relative z-10 flex items-center gap-2 text-xs transition-colors"
+              className="text-muted-foreground hover:text-foreground relative z-10 flex w-fit items-center gap-2 text-xs transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               <Mail className="size-3 shrink-0" />
