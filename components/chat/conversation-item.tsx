@@ -27,15 +27,17 @@ export function ConversationItem({
 }: ConversationItemProps) {
   const initials = getInitials(patientName, patientSurname)
   const avatarColor = getAvatarColor(patientId)
+  const hasUnread = unreadCount > 0
 
   return (
     <button
       onClick={onClick}
       className={cn(
-        'flex w-full items-center gap-3 rounded-lg px-4 py-3.5 text-left transition-colors',
+        'flex w-full items-center gap-3 rounded-lg pl-4 pr-5 py-3.5 text-left transition-colors',
         isSelected ? 'bg-accent' : 'hover:bg-muted/50'
       )}
     >
+      {/* Avatar — no indicator dot here */}
       <div
         className={cn(
           'flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white',
@@ -44,24 +46,50 @@ export function ConversationItem({
       >
         {initials}
       </div>
+
+      {/* Content */}
       <div className="min-w-0 flex-1">
-        <div className="flex items-center justify-between">
-          <span className={cn('truncate text-sm', unreadCount > 0 ? 'font-semibold' : 'font-medium')}>
+        {/* Row 1: Name + unread dot (if any) + Timestamp */}
+        <div className="flex items-center gap-1.5">
+          <span
+            className={cn(
+              'min-w-0 flex-1 truncate text-sm',
+              hasUnread ? 'font-semibold' : 'font-medium'
+            )}
+          >
             {patientName} {patientSurname}
           </span>
-          <span className="text-muted-foreground shrink-0 text-xs">
+          {hasUnread && (
+            <span className="size-2 shrink-0 rounded-full bg-primary" />
+          )}
+          <span className="shrink-0 text-[10px] text-muted-foreground">
             {formatRelativeTime(lastTimestamp)}
           </span>
         </div>
-        <div className="flex items-center justify-between gap-2">
-          <p className={cn('truncate text-xs', unreadCount > 0 ? 'font-medium text-foreground' : 'text-muted-foreground')}>
+
+        {/* Row 2: Preview + unread count badge — slot always reserved */}
+        <div className="mt-0.5 flex items-center gap-2">
+          <p
+            className={cn(
+              'min-w-0 flex-1 truncate text-xs',
+              hasUnread ? 'font-medium text-foreground' : 'text-muted-foreground'
+            )}
+          >
             {lastMessage}
           </p>
-          {unreadCount > 0 && (
-            <span className="shrink-0 rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold text-primary-foreground">
-              {unreadCount > 1 ? unreadCount : 'NUOVO'}
-            </span>
-          )}
+          {/* Fixed-width slot — always takes space so text never touches the right edge */}
+          <div className="flex w-5 shrink-0 justify-end">
+            {hasUnread && (
+              <span
+                className={cn(
+                  'flex items-center justify-center rounded-full bg-primary text-[10px] font-bold leading-none text-primary-foreground',
+                  unreadCount > 9 ? 'min-w-[20px] px-1 py-0.5' : 'size-[18px]'
+                )}
+              >
+                {unreadCount > 99 ? '99+' : unreadCount}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </button>

@@ -26,7 +26,7 @@ export function UpcomingSessionItem({ session }: UpcomingSessionItemProps) {
   const avatarColor = getAvatarColor(session.patientId)
 
   return (
-    <div className="flex items-center gap-3 rounded-lg border p-3">
+    <div className="flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50">
       <Avatar className="size-9 shrink-0">
         <AvatarFallback className={`${avatarColor} text-xs font-medium text-white`}>
           {initials}

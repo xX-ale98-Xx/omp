@@ -101,10 +101,10 @@ export function NewInvoiceDialog({ nextNumber, onAdd }: NewInvoiceDialogProps) {
       <DialogTrigger asChild>
         <Button
           variant="secondary"
-          className="bg-primary-foreground/15 text-primary-foreground hover:bg-primary-foreground/30"
+          className="border border-white/25 bg-white/25 text-primary-foreground backdrop-blur-sm transition-colors hover:bg-white/35 dark:border-white/35 dark:bg-white/35 dark:hover:bg-white/45"
         >
-          <Plus className="mr-1 size-4" />
-          Nuova Fattura
+          <Plus className="size-4" />
+          <span className="hidden sm:inline">Nuova Fattura</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">

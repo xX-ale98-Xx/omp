@@ -30,7 +30,7 @@ export function ConversationList({
         <p className="text-muted-foreground text-xs">{conversations.length} conversazioni</p>
       </div>
       <ScrollArea className="flex-1">
-        <div className="space-y-1 p-2">
+        <div className="space-y-1 py-2 pl-2 pr-[14px]">
           {conversations.map((conv) => (
             <ConversationItem
               key={conv.patientId}

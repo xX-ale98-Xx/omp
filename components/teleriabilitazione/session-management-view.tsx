@@ -34,7 +34,6 @@ export function SessionManagementView({ sessions, onStartCall }: SessionManageme
   const completedToday = todaySessions.filter((s) => s.stato === 'completata').length
   const totalToday = todaySessions.length
 
-  // Find next scheduled session
   const now = new Date()
   const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
   const nextSession = todaySessions.find(
@@ -78,7 +77,7 @@ export function SessionManagementView({ sessions, onStartCall }: SessionManageme
   ]
 
   return (
-    <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+    <div className="flex flex-1 flex-col gap-6 p-4 lg:p-6">
       {/* Banner */}
       <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-primary-foreground shadow-sm dark:from-brand-500 dark:to-brand-300 sm:flex-row sm:items-center sm:justify-between">
         <div>

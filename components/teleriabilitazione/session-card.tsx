@@ -55,23 +55,23 @@ export function SessionCard({ session, onStartCall }: SessionCardProps) {
   const canStart = session.stato === 'programmata'
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border p-4 transition-colors hover:bg-muted/50 sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-2 overflow-hidden rounded-lg border p-3 transition-colors hover:bg-muted/50 sm:flex-row sm:items-center sm:p-4">
       {/* Row 1: Time + Avatar + Info */}
-      <div className="flex min-w-0 flex-1 items-center gap-3">
-        <div className="w-14 shrink-0 text-center">
-          <p className="text-sm font-semibold">{session.oraInizio}</p>
-          <p className="text-xs text-muted-foreground">{session.oraFine}</p>
+      <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
+        <div className="w-12 shrink-0 text-center sm:w-14">
+          <p className="text-xs font-semibold sm:text-sm">{session.oraInizio}</p>
+          <p className="text-[10px] text-muted-foreground sm:text-xs">{session.oraFine}</p>
         </div>
 
-        <Avatar className="size-10 shrink-0">
+        <Avatar className="size-9 shrink-0 sm:size-10">
           <AvatarFallback className={`${avatarColor} text-sm font-medium text-white`}>
             {initials}
           </AvatarFallback>
         </Avatar>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium">{nome} {cognome}</p>
-          <p className="truncate text-sm text-muted-foreground">{session.motivo}</p>
+          <p className="truncate text-sm font-medium sm:text-base">{nome} {cognome}</p>
+          <p className="truncate text-xs text-muted-foreground">{session.motivo}</p>
         </div>
       </div>
 
@@ -79,9 +79,9 @@ export function SessionCard({ session, onStartCall }: SessionCardProps) {
       <div className="flex items-center justify-between gap-2 sm:justify-end">
         {getStatusBadge(session.stato)}
         {canStart && (
-          <Button size="sm" onClick={() => onStartCall(session)}>
+          <Button size="sm" className="shrink-0" onClick={() => onStartCall(session)}>
             <Phone className="size-3.5" />
-            <span className="sr-only sm:not-sr-only sm:ml-1.5">Avvia Chiamata</span>
+            <span className="hidden md:inline md:ml-1.5">Avvia Chiamata</span>
           </Button>
         )}
       </div>
