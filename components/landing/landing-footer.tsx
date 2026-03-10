@@ -8,8 +8,8 @@ export default function LandingFooter() {
         <Separator className="mb-8" />
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex items-center gap-2">
-            <Image src="/OMP_logo.svg" alt="OhMyPhysio" width={24} height={24} />
-            <span className="font-[family-name:var(--font-lusitana)] text-sm font-bold">
+            <Image src="/Favicon_200px_dark.svg" alt="OhMyPhysio" width={24} height={24} />
+            <span className="font-[family-name:var(--font-inter)] text-sm font-bold">
               OhMyPhysio
             </span>
           </div>

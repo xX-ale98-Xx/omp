@@ -25,12 +25,12 @@ export function ConversationList({
 }: ConversationListProps) {
   return (
     <div className="flex h-full flex-col">
-      <div className="border-b px-4 py-4">
+      <div className="px-6 py-4">
         <h2 className="text-lg font-semibold">Messaggi</h2>
         <p className="text-muted-foreground text-xs">{conversations.length} conversazioni</p>
       </div>
       <ScrollArea className="flex-1">
-        <div className="space-y-1 py-2 pl-2 pr-[14px]">
+        <div className="space-y-1 py-2 px-2">
           {conversations.map((conv) => (
             <ConversationItem
               key={conv.patientId}

@@ -31,8 +31,8 @@ export default function LandingHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/landing" className="flex items-center gap-2">
-          <Image src="/OMP_logo.svg" alt="OhMyPhysio" width={32} height={32} />
-          <span className="font-[family-name:var(--font-lusitana)] text-lg font-bold">
+          <Image src="/Favicon_200px_dark.svg" alt="OhMyPhysio" width={32} height={32} />
+          <span className="font-[family-name:var(--font-inter)] text-lg font-bold">
             OhMyPhysio
           </span>
         </Link>

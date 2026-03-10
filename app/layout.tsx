@@ -8,6 +8,10 @@ import '@/styles/autofillFix.css'
 export const metadata: Metadata = {
   title: 'OhMyPhysio - OMP!',
   description: 'Landing page for OMP application',
+  icons: {
+    icon: '/Favicon_200px_dark.svg',
+    apple: '/Favicon_200px_dark.svg',
+  },
 }
 
 export default function RootLayout({
