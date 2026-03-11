@@ -128,11 +128,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               >
                 <Link href="/dashboard">
                   <Image
-                    src="/OMP_logo.svg"
+                    src="/OMP-Favicon-Light.svg"
                     alt="OhMyPhysio"
                     width={20}
                     height={20}
-                    className="size-5"
+                    className="size-5 dark:hidden"
+                  />
+                  <Image
+                    src="/OMP-Favicon-Dark.svg"
+                    alt="OhMyPhysio"
+                    width={20}
+                    height={20}
+                    className="size-5 hidden dark:block"
                   />
                   <span className="text-base font-semibold">OhMyPhysio</span>
                 </Link>

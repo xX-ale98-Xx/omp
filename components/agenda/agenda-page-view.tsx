@@ -86,84 +86,89 @@ export function AgendaPageView() {
       : formatDateItalian(currentDate)
 
   return (
-    <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
-      {/* Header with gradient */}
-      <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-primary-foreground shadow-sm dark:from-brand-500 dark:to-brand-300">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">Agenda</h1>
-            <p className="mt-1 text-sm capitalize text-primary-foreground/80">{dateLabel}</p>
+    <div className="flex flex-1 min-h-0 flex-col">
+      {/* Zona fissa: non fa parte del contenuto scrollabile */}
+      <div className="flex shrink-0 flex-col gap-6 p-4 pb-0 md:p-6 md:pb-0">
+        {/* Header with gradient */}
+        <div className="flex flex-col gap-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-400 px-6 py-6 text-primary-foreground shadow-sm dark:from-brand-500 dark:to-brand-300">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight">Agenda</h1>
+              <p className="mt-1 text-sm capitalize text-primary-foreground/80">{dateLabel}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <NewAppointmentDialog
+                selectedDate={getDateString(currentDate)}
+                onAdd={handleAddAppointment}
+              />
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <NewAppointmentDialog
-              selectedDate={getDateString(currentDate)}
-              onAdd={handleAddAppointment}
-            />
+        </div>
+
+        {/* Controls: view toggle + navigation */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <ToggleGroup
+            type="single"
+            variant="outline"
+            value={viewMode}
+            onValueChange={(v) => v && setViewMode(v as ViewMode)}
+          >
+            <ToggleGroupItem value="lista" aria-label="Vista lista">
+              <List className="size-4 sm:mr-1.5" />
+              <span className="hidden sm:inline">Lista</span>
+            </ToggleGroupItem>
+            <ToggleGroupItem value="giorno" aria-label="Vista giorno">
+              <CalendarDays className="size-4 sm:mr-1.5" />
+              <span className="hidden sm:inline">Giorno</span>
+            </ToggleGroupItem>
+            <ToggleGroupItem value="settimana" aria-label="Vista settimana">
+              <CalendarRange className="size-4 sm:mr-1.5" />
+              <span className="hidden sm:inline">Settimana</span>
+            </ToggleGroupItem>
+            <ToggleGroupItem value="mese" aria-label="Vista mese">
+              <Grid3X3 className="size-4 sm:mr-1.5" />
+              <span className="hidden sm:inline">Mese</span>
+            </ToggleGroupItem>
+          </ToggleGroup>
+
+          <div className="flex items-center rounded-md border">
+            <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
+              <ChevronLeft className="size-4" />
+            </Button>
+            <Button variant="ghost" size="sm" onClick={goToday}>
+              Oggi
+            </Button>
+            <Button variant="ghost" size="icon" onClick={() => navigate(1)}>
+              <ChevronRight className="size-4" />
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Controls: view toggle + navigation */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          value={viewMode}
-          onValueChange={(v) => v && setViewMode(v as ViewMode)}
-        >
-          <ToggleGroupItem value="lista" aria-label="Vista lista">
-            <List className="size-4 sm:mr-1.5" />
-            <span className="hidden sm:inline">Lista</span>
-          </ToggleGroupItem>
-          <ToggleGroupItem value="giorno" aria-label="Vista giorno">
-            <CalendarDays className="size-4 sm:mr-1.5" />
-            <span className="hidden sm:inline">Giorno</span>
-          </ToggleGroupItem>
-          <ToggleGroupItem value="settimana" aria-label="Vista settimana">
-            <CalendarRange className="size-4 sm:mr-1.5" />
-            <span className="hidden sm:inline">Settimana</span>
-          </ToggleGroupItem>
-          <ToggleGroupItem value="mese" aria-label="Vista mese">
-            <Grid3X3 className="size-4 sm:mr-1.5" />
-            <span className="hidden sm:inline">Mese</span>
-          </ToggleGroupItem>
-        </ToggleGroup>
-
-        <div className="flex items-center rounded-md border">
-          <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
-            <ChevronLeft className="size-4" />
-          </Button>
-          <Button variant="ghost" size="sm" onClick={goToday}>
-            Oggi
-          </Button>
-          <Button variant="ghost" size="icon" onClick={() => navigate(1)}>
-            <ChevronRight className="size-4" />
-          </Button>
-        </div>
+      {/* Unico scrollbar: solo il calendario scorre */}
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-4 pt-6 md:px-6 md:pb-6 md:pt-6">
+        {viewMode === 'lista' && (
+          <AgendaListView
+            appointments={appointments}
+            selectedDate={currentDate}
+            onMarkCompleted={handleMarkCompleted}
+            onMarkPaid={handleMarkPaid}
+          />
+        )}
+        {viewMode === 'giorno' && (
+          <DayView currentDate={currentDate} appointments={appointments} />
+        )}
+        {viewMode === 'settimana' && (
+          <WeekView currentDate={currentDate} appointments={appointments} />
+        )}
+        {viewMode === 'mese' && (
+          <MonthView
+            currentDate={currentDate}
+            appointments={appointments}
+            onDayClick={handleDayClick}
+          />
+        )}
       </div>
-
-      {/* View content */}
-      {viewMode === 'lista' && (
-        <AgendaListView
-          appointments={appointments}
-          selectedDate={currentDate}
-          onMarkCompleted={handleMarkCompleted}
-          onMarkPaid={handleMarkPaid}
-        />
-      )}
-      {viewMode === 'giorno' && (
-        <DayView currentDate={currentDate} appointments={appointments} />
-      )}
-      {viewMode === 'settimana' && (
-        <WeekView currentDate={currentDate} appointments={appointments} />
-      )}
-      {viewMode === 'mese' && (
-        <MonthView
-          currentDate={currentDate}
-          appointments={appointments}
-          onDayClick={handleDayClick}
-        />
-      )}
     </div>
   )
 }

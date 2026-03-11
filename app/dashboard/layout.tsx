@@ -7,6 +7,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <SensitiveDataProvider>
       <SidebarProvider
+        className="h-svh overflow-hidden"
         style={
           {
             '--sidebar-width': 'calc(var(--spacing) * 72)',
@@ -15,9 +16,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         }
       >
         <AppSidebar variant="inset" />
-        <SidebarInset className="max-h-svh overflow-y-auto">
+        <SidebarInset className="overflow-hidden">
           <SiteHeader />
-          <div className="animate-in fade-in duration-200 flex min-h-0 flex-1 flex-col">{children}</div>
+          <div className="animate-in fade-in duration-200 flex min-h-0 flex-1 flex-col overflow-y-auto">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </SensitiveDataProvider>
