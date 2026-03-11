@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { inter, lusitana } from '@/utils/ui/fonts'
+import { inter, fraunces } from '@/utils/ui/fonts'
 import { ThemeProvider } from '@/providers/theme-provider'
 
 import '@/styles/globals.css'
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" suppressHydrationWarning>
-      <body className={`${inter.className} ${inter.variable} ${lusitana.variable} antialiased`}>
+      <body className={`${inter.className} ${inter.variable} ${fraunces.variable} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

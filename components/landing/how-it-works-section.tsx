@@ -35,7 +35,7 @@ export default function HowItWorksSection() {
   return (
     <section id="come-funziona" className="bg-muted scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="font-[family-name:var(--font-lusitana)] mb-12 text-center text-3xl font-bold md:text-4xl">
+        <h2 className="font-[family-name:var(--font-fraunces)] mb-12 text-center text-3xl font-bold md:text-4xl">
           Come funziona
         </h2>
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">

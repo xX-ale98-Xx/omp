@@ -33,8 +33,8 @@ export function ConversationItem({
     <button
       onClick={onClick}
       className={cn(
-        'flex w-full items-center gap-3 rounded-lg pl-4 pr-5 py-3.5 text-left transition-colors',
-        isSelected ? 'bg-accent' : 'hover:bg-muted/50'
+        'flex w-auto items-center gap-3 rounded-lg px-4 py-3.5 text-left transition-colors',
+        isSelected ? 'bg-muted' : 'hover:bg-muted/50'
       )}
     >
       {/* Avatar — no indicator dot here */}
@@ -59,20 +59,18 @@ export function ConversationItem({
           >
             {patientName} {patientSurname}
           </span>
-          {hasUnread && (
-            <span className="size-2 shrink-0 rounded-full bg-primary" />
-          )}
-          <span className="shrink-0 text-[10px] text-muted-foreground">
+          {hasUnread && <span className="bg-primary size-2 shrink-0 rounded-full" />}
+          <span className="text-muted-foreground shrink-0 text-[10px]">
             {formatRelativeTime(lastTimestamp)}
           </span>
         </div>
 
         {/* Row 2: Preview + unread count badge — slot always reserved */}
-        <div className="mt-0.5 flex items-center gap-2">
+        <div className="mt-0.5 flex flex-1 items-center gap-2">
           <p
             className={cn(
               'min-w-0 flex-1 truncate text-xs',
-              hasUnread ? 'font-medium text-foreground' : 'text-muted-foreground'
+              hasUnread ? 'text-foreground font-medium' : 'text-muted-foreground'
             )}
           >
             {lastMessage}
@@ -82,7 +80,7 @@ export function ConversationItem({
             {hasUnread && (
               <span
                 className={cn(
-                  'flex items-center justify-center rounded-full bg-primary text-[10px] font-bold leading-none text-primary-foreground',
+                  'bg-primary text-primary-foreground flex items-center justify-center rounded-full text-[10px] leading-none font-bold',
                   unreadCount > 9 ? 'min-w-[20px] px-1 py-0.5' : 'size-[18px]'
                 )}
               >

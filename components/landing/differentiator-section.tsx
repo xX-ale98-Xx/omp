@@ -31,7 +31,7 @@ export default function DifferentiatorSection() {
   return (
     <section id="perche-omp" className="bg-primary text-primary-foreground scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="font-[family-name:var(--font-lusitana)] mb-12 text-center text-3xl font-bold md:text-4xl">
+        <h2 className="font-[family-name:var(--font-fraunces)] mb-12 text-center text-3xl font-bold md:text-4xl">
           Perche scegliere OhMyPhysio?
         </h2>
         <div className="grid gap-10 sm:grid-cols-2">

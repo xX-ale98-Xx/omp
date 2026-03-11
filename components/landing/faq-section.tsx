@@ -47,7 +47,7 @@ export default function FaqSection() {
   return (
     <section id="faq" className="bg-background scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h2 className="font-[family-name:var(--font-lusitana)] mb-12 text-center text-3xl font-bold md:text-4xl">
+        <h2 className="font-[family-name:var(--font-fraunces)] mb-12 text-center text-3xl font-bold md:text-4xl">
           Domande frequenti
         </h2>
         <Accordion type="single" collapsible className="w-full">

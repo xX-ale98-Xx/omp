@@ -1,3 +1,4 @@
+// Conversation-list.tsx
 'use client'
 
 import { ScrollArea } from '@/components/shadcn/ui/scroll-area'
@@ -24,13 +25,13 @@ export function ConversationList({
   onSelect,
 }: ConversationListProps) {
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-1 flex-col px-4">
       <div className="px-6 py-4">
         <h2 className="text-lg font-semibold">Messaggi</h2>
         <p className="text-muted-foreground text-xs">{conversations.length} conversazioni</p>
       </div>
-      <ScrollArea className="flex-1">
-        <div className="space-y-1 py-2 px-2">
+      <ScrollArea className="flex-1 min-h-0">
+        <div className="flex flex-col w-full flex-1 space-y-1 px-2 py-2">
           {conversations.map((conv) => (
             <ConversationItem
               key={conv.patientId}

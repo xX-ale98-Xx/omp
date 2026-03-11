@@ -5,7 +5,7 @@ export default function CtaSection() {
   return (
     <section id="demo" className="bg-muted scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-        <h2 className="font-[family-name:var(--font-lusitana)] mb-4 text-3xl font-bold md:text-4xl">
+        <h2 className="font-[family-name:var(--font-fraunces)] mb-4 text-3xl font-bold md:text-4xl">
           Pronto a trasformare il tuo studio?
         </h2>
         <p className="text-muted-foreground mx-auto mb-8 max-w-xl text-lg">

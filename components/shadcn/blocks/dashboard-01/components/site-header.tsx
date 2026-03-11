@@ -31,7 +31,7 @@ export function SiteHeader() {
         <SidebarTrigger className="-ml-1" />
         <Separator orientation="vertical" className="mx-2 data-[orientation=vertical]:h-4" />
         <h1 className="text-base font-medium">
-          <span className="text-primary">OhMy</span>Physio
+          OhMy<span className="text-primary">Physio</span>
         </h1>
         <div className="ml-auto flex items-center gap-1">
           <DropdownMenu>

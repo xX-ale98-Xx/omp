@@ -26,7 +26,7 @@ export default function SolutionSection() {
   return (
     <section id="soluzione" className="bg-background scroll-mt-20 py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="font-[family-name:var(--font-lusitana)] mb-4 text-center text-3xl font-bold md:text-4xl">
+        <h2 className="font-[family-name:var(--font-fraunces)] mb-4 text-center text-3xl font-bold md:text-4xl">
           Una piattaforma, due dimensioni integrate
         </h2>
         <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center text-lg">
