@@ -30,7 +30,7 @@ export default function LandingHeader() {
     <header className="bg-background/80 border-border sticky top-0 z-50 border-b backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/landing" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <Image src="/OMP-Favicon-Light.svg" alt="OhMyPhysio" width={28} height={28} className="dark:hidden" />
           <Image src="/OMP-Favicon-Dark.svg" alt="OhMyPhysio" width={28} height={28} className="hidden dark:block" />
           <span className="font-[family-name:var(--font-inter)] text-lg font-medium">

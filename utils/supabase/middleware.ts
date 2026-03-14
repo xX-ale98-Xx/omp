@@ -37,30 +37,50 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    request.nextUrl.pathname !== '/' &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/signup') &&
-    !request.nextUrl.pathname.startsWith('/auth') &&
-    !request.nextUrl.pathname.startsWith('/error') &&
-    !request.nextUrl.pathname.startsWith('/landing')
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  const publicRoutes = ['/', '/login', '/signup', '/auth', '/error']
+
+  const isPublicRoute = publicRoutes.some(
+    (route) =>
+      request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/')
+  )
+
+  // Utente autenticato sulla landing → redirect alla dashboard
+  if (user && request.nextUrl.pathname === '/') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/dashboard'
+    return NextResponse.redirect(url)
+  }
+
+  // Utente non autenticato su route protetta → redirect al login
+  if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  if (
-    user &&
-    (request.nextUrl.pathname.startsWith('/login') ||
-      request.nextUrl.pathname.startsWith('/signup'))
-  ) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/dashboard'
-    return NextResponse.redirect(url)
-  }
+  // if (
+  //   !user &&
+  //   request.nextUrl.pathname !== '/' &&
+  //   !request.nextUrl.pathname.startsWith('/login') &&
+  //   !request.nextUrl.pathname.startsWith('/signup') &&
+  //   !request.nextUrl.pathname.startsWith('/auth') &&
+  //   !request.nextUrl.pathname.startsWith('/error')
+  // ) {
+  //   // no user, potentially respond by redirecting the user to the login page
+  //   const url = request.nextUrl.clone()
+  //   url.pathname = '/login'
+  //   return NextResponse.redirect(url)
+  // }
+
+  // if (
+  //   user &&
+  //   (request.nextUrl.pathname.startsWith('/login') ||
+  //     request.nextUrl.pathname.startsWith('/signup'))
+  // ) {
+  //   const url = request.nextUrl.clone()
+  //   url.pathname = '/dashboard'
+  //   return NextResponse.redirect(url)
+  // }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is.
   // If you're creating a new response object with NextResponse.next() make sure to:
