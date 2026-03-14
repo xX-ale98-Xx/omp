@@ -85,7 +85,7 @@ export default function ProblemSection() {
             </div>
           </div>
           {/* Organizational */}
-          <div>
+          <div className="mt-4 md:mt-0">
             <h3 className="text-primary mb-4 text-sm font-semibold uppercase tracking-wider">
               Sfide Organizzative
             </h3>

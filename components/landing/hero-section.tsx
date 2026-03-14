@@ -12,7 +12,9 @@ export default function HeroSection() {
             IA per la Fisioterapia
           </Badge>
           <h1 className="font-[family-name:var(--font-fraunces)] text-4xl font-bold md:text-5xl lg:text-6xl">
-            Meno burocrazia, più tempo per i tuoi pazienti
+            Meno burocrazia.
+            <br />
+            Più tempo per i tuoi pazienti.
           </h1>
           <p className="text-muted-foreground max-w-lg text-lg">
             Automatizza la burocrazia dello studio con l&apos;IA: cartelle rapide, appuntamenti
