@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import LandingHeader from '@/components/landing/landing-header'
 import HeroSection from '@/components/landing/hero-section'
+import CoCreazioneSection from '@/components/landing/co-creazione-section'
 import ChiSiamoSection from '@/components/landing/chi-siamo-section'
 import MissionSection from '@/components/landing/mission-section'
 import ProblemSection from '@/components/landing/problem-section'
@@ -25,6 +26,7 @@ export default function LandingPage() {
       <LandingHeader />
       <main>
         <HeroSection />
+        <CoCreazioneSection />
         <ProblemSection />
         <SolutionSection />
         <HowItWorksSection />

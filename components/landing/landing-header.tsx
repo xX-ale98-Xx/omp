@@ -19,6 +19,7 @@ const navLinks = [
   { href: '#mission', label: 'Mission' },
   { href: '#soluzione', label: 'Soluzione' },
   { href: '#contatti', label: 'Contatti' },
+  { href: '#co-creazione', label: 'Co-Creazione' },
 ]
 
 export default function LandingHeader() {

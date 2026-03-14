@@ -27,7 +27,7 @@ export default function SolutionSection() {
           OhMyPhysio unisce la gestione clinica e operativa in un&apos;unica soluzione, pensata da
           professionisti come te.
         </p>
-        <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2">
           {pillars.map((pillar) => {
             const Icon = pillar.icon
             return (
