@@ -14,7 +14,7 @@ export default function CtaSection() {
         </p>
         <Button size="lg" asChild>
           <a href="mailto:info@ohmyphysio.it">
-            Prenota una demo
+            Crea con noi OMP!
             <ArrowRight className="size-4" />
           </a>
         </Button>

@@ -4,19 +4,21 @@ import { Card, CardContent } from '@/components/shadcn/ui/card'
 const clinicalProblems = [
   {
     icon: Eye,
-    title: 'Mancanza di visibilita',
-    description: 'Non sai se i pazienti eseguono gli esercizi a casa, ne come li eseguono.',
+    title: 'Mancanza di chiarezza sul percorso del paziente',
+    description:
+      'Hai difficoltà a sapere quali programmi hai assegnato ai tuoi pazienti e perdi informazioni importanti.',
   },
   {
     icon: TrendingDown,
-    title: 'Scarsa aderenza terapeutica',
+    title: 'Gestione disorganizzata dei programmi',
     description:
-      'Senza guida continua, i pazienti abbandonano i programmi riabilitativi troppo presto.',
+      'I protocolli riabilitativi che prepari sono sparsi tra appunti e documenti, rendendo difficile garantire continuità e ordine.',
   },
   {
     icon: BarChart3,
-    title: 'Valutazioni soggettive',
-    description: 'Le decisioni cliniche si basano su sensazioni, non su dati oggettivi e misurabili.',
+    title: 'Report limitati e frammentati',
+    description:
+      'Raccogliere e analizzare i progressi dei tuoi pazienti è complicato e ti fa perdere tempo.',
   },
 ]
 
@@ -24,18 +26,18 @@ const orgProblems = [
   {
     icon: Puzzle,
     title: 'Strumenti frammentati',
-    description: 'Agenda, cartelle cliniche, fatturazione e comunicazioni su piattaforme diverse.',
+    description: 'Usi diversi software per gestire: agenda, cartelle cliniche, fatturazione e comunicazioni.',
   },
   {
     icon: MessageSquare,
-    title: 'Comunicazione inefficiente',
-    description: 'Messaggi sparsi tra WhatsApp, email e telefonate. Nessuna tracciabilita.',
+    title: 'Comunicazione caotica',
+    description: 'Ti arrivano messaggi sparsi tra WhatsApp, email e telefonate. Nessuna tracciabilità.',
   },
   {
     icon: Clock,
-    title: 'Troppo tempo in burocrazia',
+    title: 'Burocrazia eccessiva',
     description:
-      'Ore sprecate in attivita amministrative che tolgono tempo alla cura dei pazienti.',
+      'Sprechi diverse ore in attività amministrative che tolgono tempo alla cura dei pazienti.',
   },
 ]
 
@@ -49,7 +51,7 @@ function ProblemCard({
   description: string
 }) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardContent className="flex gap-4 pt-6">
         <div className="bg-primary/10 text-primary flex size-10 shrink-0 items-center justify-center rounded-lg">
           <Icon className="size-5" />
@@ -76,7 +78,7 @@ export default function ProblemSection() {
             <h3 className="text-primary mb-4 text-sm font-semibold uppercase tracking-wider">
               Sfide Cliniche
             </h3>
-            <div className="flex flex-col gap-4">
+            <div className="grid h-full auto-rows-fr gap-4">
               {clinicalProblems.map((p) => (
                 <ProblemCard key={p.title} {...p} />
               ))}
@@ -87,7 +89,7 @@ export default function ProblemSection() {
             <h3 className="text-primary mb-4 text-sm font-semibold uppercase tracking-wider">
               Sfide Organizzative
             </h3>
-            <div className="flex flex-col gap-4">
+            <div className="grid h-full auto-rows-fr gap-4">
               {orgProblems.map((p) => (
                 <ProblemCard key={p.title} {...p} />
               ))}

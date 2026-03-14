@@ -12,21 +12,19 @@ export default function HeroSection() {
             IA per la Fisioterapia
           </Badge>
           <h1 className="font-[family-name:var(--font-fraunces)] text-4xl font-bold md:text-5xl lg:text-6xl">
-            Fisioterapia intelligente, oltre lo studio
+            Meno burocrazia, più tempo per i tuoi pazienti
           </h1>
           <p className="text-muted-foreground max-w-lg text-lg">
-            Monitoraggio remoto con IA, esercizi guidati e gestione completa dello studio in
-            un&apos;unica piattaforma. Segui i tuoi pazienti ovunque si trovino.
+            Automatizza la burocrazia dello studio con l&apos;IA: cartelle rapide, appuntamenti
+            organizzati, esercizi condivisibili e comunicazioni automatizzate. Così puoi dedicarti
+            completamente ai pazienti.
           </p>
           <div className="flex flex-wrap gap-4">
             <Button size="lg" asChild>
               <a href="#demo">
-                Richiedi una demo
+                Crea con noi OMP!
                 <ArrowRight className="size-4" />
               </a>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a href="#come-funziona">Scopri come funziona</a>
             </Button>
           </div>
         </div>

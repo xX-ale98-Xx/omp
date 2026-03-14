@@ -15,12 +15,10 @@ import {
 import ThemeToggle from '@/components/dark-light/ThemeToggleButton'
 
 const navLinks = [
-  { href: '#problemi', label: 'Problemi' },
+  { href: '#chi-siamo', label: 'Chi siamo' },
+  { href: '#mission', label: 'Mission' },
   { href: '#soluzione', label: 'Soluzione' },
-  { href: '#come-funziona', label: 'Come funziona' },
-  { href: '#vantaggi', label: 'Vantaggi' },
-  { href: '#perche-omp', label: 'Perche OMP' },
-  { href: '#faq', label: 'FAQ' },
+  { href: '#contatti', label: 'Contatti' },
 ]
 
 export default function LandingHeader() {
@@ -31,8 +29,8 @@ export default function LandingHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/OMP-Favicon-Light.svg" alt="OhMyPhysio" width={28} height={28} className="dark:hidden" />
-          <Image src="/OMP-Favicon-Dark.svg" alt="OhMyPhysio" width={28} height={28} className="hidden dark:block" />
+          <Image src="/OMP-Favicon-Light.svg" alt="OhMyPhysio" width={24} height={24} className="dark:hidden" />
+          <Image src="/OMP-Favicon-Dark.svg" alt="OhMyPhysio" width={24} height={24} className="hidden dark:block" />
           <span className="font-[family-name:var(--font-inter)] text-lg font-medium">
             OhMyPhysio
           </span>
@@ -54,11 +52,8 @@ export default function LandingHeader() {
         {/* Desktop right */}
         <div className="hidden items-center gap-3 md:flex">
           <ThemeToggle />
-          <Button variant="outline" className="rounded-lg" asChild>
-            <Link href="/login">Accedi</Link>
-          </Button>
           <Button className="rounded-lg" asChild>
-            <a href="#demo">Richiedi una demo</a>
+            <a href="#demo">Crea con noi OMP!</a>
           </Button>
         </div>
 
@@ -92,12 +87,9 @@ export default function LandingHeader() {
                   <ThemeToggle />
                 </div>
                 <div className="border-border my-2 border-t" />
-                <Button variant="outline" asChild className="w-full rounded-lg">
-                  <Link href="/login">Accedi</Link>
-                </Button>
                 <Button asChild className="w-full rounded-lg">
                   <a href="#demo" onClick={() => setOpen(false)}>
-                    Richiedi una demo
+                    Crea con noi OMP!
                   </a>
                 </Button>
               </nav>
